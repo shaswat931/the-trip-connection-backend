@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | The Trip Connection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ========== RESET ========== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* ========== GLOBAL ========== */
+body{
+  background:#f4f6fb;
+  color:#1f2937;
+}
+
+.admin-layout{
+  display:flex;
+  min-height:100vh;
+}
+
+/* ========== SIDEBAR (Updated for better visual matching) ========== */
+.sidebar{
+  width:250px;
+  background:#0f172a; /* Dark background */
+  color:#fff;
+  padding:0; /* Removed padding from sidebar container */
+  position:fixed;
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2{
+  font-size:24px; /* Slightly larger */
+  font-weight: 800;
+  padding:24px 20px;
+  color: #fff;
+  border-bottom: 1px solid #1e293b; /* Separator */
+}
+
+.sidebar nav {
+    padding: 20px 20px 0 20px;
+    flex-grow: 1;
+}
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#cbd5e1;
+  text-decoration:none;
+  padding:12px 14px;
+  border-radius:10px;
+  margin-bottom:8px; /* Reduced gap */
+  transition:.3s;
+  font-size:15px;
+}
+
+.sidebar a i{
+  width:18px;
+}
+
+/* Active Link Styling matching image */
+.sidebar a:hover,
+.sidebar a.active{
+  background:#1e293b;
+  color:#fff;
+}
+.sidebar a.active {
+    font-weight: 600;
+}
+
+/* Logout button separation */
+.logout-btn-container {
+    padding: 20px 20px 24px 20px;
+    margin-top: auto; /* Push to bottom */
+    border-top: 1px solid #1e293b;
+}
+
+
+/* ========== MAIN ========== */
+.main{
+  margin-left:250px;
+  padding:30px;
+  width:100%;
+}
+
+/* ========== TOPBAR ========== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+  /* Added padding to align with image design */
+  padding-bottom: 15px; 
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.menu-btn{
+  display:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.topbar h1{
+  font-size:30px; /* Larger title matching image */
+  font-weight:700;
+}
+
+/* FIX: Admin Profile for clearer logo */
+.admin-profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.admin-profile img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:contain; /* Ensure logo fits if it's a square image */
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+/* ========== STATS ========== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); 
+  gap:22px;
+  margin-bottom:40px;
+}
+
+/* STAT CARD AS LINK */
+.stat-card{
+  background:#fff;
+  padding:26px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  transition:.3s;
+  border-left: 5px solid transparent; 
+  text-decoration: none; 
+  color: inherit; 
+  display: block; 
+  cursor: pointer;
+}
+
+.stat-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 45px rgba(0,0,0,.15);
+}
+
+.stat-card i{
+  font-size:30px;
+  /* Default icon color */
+  color:#ff6b00; 
+  margin-bottom:15px;
+}
+
+.stat-card h3{
+  font-size:15px;
+  color:#6b7280;
+  font-weight:500;
+}
+
+.stat-card p{
+  font-size:30px;
+  font-weight:700;
+  margin-top:6px;
+}
+
+/* Custom Icon Colors matching the image */
+.stat-card[href="tour-bookings.html"] i, .stat-card[href="tour-bookings.html"] { border-left-color: #ff6b00; }
+.stat-card[href="car-enquiries.html"] i { color: #0d6efd; }
+.stat-card[href="car-enquiries.html"] { border-left-color: #0d6efd; }
+.stat-card[href="bus-enquiries.html"] i { color: #25d366; }
+.stat-card[href="bus-enquiries.html"] { border-left-color: #25d366; }
+.stat-card[href="manage-packages.html"] i { color: #f59e0b; }
+.stat-card[href="manage-packages.html"] { border-left-color: #f59e0b; }
+.stat-card[href="contacts.html"] i { color: #7c3aed; }
+.stat-card[href="contacts.html"] { border-left-color: #7c3aed; }
+.stat-card[href="tour-bookings.html"]:first-child i { color: #dc2626; } /* Action required icon */
+.stat-card[href="tour-bookings.html"]:first-child { border-left-color: #dc2626; }
+
+/* ========== CONTENT BOX ========== */
+.box{
+  background:#fff;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+/* ========== MOBILE ========== */
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.3s;
+    z-index:1000;
+  }
+  .sidebar.active{
+    transform:translateX(0);
+  }
+  .main{
+    margin-left:0;
+  }
+  .menu-btn{
+    display:block;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Admin Panel</h2>
+    
+    <nav>
+        <!-- Home Icon changed to fas fa-home -->
+        <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="manage-packages.html"><i class="fas fa-suitcase"></i> Packages</a>
+        <a href="add-package.html"><i class="fas fa-plus-circle"></i> Add Package</a>
+        <a href="manage-offers.html"><i class="fas fa-bullhorn"></i> Offer Popup</a>
+        
+        <a href="tour-bookings.html"><i class="fas fa-calendar-check"></i> Tour Bookings</a>
+        <a href="car-enquiries.html"><i class="fas fa-car-side"></i> Car Enquiries</a>
+        <a href="bus-enquiries.html"><i class="fas fa-bus-simple"></i> Bus Enquiries</a>
+        
+        <a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a>
+        <a href="/"><i class="fas fa-globe"></i> View Website</a>
+    </nav>
+    
+    <div class="logout-btn-container">
+        <a href="/admin/login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <i class="fas fa-bars menu-btn" onclick="toggleSidebar()"></i>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="admin-profile">
+        <span>Admin</span>
+        <!-- Assuming /images/logofinal.png is a clear logo image -->
+        <img src="/images/logofinal.png" alt="Admin Logo">
+      </div>
+    </div>
+    
+    <!-- STATS (Clickable Cards) -->
+    <div class="stats">
+        
+      <!-- 1. Total Action Required -->
+      <a href="tour-bookings.html" class="stat-card">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h3>Total Action Required</h3>
+        <p id="totalActionRequired">2</p>
+      </a>
+
+      <!-- 2. New Tour Bookings -->
+      <a href="tour-bookings.html" class="stat-card">
+        <i class="fas fa-calendar-check"></i>
+        <h3>New Tour Bookings</h3>
+        <p id="tourBookingCount">0</p>
+      </a>
+
+      <!-- 3. New Car Enquiries -->
+      <a href="car-enquiries.html" class="stat-card">
+        <i class="fas fa-car-side"></i>
+        <h3>New Car Enquiries</h3>
+        <p id="carBookingCount">1</p>
+      </a>
+
+      <!-- 4. New Bus Enquiries -->
+      <a href="bus-enquiries.html" class="stat-card">
+        <i class="fas fa-bus-simple"></i>
+        <h3>New Bus Enquiries</h3>
+        <p id="busBookingCount">1</p>
+      </a>
+      
+      <!-- 5. Total Packages -->
+      <a href="manage-packages.html" class="stat-card">
+        <i class="fas fa-suitcase-rolling"></i>
+        <h3>Total Packages</h3>
+        <p id="packageCount">0</p>
+      </a>
+
+      <!-- 6. Total Contact Messages -->
+      <a href="contacts.html" class="stat-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Total Contacts</h3>
+        <p id="contactCount">4</p>
+      </a>
+      
+    </div>
+
+    <!-- CONTENT -->
+    <div class="box">
+      <h3>Welcome to the Admin Dashboard 👋</h3>
+      <p style="margin-top:10px;color:#6b7280;line-height:1.6;">
+        From here, you can manage travel packages, review bookings,
+        respond to customer inquiries, and control promotional offers
+        displayed on the website.
+      </p>
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+/* SIDEBAR TOGGLE (MOBILE) */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('active');
+}
+
+/* DASHBOARD COUNTS (UPDATED JS) */
+async function loadDashboardCounts(){
+  try{
+    // Note: We use data.tourBookings, data.carBookings, etc. as defined in server.js
+    const res = await fetch('/api/admin/dashboard-counts');
+    if (!res.ok) throw new Error('Network response was not ok');
+    
+    const data = await res.json();
+    
+    // Assign data to IDs (using 'tourBookings' for New Tour Bookings)
+    document.getElementById('tourBookingCount').innerText = data.tourBookings || 0;
+    document.getElementById('contactCount').innerText = data.contacts || 0;
+    document.getElementById('packageCount').innerText = data.packages || 0;
+    
+    document.getElementById('carBookingCount').innerText = data.carBookings || 0;
+    document.getElementById('busBookingCount').innerText = data.busBookings || 0;
+    
+    // Total Actionable = Sum of New Tour + Car + Bus bookings
+    document.getElementById('totalActionRequired').innerText = data.totalNewActionable || 0; 
+
+
+  }catch(err){
+    console.error('Dashboard load error:', err);
+    // Fallback in case of API failure
+    document.getElementById('totalActionRequired').innerText = 'E';
+    document.getElementById('carBookingCount').innerText = 'E';
+    document.getElementById('busBookingCount').innerText = 'E';
+    document.getElementById('tourBookingCount').innerText = 'E';
+    document.getElementById('contactCount').innerText = 'E';
+    document.getElementById('packageCount').innerText = 'E';
+  }
+}
+loadDashboardCounts();
+</script>
+
+</body>
+</html>

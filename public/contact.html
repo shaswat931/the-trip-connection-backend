@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | The Trip Connection - Let's Connect</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Assuming all animations, contact and overall styles are defined here) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <!-- Ensure this image source is correct -->
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HEADER SECTION में -->
+         <a href="/admin/login.html" class="login-btn" title="Admin Login">
+            <i class="fas fa-user"></i>
+        </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+<!-- ================= HERO IMAGE SLIDER (About Page Specific) ================= -->
+<section class="about-hero">
+    <!-- Image Sources kept same, but paths corrected if necessary -->
+    <div class="about-slide active" style="background-image:url('https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+
+    <div class="about-hero-content hero-text-animate"> <!-- Added hero-text-animate -->
+        <h1 class="reveal-delay-1">The Trip Connection</h1>
+        <p class="reveal-delay-2">Crafting global adventures and memories that last a lifetime.</p>
+    </div>
+</section>
+
+    <!-- CONTACT FORM & INFO (Added reveal, fade-left/right) -->
+    <section class="contact-section">
+        <div class="contact-grid">
+
+            <!-- FORM (Fades in from left) -->
+            <form class="contact-form reveal fade-left" id="contactForm">
+                <h2 class="section-title-left">Send Us A Message</h2>
+                
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Your Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Your Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" placeholder="Your Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Tell us about your travel needs or query..." rows="5"></textarea>
+                </div>
+                <button type="submit" class="cta-button-form">Send Message</button>
+                <p id="formMsg" class="form-message-status"></p>
+            </form>
+
+            <!-- INFO & MAP (Fades in from right) -->
+            <div class="contact-info-container reveal fade-right">
+                <div class="contact-info-block">
+                    <h3 class="section-title-small">Head Office Details</h3>
+                    
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> 
+                        <p>123 Trip Lane, Main Commercial Hub, Mumbai, India</p>
+                    </div>
+                    <div class="info-item"><i class="fas fa-phone"></i> 
+                        <p>+91 98765 43210 (Support Line)</p>
+                    </div>
+                    <div class="info-item"><i class="fas fa-envelope"></i> 
+                        <p>help@tripconnection.com (General Inquiries)</p>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="contact-cta">
+                    <a href="tel:+919876543210" class="contact-cta-btn call-btn">
+                        <i class="fas fa-phone-alt"></i> Call Us
+                    </a>
+                    <a href="https://wa.me/919998250825" class="contact-cta-btn whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+
+                <!-- MAP -->
+                <div class="map">
+                    <h3 class="section-title-small">Find Us on Map</h3>
+                    <iframe 
+                      src="https://www.google.com/maps?q=Mumbai&output=embed"
+                      width="100%" height="300" style="border:0;" allowfullscreen=""
+                      loading="lazy" title="Location Map">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER (STANDARDIZED ENGLISH) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (Includes Animation Logic) ================= -->
+<script>
+// ==================== SCROLL REVEAL LOGIC ====================
+// Finds all elements with the 'reveal' class
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right');
+
+const observerOptions = {
+    root: null, // relative to viewport
+    rootMargin: '0px',
+    threshold: 0.1 // Trigger when 10% of the element is visible
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); // Stop observing once animated
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    // Set transition delay based on data-delay attribute (if available)
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+
+// ==================== FORM SUBMISSION LOGIC ====================
+document.getElementById('contactForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const formMsg = document.getElementById('formMsg');
+  formMsg.innerText = "Sending message...";
+
+  const payload = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    message: document.getElementById('message').value
+  };
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if(!data.success) throw new Error('API Error');
+
+    formMsg.innerText =
+      "✅ Thank you! We have received your message and will contact you shortly.";
+    formMsg.style.color = "green";
+    e.target.reset();
+
+  } catch (err) {
+    formMsg.innerText =
+      "❌ Something went wrong. Please try again later.";
+    formMsg.style.color = "red";
+    console.error(err);
+  }
+});
+
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

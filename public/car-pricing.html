@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vapi Car Rental Pricing & Tariffs | Drop and Pickup Service</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Assuming all base and animation styles - especially for .cta-button-large) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (CAR PRICING PAGE ONLY - Enhanced Design) ================= -->
+  <style>
+    /* Defining base colors if they are not in style.css */
+    :root {
+        --primary-color: #ff6f61; /* Coral/Orange for accents */
+        --accent-blue: #0d6efd; /* Strong Blue for main headers */
+        --bg-light: #f4f7fa; /* Light background for the section */
+    }
+
+    /* Hero section refinements (Standardized) */
+    .pricing-hero {
+        height: 55vh;
+        /* Using a sophisticated highway image */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                          url('https://images.pexels.com/photos/1031383/pexels-photo-1031383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); 
+        background-size: cover;
+        background-position: center 30%; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+    .pricing-hero-content h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+    }
+    .pricing-hero-content p {
+        font-size: 1.3rem;
+        font-weight: 400;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Car Pricing Section Container */
+    .car-pricing-section {
+        max-width: 1300px; 
+        margin: 60px auto;
+        padding: 0 4%;
+        background: var(--bg-light); 
+        padding-bottom: 60px;
+        border-radius: 15px;
+    }
+    .section-title {
+        padding-top: 40px;
+        color: var(--accent-blue);
+    }
+
+    /* Grid Layout for Cards */
+    .car-pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    /* Individual Pricing Card - Enhanced */
+    .pricing-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 1px solid #eee;
+        display: flex;
+        flex-direction: column; 
+    }
+
+    .pricing-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        border-color: var(--primary-color);
+    }
+    
+    /* Card Header (Destination) */
+    .card-header {
+        padding: 28px 25px; 
+        color: white;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        background: linear-gradient(135deg, var(--accent-blue), #4a91ff); 
+        clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); /* Diagonal bottom cut */
+    }
+
+    .card-content {
+        padding: 30px 25px 25px; 
+        flex-grow: 1; 
+    }
+    
+    .card-subtitle {
+        font-weight: 500;
+        color: #666; 
+        margin-bottom: 25px; 
+        font-size: 1.1rem;
+        text-align: center;
+        text-transform: capitalize;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 15px;
+    }
+
+    /* Rate Group Styling */
+    .rate-group {
+        display: flex;
+        justify-content: center; 
+        gap: 15px; 
+        margin-top: 15px;
+        max-width: 350px; 
+        margin-left: auto;
+        margin-right: auto;
+        flex-grow: 1; /* Allows rates to occupy middle space */
+    }
+
+    .car-type-box {
+        flex: 1;
+        padding: 15px 10px; 
+        border-radius: 12px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    /* Visual distinction for car types */
+    .car-type-box:nth-child(1) { 
+        background-color: #ffedeb;
+        border: 2px solid var(--primary-color);
+    }
+    .car-type-box:nth-child(2) { 
+        background-color: #e6f0ff;
+        border: 2px solid var(--accent-blue);
+    }
+
+    .car-type-box h4 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .car-type-box .price {
+        font-size: 2.5rem; 
+        font-weight: 900;
+        line-height: 1.1;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .car-type-box:nth-child(1) .price {
+        color: var(--primary-color);
+    }
+    .car-type-box:nth-child(2) .price {
+        color: var(--accent-blue);
+    }
+
+    .car-type-box .note {
+        font-size: 0.85rem; 
+        font-weight: 600;
+        color: #555;
+        margin-top: 5px;
+        padding: 5px 0;
+    }
+    
+    /* Book Now Button Styling */
+    .book-card-btn {
+        display: block;
+        width: 90%;
+        margin: 25px auto 20px;
+        padding: 12px 0;
+        background: linear-gradient(90deg, var(--primary-color) 0%, #ff8a7d 100%);
+        color: white;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(255, 111, 97, 0.5);
+    }
+
+    /* Section Subheading (Daily vs Return) */
+    .pricing-category-title {
+        background: linear-gradient(90deg, #ff9b8d 0%, var(--primary-color) 100%);
+        color: white;
+        padding: 22px 25px; 
+        margin-top: 60px;
+        margin-bottom: 25px;
+        font-size: 1.7rem;
+        font-weight: 800;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(255, 111, 97, 0.4);
+    }
+    
+    .pricing-note {
+        padding: 20px 0;
+        font-size: 15px;
+        color: #555;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .pricing-hero {
+            height: 40vh;
+        }
+        .pricing-hero-content h1 {
+            font-size: 3rem;
+        }
+        .car-pricing-grid {
+            grid-template-columns: 1fr;
+        }
+        .pricing-category-title {
+            font-size: 1.4rem;
+        }
+    }
+    @media (max-width: 500px) {
+        .rate-group {
+            flex-direction: column;
+        }
+    }
+
+    /* Header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap slightly for better look */
+}
+
+/* FIX: Login Button Styling */
+.login-btn {
+    /* Base: Text-based pill button */
+    font-weight: 600;
+    padding: 8px 15px; 
+    border-radius: 999px; 
+    border: 1px solid #ccc; /* Subtle border */
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex; /* Allow icon and text to align */
+    align-items: center;
+    gap: 6px; /* Gap between icon and text */
+}
+
+.login-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: #fff7f1; /* Very light background on hover */
+    transform: scale(1.02);
+}
+
+/* ... (cta-button and mobile-menu-icon styles remain the same) ... */
+
+
+/* --- Who We Are Section --- */
+/* ... (All other sections CSS remains the same) ... */
+
+
+/* Responsive Fixes for Header Actions */
+@media (max-width: 768px) {
+  /* ... (other mobile CSS remains) ... */
+
+  .header-actions {
+    gap: 8px; /* Reduce gap further on mobile */
+  }
+  
+  .login-btn {
+      /* On small screens, hide the login button to save space 
+         or just show the icon if you prefer: 
+         display: flex; width: 40px; height: 40px; padding: 0; justify-content: center; */
+      display: none; 
+  }
+  
+  .cta-button {
+      padding: 8px 15px;
+      font-size: 14px;
+  }
+  
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER (Standard) ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR (Standard) ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html" class="active">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li> 
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+         <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        
+    </header>
+
+<main>
+    
+<!-- ================= HERO SECTION ================= -->
+<section class="pricing-hero">
+    <div class="pricing-hero-content hero-text-animate"> 
+        <h1 class="reveal-delay-1">Vapi Car Rental Tariffs</h1>
+        <p class="reveal-delay-2">Reliable drop, pickup, and return trips to major airports and cities.</p>
+    </div>
+</section>
+
+
+    <!-- ================= VAPI CAR PRICING SECTION (CARDS) ================= -->
+    <section class="car-pricing-section">
+        
+        <!-- Drop/Pickup Daily Service -->
+        <h3 class="pricing-category-title reveal fade-down">
+            <i class="fas fa-calendar-check"></i> Daily One-Way Drop Service
+        </h3>
+        
+        <div class="car-pricing-grid">
+            
+            <!-- Card 1: Mumbai Drop/Pickup -->
+            <div class="pricing-card reveal" data-delay="100">
+                <div class="card-header"><i class="fas fa-plane-departure"></i> Vapi to Mumbai Airport (BOM)</div>
+                <div class="card-content">
+                    <div class="card-subtitle">One-Way Drop-Off</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹3,300</span>
+                            <span class="note">+ Toll/Parking</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹2,300</span>
+                            <span class="note">+ Toll/Parking</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="booking.html?route=Vapi_Mumbai_Drop" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+
+            <!-- Card 2: Surat Drop/Pickup -->
+            <div class="pricing-card reveal" data-delay="200">
+                <div class="card-header"><i class="fas fa-plane-arrival"></i> Vapi to Surat Airport (STV)</div>
+                <div class="card-content">
+                    <div class="card-subtitle">One-Way Drop-Off</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹3,200</span>
+                            <span class="note">+ Toll/Parking</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹2,200</span>
+                            <span class="note">+ Toll/Parking</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="booking.html?route=Vapi_Surat_Drop" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+
+            <!-- Card 3: Nashik Drop/Pickup -->
+            <div class="pricing-card reveal" data-delay="300">
+                <div class="card-header"><i class="fas fa-city"></i> Vapi to Nashik</div>
+                <div class="card-content">
+                    <div class="card-subtitle">One-Way Drop-Off</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹4,000</span>
+                            <span class="note">All Inclusive</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹3,200</span>
+                            <span class="note">All Inclusive</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="booking.html?route=Vapi_Nashik_Drop" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+            
+            <!-- Card 4: Ahmedabad Drop/Pickup -->
+            <div class="pricing-card reveal" data-delay="400">
+                <div class="card-header"><i class="fas fa-landmark"></i> Vapi to Ahmedabad</div>
+                <div class="card-content">
+                    <div class="card-subtitle">One-Way Drop-Off</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹9,700</span>
+                            <span class="note">All Inclusive</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹7,800</span>
+                            <span class="note">All Inclusive</span>
+                        </div>
+                    </div>
+                </div>
+                <a href="booking.html?route=Vapi_Ahmedabad_Drop" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+        </div>
+
+        <!-- One Day Return Trip Section -->
+        <h3 class="pricing-category-title reveal fade-down">
+            <i class="fas fa-sync-alt"></i> One Day Return Trip (Same Day)
+        </h3>
+        
+        <div class="car-pricing-grid">
+            
+            <!-- Card 5: Mumbai Return -->
+            <div class="pricing-card reveal" data-delay="100">
+                <div class="card-header"><i class="fas fa-plane-departure"></i> Vapi to Mumbai Airport</div>
+                 <div class="card-content">
+                    <div class="card-subtitle">Round Trip</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹5,800</span>
+                            <span class="note">Price + Parking</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹4,500</span>
+                            <span class="note">Price + Parking</span>
+                        </div>
+                    </div>
+                 </div>
+                 <a href="booking.html?route=Vapi_Mumbai_Return" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+
+            <!-- Card 6: Surat Return -->
+            <div class="pricing-card reveal" data-delay="200">
+                <div class="card-header"><i class="fas fa-plane-arrival"></i> Vapi to Surat Airport</div>
+                 <div class="card-content">
+                    <div class="card-subtitle">Round Trip</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹5,200</span>
+                            <span class="note">Price + Parking</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹4,500</span>
+                            <span class="note">Price + Parking</span>
+                        </div>
+                    </div>
+                 </div>
+                 <a href="booking.html?route=Vapi_Surat_Return" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+
+            <!-- Card 7: Ahmedabad Return -->
+            <div class="pricing-card reveal" data-delay="300">
+                <div class="card-header"><i class="fas fa-landmark"></i> Vapi to Ahmedabad</div>
+                 <div class="card-content">
+                    <div class="card-subtitle">Round Trip</div>
+                    <div class="rate-group">
+                        <div class="car-type-box">
+                            <h4>Big Car (SUV)</h4>
+                            <span class="price">₹12,500</span>
+                            <span class="note">All Inclusive</span>
+                        </div>
+                        <div class="car-type-box">
+                            <h4>Small Car (Sedan)</h4>
+                            <span class="price">₹10,200</span>
+                            <span class="note">All Inclusive</span>
+                        </div>
+                    </div>
+                 </div>
+                 <a href="booking.html?route=Vapi_Ahmedabad_Return" class="book-card-btn">
+                    <i class="fas fa-arrow-right"></i> Book Now
+                </a>
+            </div>
+            
+            <!-- Card 8: Local Vapi/Silvassa (Placeholder for grid spacing) -->
+            <div class="pricing-card reveal" data-delay="400">
+                <div class="card-header" style="background: linear-gradient(135deg, #111, #333); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);">
+                    <i class="fas fa-city"></i> Local Rentals
+                </div>
+                 <div class="card-content">
+                    <div class="card-subtitle">Vapi/Silvassa/Daman Local</div>
+                    <p style="text-align: center; color: #333; margin-top: 10px;">
+                        Need a car for local hourly packages or daily running?
+                    </p>
+                    <div class="rate-group" style="margin-top: 30px;">
+                        <span class="price" style="font-size: 2rem; color: var(--primary-color);">Call Us!</span>
+                    </div>
+                 </div>
+                 <a href="contact.html" class="book-card-btn" style="background: #25D366;">
+                    <i class="fab fa-whatsapp"></i> Get Custom Local Rate
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="pricing-note reveal" style="max-width: 1200px; margin: 40px auto 0;">
+             <p>Note: 'All Inclusive' rates cover toll, taxes, and driver allowance. Parking charges are separate for Mumbai and Surat Airports as specified. Rates are for Vapi starting/ending point. Final quote subject to fuel fluctuations and trip timing.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+             <a href="contact.html" class="cta-button-large" style="padding: 15px 40px; font-size: 1.2rem;">
+                <i class="fas fa-phone-volume"></i> Need Custom Quote?
+            </a>
+        </div>
+       
+    </section>
+</main>
+
+<!-- FOOTER (Standard) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="domestic.html">Domestic Tours</a></li>
+                <li><a href="international.html">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS (Standard) -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (Standard) ================= -->
+<script>
+// Scroll Reveal Logic (Standard)
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down');
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Ticket Booking | Request a Quote | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes base styles and animations) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (BUS PAGE ONLY - REDESIGNED) ================= -->
+  <style>
+    /* ... (Existing hero styles remain) ... */
+
+    /* Customizing the button text to reflect "Request" */
+    .booking-form button {
+        background: #0d6efd; 
+        box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+    }
+    .booking-form button:hover {
+        background: #0b5cdb;
+        box-shadow: 0 15px 30px rgba(13, 110, 253, 0.5);
+    }
+    
+    /* FIX: Message element style */
+    #busMsg {
+        margin-top: 15px;
+        font-weight: 600;
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    /* FIX: GRID LAYOUT FOR 5 FIELDS + 1 BUTTON (6 COLUMNS) */
+    .booking-form {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); /* Base 6 column grid */
+        gap: 20px;
+        align-items: flex-end;
+    }
+    
+    /* Wide Screen Spacing (Desktop) */
+    .booking-form #name_group { grid-column: span 2; }
+    .booking-form #phone_group { grid-column: span 2; }
+    .booking-form #date_group { grid-column: span 2; }
+
+    .booking-form #from_group { grid-column: span 2; }
+    .booking-form #to_group { grid-column: span 2; }
+    .booking-form #button_group { grid-column: span 2; }
+
+
+    /* Responsive Overrides (For better mobile/tablet experience) */
+    @media (max-width: 950px) {
+        .booking-form {
+            grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+        }
+        .booking-form > div {
+             grid-column: span 1 !important; /* All input fields take half width */
+        }
+        .booking-form #button_group { 
+            grid-column: span 2 !important; /* Button takes full width */
+        }
+    }
+    @media (max-width: 600px) {
+        .booking-form {
+            grid-template-columns: 1fr; /* Mobile: 1 column */
+        }
+        .booking-form > div,
+        .booking-form #button_group {
+            grid-column: span 1 !important; /* All items full width */
+        }
+    }
+    
+    /* Header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap slightly for better look */
+}
+
+/* FIX: Login Button Styling */
+.login-btn {
+    /* Base: Text-based pill button */
+    font-weight: 600;
+    padding: 8px 15px; 
+    border-radius: 999px; 
+    border: 1px solid #ccc; /* Subtle border */
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex; /* Allow icon and text to align */
+    align-items: center;
+    gap: 6px; /* Gap between icon and text */
+}
+
+.login-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: #fff7f1; /* Very light background on hover */
+    transform: scale(1.02);
+}
+
+/* ... (cta-button and mobile-menu-icon styles remain the same) ... */
+
+
+/* --- Who We Are Section --- */
+/* ... (All other sections CSS remains the same) ... */
+
+
+/* Responsive Fixes for Header Actions */
+@media (max-width: 768px) {
+  /* ... (other mobile CSS remains) ... */
+
+  .header-actions {
+    gap: 8px; /* Reduce gap further on mobile */
+  }
+  
+  .login-btn {
+      /* On small screens, hide the login button to save space 
+         or just show the icon if you prefer: 
+         display: flex; width: 40px; height: 40px; padding: 0; justify-content: center; */
+      display: none; 
+  }
+  
+  .cta-button {
+      padding: 8px 15px;
+      font-size: 14px;
+  }
+  
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+  </style>
+</head>
+
+<body>
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html" class="active">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html" class="active">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+<!-- HERO -->
+    <section class="bus-hero">
+        <div class="bus-hero-content hero-text-animate">
+            <h1 class="reveal-delay-1">Request Bus Quote & Availability</h1>
+            <p class="reveal-delay-2">Tell us your route, and we will find the best options and price for you.</p>
+        </div>
+    </section>
+    
+    <!-- BOOKING WIDGET -->
+    <div class="booking-widget reveal fade-down" data-delay="100">
+        <!-- FORM ACTION UPDATED TO HANDLE SUBMISSION VIA JS -->
+        <form class="booking-form" id="busBookingForm">
+            <input type="hidden" name="service" value="Bus Quote">
+            
+            <!-- NEW: Name Field -->
+            <div id="name_group">
+                <label for="client_name">Your Name</label>
+                <input type="text" id="client_name" name="name" placeholder="Full Name" required>
+            </div>
+            
+            <!-- NEW: Phone Field -->
+            <div id="phone_group">
+                <label for="client_phone">Phone Number</label>
+                <input type="tel" id="client_phone" name="phone" placeholder="+91 98765 43210" required>
+            </div>
+            
+            <!-- Existing Fields -->
+            <div id="from_group">
+                <label for="from">Leaving From</label>
+                <input type="text" id="from" name="From" placeholder="e.g., Vapi" required>
+            </div>
+            
+            <div id="to_group">
+                <label for="to">Going To</label>
+                <input type="text" id="to" name="To" placeholder="e.g., Mumbai / Pune / Surat" required>
+            </div>
+            
+            <div id="date_group">
+                <label for="date">Journey Date</label>
+                <input type="date" id="date" name="Date" required>
+            </div>
+            
+            <div id="button_group" style="display: flex; align-items: flex-end;">
+                <button type="submit">Send Quote Request</button>
+            </div>
+        </form>
+        
+        <div id="busMsg" class="message-status"></div>
+        
+        <p style="margin-top: 25px; font-size: 14px; text-align: center; color: #777;">
+            We will contact you shortly with the best available tickets and prices.
+        </p>
+    </div>
+
+    <!-- BENEFITS SECTION -->
+    <section class="benefits-section">
+        <h2 class="section-title reveal">Why Choose Our Personalised Booking?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card reveal fade-up" data-delay="100">
+                <i class="fas fa-handshake"></i>
+                <h3>Expert Negotiation</h3>
+                <p>We leverage partnerships to secure seats and rates often unavailable directly online.</p>
+            </div>
+            <div class="benefit-card reveal fade-up" data-delay="300">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Travel Assurance</h3>
+                <p>Receive dedicated support for immediate solutions if there are cancellations or route changes.</p>
+            </div>
+            <div class="benefit-card reveal fade-up" data-delay="500">
+                <i class="fas fa-bus-simple"></i>
+                <h3>Premium Selection</h3>
+                <p>Access to verified, high-quality AC/Sleeper buses that guarantee maximum comfort.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCAL ROUTES SECTION (Vapi/Surat Focus) -->
+    <section class="local-routes reveal">
+        <h2 class="section-title">Popular Local Routes from Vapi & Surat</h2>
+        <p style="color: #666; font-size: 1.1rem; max-width: 800px; margin: 0 auto 20px;">
+            Connecting South Gujarat and Maharashtra effortlessly. Send us an enquiry for these high-demand routes.
+        </p>
+<div class="local-routes-list reveal">
+    <span>Vapi to Mumbai</span>
+    <span>Surat to Pune</span>
+    <span>Vapi to Ahmedabad</span>
+    <span>Surat to Jaipur</span>
+    <span>Navsari to Mumbai</span>
+    <span>Vapi to Nashik</span>
+</div>
+<a href="contact.html?service=Bus%20Quote" class="cta-button-large" style="margin-top: 20px; background: #0d6efd;">Get a Quick Quote Now</a>
+</section>
+
+</main>
+
+<!-- FOOTER (STANDARDIZED ENGLISH) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (SCROLL REVEAL & MOBILE MENU) ================= -->
+<script>
+// ==================== FORM SUBMISSION LOGIC (USING FETCH) ====================
+document.getElementById('busBookingForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const payload = {
+    // FIX: Added Name and Phone to payload
+    name: document.getElementById('client_name').value,
+    phone: document.getElementById('client_phone').value,
+    
+    pickup: document.getElementById('from').value,
+    drop: document.getElementById('to').value,
+    date: document.getElementById('date').value,
+    source: 'Bus Booking Page'
+  };
+
+  const msg = document.getElementById('busMsg');
+  
+  // Reset message and show loading
+  msg.innerText = 'Submitting your request...';
+  msg.style.background = '#e6f7ff';
+  msg.style.color = '#0d6efd';
+
+  try {
+    // NOTE: Update the URL below if your API endpoint is different
+    const apiUrl = '/api/bus-booking'; 
+    
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ message: 'Server responded with an error status.' }));
+        throw new Error(errorData.message || `HTTP error! Status: ${res.status}`);
+    }
+
+    msg.innerText = '✅ Bus quote request sent successfully! We will contact you soon.';
+    msg.style.background = '#e6ffed';
+    msg.style.color = 'green';
+    document.getElementById('busBookingForm').reset();
+    
+
+  } catch (err) {
+    console.error('Submission Error:', err);
+    msg.innerText = `❌ Error submitting request: ${err.message}. Please try WhatsApp.`;
+    msg.style.background = '#ffe6e6';
+    msg.style.color = 'red';
+  }
+});
+
+
+// ==================== SCROLL REVEAL LOGIC (Reused from previous pages) ====================
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+
+const observerOptions = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.1 
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+// ==================== MOBILE MENU TOGGLE ====================
+
+   
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

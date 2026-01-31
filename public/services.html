@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Services | Car, Bus, Visa Assistance | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes base styles and animations) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (SERVICES PAGE ONLY) ================= -->
+  <style>
+    /* Hero */
+    .services-hero {
+        height: 50vh;
+        background: url('https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+    .services-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, .6);
+        z-index: 1;
+    }
+    .services-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    .services-hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: 80px 6%;
+        background: var(--bg-light);
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 35px;
+        margin-top: 40px;
+    }
+
+    .service-card {
+        background: var(--bg-white);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+    }
+    .service-card-icon {
+        background: var(--primary-color);
+        padding: 30px;
+        color: #fff;
+        text-align: center;
+        position: relative;
+    }
+    .service-card-icon i {
+        font-size: 50px;
+    }
+    .service-card-content {
+        padding: 30px;
+    }
+    .service-card-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+    }
+    .service-card-content p {
+        color: #555;
+        margin-bottom: 20px;
+    }
+    .service-card-content .cta-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    /* Special CTA Section */
+    .why-us-cta {
+        text-align: center;
+        padding: 60px 6%;
+        background: linear-gradient(135deg, #f0f4ff, #e4ebfa);
+        border-radius: 20px;
+        max-width: 1200px;
+        margin: 40px auto;
+    }
+    .why-us-cta h2 {
+        color: #0d6efd;
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    .why-us-cta p {
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: #444;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .services-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <!-- Ensure this image source is correct -->
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HEADER SECTION में -->
+         <a href="/admin/login.html" class="login-btn" title="Admin Login">
+            <i class="fas fa-user"></i>
+        </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+<!-- ================= HERO IMAGE SLIDER (About Page Specific) ================= -->
+<section class="about-hero">
+    <!-- Image Sources kept same, but paths corrected if necessary -->
+    <div class="about-slide active" style="background-image:url('https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+
+    <div class="about-hero-content hero-text-animate"> <!-- Added hero-text-animate -->
+        <h1 class="reveal-delay-1">The Trip Connection</h1>
+        <p class="reveal-delay-2">Crafting global adventures and memories that last a lifetime.</p>
+    </div>
+</section>
+
+    <!-- MAIN SERVICES GRID -->
+    <section class="services-section">
+        <h2 class="section-title reveal">Our Comprehensive Travel Services</h2>
+
+        <div class="services-grid">
+            
+            <!-- Service Card 1: Car Booking -->
+            <div class="service-card reveal fade-up" data-delay="100">
+                <div class="service-card-icon" style="background: #0d6efd;">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="service-card-content">
+                    <h3>Car & Cab Booking</h3>
+                    <p>Book reliable taxis, rental cars, or private chauffeurs for airport transfers (Mumbai-Surat, Vapi), local sightseeing, and intercity travel across India.</p>
+                    <a href="car.html" class="cta-button">Book Car</a>
+                </div>
+            </div>
+
+            <!-- Service Card 2: Bus Booking -->
+            <div class="service-card reveal fade-up" data-delay="300">
+                <div class="service-card-icon" style="background: var(--primary-color);">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <div class="service-card-content">
+                    <h3>Bus Tickets</h3>
+                    <p>Easy online booking for all major bus operators across India. Choose from Sleeper, AC, and Volvo buses for comfortable domestic journeys.</p>
+                    <a href="bus.html" class="cta-button">Book Bus Ticket</a>
+                </div>
+            </div>
+
+            <!-- Service Card 3: Visa Assistance -->
+            <div class="service-card reveal fade-up" data-delay="500">
+                <div class="service-card-icon" style="background: #25D366;">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <div class="service-card-content">
+                    <h3>Visa & Immigration Help</h3>
+                    <p>Expert support for international visa applications. We ensure all paperwork is correctly submitted for popular tourist destinations.</p>
+                    <a href="visa.html" class="cta-button">Get Visa Help</a>
+                </div>
+            </div>
+            
+             <!-- Service Card 4: Flight Booking -->
+            <div class="service-card reveal fade-up" data-delay="100">
+                <div class="service-card-icon" style="background: #7c3aed;">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="service-card-content">
+                    <h3>Flight Ticketing</h3>
+                    <p>Competitive rates for both domestic and international flights. We find the best routes and deals for individual and group travel.</p>
+                    <a href="booking.html" class="cta-button">Book Flights</a>
+                </div>
+            </div>
+
+            <!-- Service Card 5: Hotel Booking -->
+            <div class="service-card reveal fade-up" data-delay="300">
+                <div class="service-card-icon" style="background: #e65c00;">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <div class="service-card-content">
+                    <h3>Hotel Reservations</h3>
+                    <p>Access exclusive deals on hotels, resorts, and homestays globally. Guaranteed best prices for your accommodation needs.</p>
+                    <a href="booking.html" class="cta-button">Find Hotels</a>
+                </div>
+            </div>
+            
+             <!-- Service Card 6: Insurance -->
+            <div class="service-card reveal fade-up" data-delay="500">
+                <div class="service-card-icon" style="background: #f59e0b;">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="service-card-content">
+                    <h3>Travel Insurance</h3>
+                    <p>Stay protected on your journey with comprehensive travel insurance plans covering medical emergencies and trip cancellations.</p>
+                    <a href="contact.html" class="cta-button">Get a Quote</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <!-- WHY CHOOSE US CTA -->
+    <section class="why-us-cta reveal fade-down">
+        <h2>Why Use Our Booking Services?</h2>
+        <p>Beyond our curated packages, our standalone services offer convenience, reliability, and competitive pricing, ensuring every segment of your travel is perfect.</p>
+        <a href="contact.html" class="cta-button-large" style="background: #0d6efd;">Get Personalized Assistance Today</a>
+    </section>
+
+</main>
+
+<!-- FOOTER (STANDARDIZED ENGLISH) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (SCROLL REVEAL & MOBILE MENU) ================= -->
+<script>
+// ==================== SCROLL REVEAL LOGIC ====================
+// Includes all necessary reveal classes
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+
+const observerOptions = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.1 
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

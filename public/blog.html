@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Blog | Explore India & Asia Guides | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes base styles and animations) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (BLOG PAGE ONLY - PREMIUM DESIGN) ================= -->
+  <style>
+    /* Defining base colors for robust styling */
+    :root {
+        --primary-color: #ff6f61; /* Coral/Orange for accents */
+        --secondary-color: #333; /* Dark text */
+        --accent-blue: #0d6efd; /* Strong Blue for main headers */
+        --bg-light: #f4f7fa; /* Light background for the section */
+        --bg-white: #ffffff;
+    }
+    
+    /* Hero */
+    .blog-hero {
+        height: 80vh;
+        /* Using a high-quality, inspiring travel image */
+        background: url('https://images.pexels.com/photos/10186717/pexels-photo-10186717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+    .blog-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .7); z-index: 1; } /* Slightly darker overlay */
+    .blog-hero-content { position: relative; z-index: 2; text-align: center; }
+    .blog-hero-content h1 { font-size: 3.8rem; font-weight: 900; letter-spacing: 1px; }
+    .blog-hero-content p { font-size: 1.3rem; margin-top: 5px; font-weight: 300; }
+
+    /* Blog Layout & Section Title Enhancement */
+    .blog-section {
+        padding: 80px 6%;
+        background: var(--bg-light);
+    }
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--accent-blue);
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: var(--primary-color);
+        border-radius: 5px;
+    }
+    
+    /* --- FEATURED POST SECTION --- */
+    .featured-section {
+        padding: 40px 6%;
+        background: var(--bg-light);
+    }
+    .featured-post {
+        display: flex;
+        gap: 0; /* Removing gap here, managing gap internally */
+        max-width: 1200px;
+        margin: 0 auto;
+        background: var(--bg-white);
+        border-radius: 20px;
+        overflow: hidden;
+        /* Enhanced Shadow */
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2); 
+        border-left: 8px solid var(--primary-color); /* Strong vertical highlight */
+        transition: transform 0.3s ease;
+        text-decoration: none; /* Ensure it looks clickable */
+    }
+    .featured-post:hover {
+         transform: scale(1.01);
+    }
+    .featured-image {
+        flex: 1.5;
+        min-width: 40%;
+    }
+    .featured-image img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        display: block;
+    }
+    .featured-content {
+        flex: 2;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .category-tag {
+        display: inline-block;
+        padding: 6px 15px;
+        background: var(--primary-color); 
+        color: white; 
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+    .featured-content h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: var(--secondary-color);
+        line-height: 1.3;
+    }
+    .featured-content p {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+    .author-meta {
+        font-size: 15px;
+        color: #777;
+        margin-bottom: 20px;
+    }
+    
+    /* --- REGULAR BLOG GRID --- */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+        margin-top: 40px;
+    }
+
+    /* Blog Card Style */
+    .blog-card {
+        background: var(--bg-white);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        transition: transform 0.4s, box-shadow 0.4s;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+    }
+    .blog-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .blog-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+    .blog-card:hover img {
+        transform: scale(1.08); /* Slightly more aggressive zoom */
+    }
+
+    .card-content {
+        padding: 25px;
+        flex-grow: 1; 
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-meta {
+        font-size: 13px;
+        color: #999;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .card-meta span i {
+        color: var(--primary-color); /* Changing icon color to primary for consistency */
+        margin-right: 5px;
+    }
+
+    .card-content h3 {
+        font-size: 1.4rem;
+        font-weight: 700; /* Bolder title */
+        color: var(--secondary-color);
+        margin-bottom: 15px;
+    }
+
+    .card-content p {
+        color: #666; /* Slightly darker body text for readability */
+        font-size: 15px;
+        flex-grow: 1;
+        margin-bottom: 20px;
+    }
+    
+    .read-more-btn {
+        margin-top: auto;
+        color: var(--accent-blue); /* Using blue for read more link */
+        font-weight: 600;
+        transition: color 0.3s;
+        align-self: flex-start;
+    }
+    .read-more-btn:hover {
+        color: var(--primary-color);
+    }
+    
+    /* Pagination/Load More button */
+    .pagination {
+        text-align: center;
+        margin-top: 50px;
+    }
+    .pagination a {
+        background: var(--accent-blue);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s;
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
+    }
+    .pagination a:hover {
+        background: var(--primary-color);
+    }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+        .featured-post {
+            flex-direction: column;
+            border-left: none; /* Remove vertical bar on mobile */
+            border-bottom: 5px solid var(--primary-color); /* Use bottom border instead */
+        }
+        .featured-image img {
+            height: 300px;
+        }
+        .featured-content {
+            padding: 30px;
+        }
+        .featured-content h2 {
+            font-size: 1.8rem;
+        }
+        .blog-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+    }
+    @media (max-width: 600px) {
+        .blog-hero {
+            height: 30vh;
+        }
+        .blog-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* --- ADMIN LOGIN ICON STYLE --- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.login-btn {
+    font-weight: 600;
+    padding: 8px 15px; 
+    border-radius: 999px; 
+    border: 2px solid #ddd; 
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+
+.login-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: #fff7f1; /* Light hover background */
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .login-btn {
+      display: none; 
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- PRELOADER & HEADER (Standardized) -->
+<div id="preloader"><img src="/images/logofinal.png" alt="Loading"></div>
+<header class="header">
+    <a href="index.html" class="logo"><img src="/images/logofinal.png" alt="The Trip Connection Logo"></a>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="packages.html">Packages ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="domestic.html">Domestic Tours</a></li>
+                    <li><a href="international.html">International Tours</a></li>
+                    <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                    <li><a href="package-details.html">All Packages</a></li>
+                </ul>
+            </li>            
+            <li class="dropdown">
+                <a href="services.html">Services ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="bus.html">Bus Booking</a></li>
+                    <li><a href="car.html">Car Booking</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <a href="/admin/login.html" class="login-btn" title="Admin Login">
+            <i class="fas fa-user"></i>
+        </a>
+        <a href="booking.html" class="cta-button">Book Now</a>
+        <div class="mobile-menu-icon"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO -->
+    <section class="blog-hero">
+        <div class="blog-hero-content hero-text-animate">
+            <h1 class="reveal-delay-1">Explore Incredible India</h1>
+            <p class="reveal-delay-2">Guides, tips, and stories for Indian travelers and local adventures.</p>
+        </div>
+    </section>
+    
+    <!-- FEATURED POST SECTION (Indian Focus) -->
+    <section class="featured-section">
+        <h2 class="section-title reveal">Editor's Pick: Adventure Awaits</h2>
+        <a href="blog-detail.html?id=ladakh-bike" class="featured-post reveal fade-left">
+            <div class="featured-image">
+                <img src="https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Leh Ladakh Bike Trip">
+            </div>
+            <div class="featured-content">
+                <span class="category-tag">Domestic Adventure</span>
+                <h2>Leh-Ladakh Dream Trip: Planning Your Ultimate Bike Expedition</h2>
+                <p>The high mountain passes call! Get our detailed guide on required permits, best season to travel, packing essentials, and avoiding altitude sickness for your unforgettable Himalayan journey.</p>
+                <div class="author-meta">
+                    By Adventure Desk | <i class="fas fa-calendar-alt"></i> May 25, 2024
+                </div>
+                <div style="margin-top: 10px;">
+                    <!-- Adjusted CTA button for featured section -->
+                    <span class="cta-button" style="padding: 10px 25px; font-size: 16px;">Read Full Guide</span>
+                </div>
+            </div>
+        </a>
+    </section>
+
+
+    <!-- BLOG POSTS GRID -->
+    <section class="blog-section">
+        <h2 class="section-title reveal">Latest Travel Articles</h2>
+        
+        <div class="blog-grid">
+            
+            <!-- Blog Card 1: North East India -->
+            <a href="blog-detail.html?id=northeast-guide" class="blog-card reveal fade-up" data-delay="100">
+                <img src="https://images.pexels.com/photos/5697205/pexels-photo-5697205.jpeg?auto=compress&cs=tinysrgb&w=600" alt="North East India">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fas fa-tag"></i> Domestic Hidden Gems</span>
+                        <span><i class="fas fa-calendar-alt"></i> June 10, 2024</span>
+                    </div>
+                    <h3>The Seven Sisters: Your Guide to North East India Tourism</h3>
+                    <p>Discover the untouched beauty of Meghalaya, Assam, and Sikkim—a perfect itinerary for nature lovers.</p>
+                    <span class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Blog Card 2: South India Temple Tour -->
+            <a href="blog-detail.html?id=south-temples" class="blog-card reveal fade-up" data-delay="300">
+                <img src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=600" alt="South Indian Temple">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fas fa-tag"></i> Heritage & Culture</span>
+                        <span><i class="fas fa-calendar-alt"></i> May 15, 2024</span>
+                    </div>
+                    <h3>A Spiritual Journey: The Grand Temple Towns of South India</h3>
+                    <p>A detailed itinerary covering Madurai, Rameswaram, and Thanjavur—deep dive into Indian history.</p>
+                    <span class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Blog Card 3: Rann Utsav (Gujarat Focus) -->
+            <a href="blog-detail.html?id=kutch-festival" class="blog-card reveal fade-up" data-delay="500">
+                <img src="https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rann of Kutch festival">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fas fa-tag"></i> Gujarat Special</span>
+                        <span><i class="fas fa-calendar-alt"></i> March 10, 2024</span>
+                    </div>
+                    <h3>Rann Utsav Magic: When and How to Visit the White Desert</h3>
+                    <p>A comprehensive guide to planning your trip around the colorful Rann Utsav festival in Kutch, Gujarat.</p>
+                    <span class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+            <!-- Blog Card 4: Affordable Foreign Trips (Asia Focus) -->
+            <a href="blog-detail.html?id=affordable-asia" class="blog-card reveal fade-up" data-delay="100">
+                <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Thailand Beach">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fas fa-tag"></i> International Budget</span>
+                        <span><i class="fas fa-calendar-alt"></i> Feb 20, 2024</span>
+                    </div>
+                    <h3>4 Affordable Foreign Trips Perfect for Indian Travelers (Under ₹50k)</h3>
+                    <p>Thailand, Vietnam, Nepal, and Sri Lanka—budget-friendly destinations near India with easy visas.</p>
+                    <span class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+            <!-- Blog Card 5: Maharashtra/Vapi Getaways -->
+            <a href="blog-detail.html?id=maharashtra-gems" class="blog-card reveal fade-up" data-delay="300">
+                <img src="https://images.pexels.com/photos/1723145/pexels-photo-1723145.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lonavala hills">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fas fa-tag"></i> Weekend Getaways</span>
+                        <span><i class="fas fa-calendar-alt"></i> Jan 05, 2024</span>
+                    </div>
+                    <h3>Top 5 Monsoon Getaways Near Vapi & Mumbai</h3>
+                    <p>Exploring the best hill stations (Lonavala, Khandala, Malshej) easily accessible from the Gujarat-Maharashtra border.</p>
+                    <span class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+            <!-- Blog Card 6: Essential Travel Hacks -->
+            <a href="blog-detail.html?id=travel-hacks" class="blog-card reveal fade-up" data-delay="500">
+                <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Packing">
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span><i class="fas fa-tag"></i> Travel Tips</span>
+                        <span><i class="fas fa-calendar-alt"></i> Dec 18, 2023</span>
+                    </div>
+                    <h3>The Ultimate Packing Checklist for a 10-Day Indian Tour</h3>
+                    <p>Smart packing tips to manage varied Indian climates and cultural nuances without overpacking.</p>
+                    <span class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+            
+        </div>
+        
+        <div class="pagination reveal">
+            <a href="#">Load More Articles</a>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER & WIDGETS (Standardized) -->
+<footer class="footer">
+    <!-- ... Footer Content ... -->
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- JS SCRIPTS (Standard Scroll Reveal logic) -->
+<script>
+// Scroll Reveal Logic (Standard) - Included here for completeness if external JS is skipped
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

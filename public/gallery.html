@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery | Travel Memories | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes base styles and animations) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (GALLERY PAGE ONLY) ================= -->
+  <style>
+    /* Hero */
+    .gallery-hero {
+        height: 40vh;
+        background: url('https://images.pexels.com/photos/1018596/pexels-photo-1018596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+    .gallery-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .7); z-index: 1; }
+    .gallery-hero-content { position: relative; z-index: 2; text-align: center; }
+    .gallery-hero-content h1 { font-size: 3.5rem; font-weight: 800; }
+    .gallery-hero-content p { font-size: 1.1rem; margin-top: 5px; }
+
+    /* Gallery Section */
+    .gallery-section {
+        padding: 80px 6%;
+        background: var(--bg-light);
+    }
+    
+    .gallery-grid {
+        display: grid;
+        gap: 20px;
+        /* Responsive Grid: 2 columns on small, 3 on medium, 4 on large */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        margin-top: 40px;
+    }
+    
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    .gallery-item:hover {
+        transform: scale(1.03);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 300px; /* Fixed height for uniformity */
+        object-fit: cover;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+
+    /* Overlay Text */
+    .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+
+    .gallery-overlay h4 {
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+    }
+    .gallery-overlay span {
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+
+    /* Category Filter (Simple Demo) */
+    .filter-buttons {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .filter-buttons button {
+        background: var(--bg-white);
+        border: 1px solid #ddd;
+        padding: 8px 20px;
+        margin: 5px;
+        border-radius: 30px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+    }
+    .filter-buttons button.active,
+    .filter-buttons button:hover {
+        background: var(--primary-color);
+        color: #fff;
+    }
+
+    /* Placeholder for Modal/Lightbox (Optional) */
+    #lightbox {
+        display: none;
+    }
+    
+    @media (max-width: 600px) {
+        .gallery-hero {
+            height: 30vh;
+        }
+        .gallery-hero-content h1 {
+            font-size: 2.5rem;
+        }
+        .gallery-item img {
+            height: 250px;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <!-- Ensure this image source is correct -->
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HEADER SECTION में -->
+         <a href="/admin/login.html" class="login-btn" title="Admin Login">
+            <i class="fas fa-user"></i>
+        </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+<!-- ================= HERO IMAGE SLIDER (About Page Specific) ================= -->
+<section class="about-hero">
+    <!-- Image Sources kept same, but paths corrected if necessary -->
+    <div class="about-slide active" style="background-image:url('https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+
+    <div class="about-hero-content hero-text-animate"> <!-- Added hero-text-animate -->
+        <h1 class="reveal-delay-1">The Trip Connection</h1>
+        <p class="reveal-delay-2">Crafting global adventures and memories that last a lifetime.</p>
+    </div>
+</section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery-section">
+        <h2 class="section-title reveal">Captured Moments</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons reveal">
+            <button class="active" data-filter="all">All</button>
+            <button data-filter="international">International</button>
+            <button data-filter="domestic">Domestic</button>
+            <button data-filter="adventure">Adventure</button>
+        </div>
+
+        <!-- Photo Grid -->
+        <div class="gallery-grid">
+            
+            <!-- Item 1: International -->
+            <div class="gallery-item reveal fade-up" data-delay="100" data-category="international">
+                <img src="https://images.pexels.com/photos/3889853/pexels-photo-3889853.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Switzerland">
+                <div class="gallery-overlay">
+                    <h4>Swiss Alps Adventure</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> Switzerland</span>
+                </div>
+            </div>
+
+            <!-- Item 2: Domestic / Adventure -->
+            <div class="gallery-item reveal fade-up" data-delay="200" data-category="domestic adventure">
+                <img src="https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ladakh Bike Trip">
+                <div class="gallery-overlay">
+                    <h4>Ladakh Bike Expedition</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> India</span>
+                </div>
+            </div>
+
+            <!-- Item 3: International -->
+            <div class="gallery-item reveal fade-up" data-delay="300" data-category="international">
+                <img src="https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bali Honeymoon">
+                <div class="gallery-overlay">
+                    <h4>Bali Honeymoon Bliss</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> Indonesia</span>
+                </div>
+            </div>
+
+            <!-- Item 4: Domestic -->
+            <div class="gallery-item reveal fade-up" data-delay="400" data-category="domestic">
+                <img src="https://images.pexels.com/photos/1618903/pexels-photo-1618903.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rajasthan Palace">
+                <div class="gallery-overlay">
+                    <h4>Royal Rajasthan Heritage</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> India</span>
+                </div>
+            </div>
+            
+             <!-- Item 5: International -->
+            <div class="gallery-item reveal fade-up" data-delay="100" data-category="international">
+                <img src="https://images.pexels.com/photos/1739572/pexels-photo-1739572.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dubai">
+                <div class="gallery-overlay">
+                    <h4>Dubai City Lights</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> UAE</span>
+                </div>
+            </div>
+            
+             <!-- Item 6: Adventure -->
+            <div class="gallery-item reveal fade-up" data-delay="200" data-category="adventure domestic">
+                <img src="https://images.pexels.com/photos/10326493/pexels-photo-10326493.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Trekking">
+                <div class="gallery-overlay">
+                    <h4>Himalayan Trekking</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> Uttarakhand</span>
+                </div>
+            </div>
+            
+             <!-- Item 7: Domestic -->
+            <div class="gallery-item reveal fade-up" data-delay="300" data-category="domestic">
+                <img src="https://images.pexels.com/photos/2033010/pexels-photo-2033010.jpeg?auto=compress&cs=tinysrgb&w=600" alt="India">
+                <div class="gallery-overlay">
+                    <h4>Ganges River View</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> Varanasi</span>
+                </div>
+            </div>
+
+             <!-- Item 8: International -->
+            <div class="gallery-item reveal fade-up" data-delay="400" data-category="international">
+                <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Thailand">
+                <div class="gallery-overlay">
+                    <h4>Thailand Beach Escape</h4>
+                    <span><i class="fas fa-map-marker-alt"></i> Phuket</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER & WIDGETS (Standardized) -->
+<footer class="footer">
+    <!-- ... Footer Content ... -->
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- JS SCRIPTS -->
+<script>
+// ==================== SCROLL REVEAL LOGIC (Local Copy) ====================
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+// ==================== GALLERY FILTER LOGIC ====================
+document.querySelectorAll('.filter-buttons button').forEach(button => {
+    button.addEventListener('click', function() {
+        // Update active button
+        document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filter = this.dataset.filter;
+        const items = document.querySelectorAll('.gallery-item');
+        
+        items.forEach(item => {
+            // Check if item contains the filter category or if filter is 'all'
+            if (filter === 'all' || item.dataset.category.includes(filter)) {
+                item.style.display = 'block';
+                // Re-trigger fade-in animation for filtered items (optional but nice touch)
+                setTimeout(() => {
+                    item.classList.remove('active');
+                    void item.offsetWidth; // Force reflow
+                    item.classList.add('active');
+                }, 10);
+
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+
+</script>
+<script src="/js/main.js"></script>
+</body>
+</html>

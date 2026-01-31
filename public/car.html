@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Booking & Rental Services | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Assuming base styles and animations are defined here) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (CAR PAGE ONLY - OPTIMIZED) ================= -->
+  <style>
+    /* Hero */
+    .car-hero {
+        height: 40vh;
+        background: url('https://images.pexels.com/photos/10398670/pexels-photo-10398670.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+    .car-hero::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, .7); z-index: 1; }
+    .car-hero-content { position: relative; z-index: 2; text-align: center; }
+    .car-hero-content h1 { font-size: 3.2rem; }
+
+    /* Search and Content structure */
+    .car-section {
+        padding: 50px 6%;
+        background: var(--bg-light);
+        padding-top: 150px; 
+    }
+    .car-search-card {
+        max-width: 1100px;
+        margin: -100px auto 40px; 
+        background: var(--bg-white);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        position: relative;
+        z-index: 5;
+    }
+    .car-search-card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        color: #0d6efd;
+    }
+    
+    /* FIX: Grid layout for 7+ items */
+    .car-search-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); /* Base grid of 6 columns */
+        gap: 20px;
+        align-items: flex-end;
+    }
+    /* Set specific column spans for wide screen */
+    .car-search-grid #name_group { grid-column: span 3; }
+    .car-search-grid #phone_group { grid-column: span 3; }
+    .car-search-grid #pickup_group,
+    .car-search-grid #drop_group { grid-column: span 2; }
+    .car-search-grid #date_group,
+    .car-search-grid #type_group,
+    .car-search-grid #button_group { grid-column: span 2; }
+    
+    .car-search-grid label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #555;
+    }
+    .car-search-grid input, .car-search-grid select {
+        width: 100%;
+        padding: 15px; 
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 16px;
+    }
+    .car-search-grid button {
+        width: 100%;
+        padding: 15px 20px;
+        background: #0d6efd; 
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: transform 0.3s;
+        box-shadow: 0 8px 15px rgba(13, 110, 253, 0.3);
+    }
+    .car-search-grid button:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Key Routes Section */
+    .key-routes {
+        padding: 40px 6%;
+    }
+    .route-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    .route-card {
+        background: var(--bg-white);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: var(--shadow-light);
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .route-card p {
+        flex-grow: 1; 
+        margin-bottom: 20px;
+    }
+    .route-card .details-btn {
+        margin-top: auto; 
+        display: inline-block;
+    }
+    
+    /* Responsive adjustments for car search grid */
+    @media (max-width: 1050px) {
+        .car-search-grid {
+            grid-template-columns: repeat(2, 1fr); /* 2 columns on mid screens */
+        }
+        /* All items take half width */
+        .car-search-grid > div {
+             grid-column: span 1 !important; 
+        }
+        .car-search-grid button {
+            grid-column: span 2 !important; /* Button takes full width */
+        }
+    }
+    @media (max-width: 768px) {
+        .car-search-grid {
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 15px;
+        }
+        /* All items take full width */
+        .car-search-grid > div,
+        .car-search-grid button {
+            grid-column: span 1 !important; 
+        }
+    }
+    
+    /* Header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap slightly for better look */
+}
+
+/* FIX: Login Button Styling */
+.login-btn {
+    /* Base: Text-based pill button */
+    font-weight: 600;
+    padding: 8px 15px; 
+    border-radius: 999px; 
+    border: 1px solid #ccc; /* Subtle border */
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex; /* Allow icon and text to align */
+    align-items: center;
+    gap: 6px; /* Gap between icon and text */
+}
+
+.login-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: #fff7f1; /* Very light background on hover */
+    transform: scale(1.02);
+}
+
+/* ... (cta-button and mobile-menu-icon styles remain the same) ... */
+
+
+/* --- Who We Are Section --- */
+/* ... (All other sections CSS remains the same) ... */
+
+
+/* Responsive Fixes for Header Actions */
+@media (max-width: 768px) {
+  /* ... (other mobile CSS remains) ... */
+
+  .header-actions {
+    gap: 8px; /* Reduce gap further on mobile */
+  }
+  
+  .login-btn {
+      /* On small screens, hide the login button to save space 
+         or just show the icon if you prefer: 
+         display: flex; width: 40px; height: 40px; padding: 0; justify-content: center; */
+      display: none; 
+  }
+  
+  .cta-button {
+      padding: 8px 15px;
+      font-size: 14px;
+  }
+  
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html" class="active">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html" class="active">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+    <!-- HERO -->
+    <section class="car-hero">
+        <div class="car-hero-content hero-text-animate">
+            <h1 class="reveal-delay-1">Reliable Car Rental & Cab Services</h1>
+            <p class="reveal-delay-2">Professional drivers, comfortable cars, and transparent pricing for intercity travel.</p>
+        </div>
+    </section>
+
+    <!-- CAR SEARCH & VAPI/SURAT FOCUS -->
+    <section class="car-section">
+        <div class="car-search-card reveal fade-down">
+            <h2 class="section-title-left">Quickly Search & Book Your Ride</h2>
+            
+            <form class="car-search-grid" id="carBookingForm">
+                <input type="hidden" name="service" value="CarBooking">
+
+                <!-- ADDED: Name Field -->
+                <div id="name_group">
+                    <label for="client_name">Your Name</label>
+                    <input type="text" id="client_name" name="name" placeholder="Full Name" required>
+                </div>
+                <!-- ADDED: Phone Number Field -->
+                <div id="phone_group">
+                    <label for="client_phone">Phone Number (WhatsApp Preferred)</label>
+                    <input type="tel" id="client_phone" name="phone" placeholder="+91 98765 43210" required>
+                </div>
+
+                <!-- Pickup & Drop (Grid span adjusted in CSS) -->
+                <div id="pickup_group">
+                    <label for="car_pickup">Pickup Location</label>
+                    <input type="text" id="car_pickup" name="pickup" placeholder="e.g., BOM Airport" required>
+                </div>
+                <div id="drop_group">
+                    <label for="car_drop">Drop Location</label>
+                    <input type="text" id="car_drop" name="drop" placeholder="e.g., Vapi, Surat" required>
+                </div>
+                
+                <!-- Date & Type (Grid span adjusted in CSS) -->
+                <div id="date_group">
+                    <label for="car_date">Pickup Date</label>
+                    <input type="date" id="car_date" name="date" required>
+                </div>
+                <div id="type_group">
+                    <label for="car_type">Vehicle Type</label>
+                    <select id="car_type" name="type">
+                        <option value="Sedan">Sedan (Dzire, Etios)</option>
+                        <option value="SUV">SUV/Innova</option>
+                        <option value="Luxury">Luxury Car</option>
+                        <option value="Tempo">Tempo Traveller</option>
+                    </select>
+                </div>
+                
+                <!-- Button (Grid span adjusted in CSS) -->
+                <div id="button_group">
+                    <button type="submit">Get Instant Quote</button>
+                </div>
+            </form>
+            
+            <div id="carMsg" class="message-status"></div>
+            
+        </div>
+    
+        <div class="key-routes">
+            <h2 class="section-title reveal">Popular Intercity Routes</h2>
+            <div class="route-grid">
+                
+                <div class="route-card reveal fade-up" data-delay="100">
+                    <i class="fas fa-location-arrow"></i>
+                    <h4>Mumbai Airport (BOM) ⇌ Surat / Vapi</h4>
+                    <p>Hassle-free airport pickup/drop-off service. Clean, safe, and on-time every time. Guaranteed lowest tariff.</p>
+                    <a href="booking.html?service=car&route=MUMSURAT" class="details-btn">Check Availability</a>
+                </div>
+
+                <div class="route-card reveal fade-up" data-delay="300">
+                    <i class="fas fa-route"></i>
+                    <h4>Pune ⇌ Mumbai / Nashik / Shirdi</h4>
+                    <p>Ideal for business trips and weekend getaways across the Maharashtra corridor. Flexible round trip packages.</p>
+                    <a href="booking.html?service=car&route=PUNMUM" class="details-btn">Check Availability</a>
+                </div>
+
+                <div class="route-card reveal fade-up" data-delay="500">
+                    <i class="fas fa-hippo"></i>
+                    <h4>Gujarat Tourism Routes</h4>
+                    <p>Dedicated cars for Gujarat tourism, allowing flexible exploration of heritage sites like Kutch, Dwarka, and Somnath.</p>
+                    <a href="booking.html?service=car&route=AHMKUTCH" class="details-btn">Check Availability</a>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 60px;" class="reveal">
+            <p style="margin-bottom: 20px;">Need a dedicated corporate rental or specific vehicle type?</p>
+            <a href="contact.html?service=Car%20Quote" class="cta-button-large" style="background: #0d6efd;">Request Custom Corporate Quote</a>
+        </div>
+
+    </section>
+
+</main>
+
+<!-- FOOTER & WIDGETS (Standardized) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- JS SCRIPTS -->
+<script>
+document.getElementById('carBookingForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const payload = {
+    // FIX: Added Name and Phone to payload
+    name: document.getElementById('client_name').value,
+    phone: document.getElementById('client_phone').value,
+    
+    pickup: document.getElementById('car_pickup').value,
+    drop: document.getElementById('car_drop').value,
+    date: document.getElementById('car_date').value,
+    vehicleType: document.getElementById('car_type').value,
+    source: 'Car Booking Page'
+  };
+
+  const msg = document.getElementById('carMsg');
+  
+  // Reset message and show loading
+  msg.innerText = 'Submitting your request...';
+  msg.style.background = '#e6f7ff';
+  msg.style.color = '#0d6efd';
+
+
+  try {
+    const apiUrl = '/api/car-booking'; 
+    
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ message: 'Server responded with an error status.' }));
+        throw new Error(errorData.message || `HTTP error! Status: ${res.status}`);
+    }
+
+    msg.innerText = '✅ Car booking request sent successfully! We will contact you soon.';
+    msg.style.background = '#e6ffed';
+    msg.style.color = 'green';
+    document.getElementById('carBookingForm').reset();
+    
+
+  } catch (err) {
+    console.error('Submission Error:', err);
+    msg.innerText = `❌ Error submitting request: ${err.message}. Please try WhatsApp.`;
+    msg.style.background = '#ffe6e6';
+    msg.style.color = 'red';
+  }
+});
+
+
+// ==================== SCROLL REVEAL LOGIC ====================
+const revealElements = document.querySelectorAll(
+  '.reveal, .fade-left, .fade-right, .fade-down, .fade-up'
+);
+
+const observerOptions = { threshold: 0.1 };
+
+const observerCallback = (entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
+    }
+  });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+  if (el.dataset.delay) {
+    el.style.transitionDelay = `${el.dataset.delay}ms`;
+  }
+  scrollObserver.observe(el);
+});
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

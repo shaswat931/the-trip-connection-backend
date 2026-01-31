@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bali Paradise Escape - Package Details | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes base styles and animations - Assuming variables like --primary-color exist) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (MODERNIZED PACKAGE DETAILS + NEW DOMESTIC PACKAGES) ================= -->
+   <style>
+    /* VARIABLES (Setting consistent brand color for all detail pages) */
+    :root {
+        --primary-color: #fd8d0d; /* Blue */
+        --secondary-color: #1a202c;
+        --bg-light: #f9f9f9;
+        --bg-white: #ffffff;
+        --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Hero Section */
+    .details-hero {
+      height: 55vh;
+      background: url("https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") center/cover no-repeat;
+      position: relative;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .details-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .6);
+      z-index: 1;
+    }
+    .details-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .details-hero-content h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Main Section Layout */
+    .details-section {
+      padding: 70px 6%;
+      background: var(--bg-light);
+    }
+    .details-section:nth-of-type(odd) {
+        background: var(--bg-white); /* Alternate section background */
+    }
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr; /* Content wider than sidebar */
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+
+    /* Image Slider (Enhanced) */
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: var(--shadow-hover);
+    }
+    .slide {
+      display: none;
+      transition: opacity 0.5s ease;
+    }
+    .slide.active {
+      display: block;
+    }
+    .slide img {
+      width: 100%;
+      height: 420px; /* Consistent height */
+      object-fit: cover;
+    }
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, .4);
+      color: #fff;
+      border: none;
+      font-size: 28px;
+      padding: 10px 18px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+    .slider-btn:hover {
+        background: var(--primary-color);
+    }
+    .slider-btn.prev { left: 15px }
+    .slider-btn.next { right: 15px }
+
+    /* Itinerary Styling */
+    .itinerary {
+      margin-top: 50px;
+    }
+    .itinerary h2 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+        font-weight: 600;
+        border-left: 5px solid var(--primary-color);
+        padding-left: 15px;
+        color: var(--secondary-color);
+    }
+    .day {
+      padding: 20px;
+      border-left: 4px solid var(--primary-color);
+      margin-bottom: 20px;
+      background: var(--bg-white);
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .day:hover {
+        transform: translateY(-3px);
+    }
+    .day strong {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Sidebar (Pricing & Booking) */
+    .price-box {
+      background: var(--bg-white);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 100px;
+      text-align: center; /* Center content */
+    }
+    .price-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+    .price {
+      font-size: 3rem;
+      color: var(--primary-color);
+      font-weight: 800;
+      line-height: 1;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .price small {
+        font-size: 16px;
+        font-weight: 400;
+        color: #555;
+        display: block;
+        margin-top: 5px;
+    }
+    
+    .info-list {
+      margin-top: 30px;
+      padding: 0;
+      text-align: left; /* Keep list left-aligned */
+    }
+    .info-list li {
+      margin-bottom: 12px;
+      list-style: none;
+      font-size: 16px;
+      color: #333;
+    }
+    .info-list i {
+      color: #25D366; 
+      margin-right: 10px;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column; /* Stack buttons vertically for centering effect */
+      gap: 15px;
+      margin-top: 35px;
+    }
+    .cta-group a {
+      text-align: center;
+      padding: 15px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.3s;
+    }
+    .cta-group a:hover {
+        transform: translateY(-2px);
+    }
+    .book-btn {
+      background: linear-gradient(135deg, var(--primary-color), #0093E9);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
+    }
+    .wa-btn {
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    }
+
+    /* ================= RELATED DOMESTIC PACKAGE STYLES (Retained & Refined) ================= */
+
+    .related-packages-section {
+        padding: 70px 6%;
+        background: var(--bg-white);
+    }
+    .related-packages-section h2.section-title {
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 800;
+        font-size: 2.5rem;
+    }
+    .related-packages-section p.subhead {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #777;
+        margin-bottom: 50px;
+    }
+    
+    .package-category {
+        margin-bottom: 60px;
+    }
+    .package-category h3 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: var(--secondary-color);
+        border-bottom: 2px solid var(--primary-color);
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+
+    .package-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .package-card-domestic {
+        background: var(--bg-light);
+        border-radius: 15px;
+        overflow: hidden;
+        text-align: left;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .package-card-domestic:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+    .package-card-domestic-img {
+        width: 100%;
+        height: 180px; 
+        object-fit: cover;
+    }
+    .package-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .package-content h4 {
+        font-size: 1.3rem;
+        color: var(--secondary-color);
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+    .package-content .duration {
+        display: block;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .package-content .features {
+        margin: 10px 0 20px 0;
+        padding-left: 0;
+        list-style: none;
+    }
+    .package-content .features li {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    .package-content .features i {
+        color: var(--primary-color);
+        margin-right: 8px;
+    }
+
+    .card-footer {
+        margin-top: auto; 
+    }
+
+    .card-price {
+        font-weight: 800;
+        font-size: 1.6rem;
+        color: var(--primary-color);
+    }
+    .card-price small {
+        font-weight: 400;
+        color: #555;
+        font-size: 0.8rem;
+    }
+    .card-cta-btn {
+        margin-top: 15px;
+        display: block;
+        padding: 10px;
+        text-align: center;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: background 0.3s;
+    }
+    .card-cta-btn:hover {
+        background: var(--secondary-color);
+    }
+
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+      .price-box {
+        position: static;
+        margin-bottom: 30px;
+      }
+      .slide img {
+        height: 300px;
+      }
+      .package-card-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+    @media (max-width: 500px) {
+        .cta-group {
+            flex-direction: row; /* Reverting to row for better mobile button use */
+            justify-content: space-between;
+        }
+        .cta-group a {
+            flex: 1;
+            padding: 12px 10px;
+            font-size: 0.9rem;
+        }
+        .package-category h3 {
+            font-size: 1.6rem;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ... (Header, Navbar, and existing Bali details section remains the same) ... -->
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <!-- Ensure this image source is correct -->
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- HEADER SECTION में -->
+         <a href="/admin/login.html" class="login-btn" title="Admin Login">
+            <i class="fas fa-user"></i>
+        </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+<main>
+    
+<!-- ================= HERO IMAGE SLIDER (About Page Specific) ================= -->
+<section class="about-hero">
+    <!-- Image Sources kept same, but paths corrected if necessary -->
+    <div class="about-slide active" style="background-image:url('https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+
+    <div class="about-hero-content hero-text-animate"> <!-- Added hero-text-animate -->
+        <h1 class="reveal-delay-1">The Trip Connection</h1>
+        <p class="reveal-delay-2">Crafting global adventures and memories that last a lifetime.</p>
+    </div>
+</section>
+
+    <!-- INTERNATIONAL DETAILS (BALI) -->
+    <section class="details-section">
+      <div class="details-grid">
+
+        <!-- LEFT (Image Slider & Itinerary) -->
+        <div>
+          <div class="slider reveal fade-left">
+            <div class="slide active"><img src="https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bali Private Pool Villa"></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/10326493/pexels-photo-10326493.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bali Rice Terraces"></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/3801269/pexels-photo-3801269.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bali Temple"></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Beach View"></div>
+
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          
+          <p style="margin-top: 25px;" class="reveal">
+              Indulge in a week of blissful romance with our tailored Bali Honeymoon Escape. Experience the perfect blend of relaxation in Ubud’s jungles and excitement on Seminyak’s beaches. This package includes private pool villas, dedicated sightseeing, and exclusive dining experiences.
+          </p>
+
+          <!-- ITINERARY -->
+          <div class="itinerary">
+            <h2 class="reveal">Tour Itinerary</h2>
+
+            <div class="day reveal" data-delay="100"><strong>Day 1:</strong> Arrival in Denpasar & Ubud Leisure</div>
+            <div class="day reveal" data-delay="200"><strong>Day 2:</strong> Kintamani Volcano & Coffee Plantations</div>
+            <div class="day reveal" data-delay="300"><strong>Day 3:</strong> Ubud Temple, Swing Experience & Shopping</div>
+            <div class="day reveal" data-delay="400"><strong>Day 4:</strong> Transfer to Seminyak & Sunset Beach Exploration</div>
+            <div class="day reveal" data-delay="500"><strong>Day 5:</strong> Water Sports Activities & Temple Tour</div>
+            <div class="day reveal" data-delay="600"><strong>Day 6:</strong> Departure from Bali</div>
+          </div>
+        </div>
+
+        <!-- RIGHT (Pricing & CTA) -->
+        <div class="price-box reveal fade-right">
+          <h2>Bali Paradise Escape</h2>
+          <p class="price">₹28,999 <small>/ person</small></p>
+
+          <ul class="info-list">
+            <li><i class="fas fa-check-circle"></i> 4 Star Hotel/Villa Stay</li>
+            <li><i class="fas fa-check-circle"></i> Daily Breakfast Included</li>
+            <li><i class="fas fa-check-circle"></i> Private Airport Transfers</li>
+            <li><i class="fas fa-check-circle"></i> Guided Sightseeing Tours</li>
+            <li><i class="fas fa-check-circle"></i> Flights & Visa Assistance (Optional)</li>
+          </ul>
+
+          <div class="cta-group">
+            <a href="booking.html?package=bali-paradise" class="book-btn">
+                <i class="fas fa-book"></i> Book Now
+            </a>
+            <a href="#" class="wa-btn" id="waPackage">
+                <i class="fab fa-whatsapp"></i> WhatsApp Query
+            </a>
+          </div>
+          
+          <p style="margin-top: 20px; text-align: center; color: #777;">
+              Need customization? Contact us for a tailored quote.
+          </p>
+        </div>
+
+      </div>
+    </section>
+    
+    <!-- ================= NEW PACKAGES: DOMESTIC PILGRIMAGE SPECIALS ================= -->
+   <section class="details-section">
+      <div class="details-grid">
+
+        <!-- LEFT (Image Slider & Itinerary) -->
+        <div>
+          <div class="slider reveal fade-left">
+            <!-- UPDATED: Images changed to Rajasthan themes -->
+            <div class="slide active"><img src="https://images.pexels.com/photos/1109040/pexels-photo-1109040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Jaipur Hawa Mahal"></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/236528/pexels-photo-236528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Udaipur City Palace"></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/1010375/pexels-photo-1010375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Jaisalmer Desert Safari"></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/1618903/pexels-photo-1618903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Jodhpur Blue City"></div>
+
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          
+          <p style="margin-top: 25px;" class="reveal">
+              <!-- UPDATED: Content focused on Indian heritage and culture -->
+              Discover the timeless elegance and warrior history of Rajasthan with our Royal Heritage Tour. Explore magnificent forts, glittering palaces, and the vibrant culture of the 'Land of Kings'. This package promises royal treatment, luxury heritage stays, and unforgettable desert adventures.
+          </p>
+
+          <!-- ITINERARY -->
+          <div class="itinerary">
+            <h2 class="reveal">Tour Itinerary (6 Days / 5 Nights)</h2>
+
+            <!-- UPDATED: Indian Itinerary -->
+            <div class="day reveal" data-delay="100"><strong>Day 1:</strong> Arrival in Jaipur (Pink City) & City Palace Visit</div>
+            <div class="day reveal" data-delay="200"><strong>Day 2:</strong> Amber Fort, Hawa Mahal & Local Shopping</div>
+            <div class="day reveal" data-delay="300"><strong>Day 3:</strong> Transfer to Jodhpur (Blue City) & Mehrangarh Fort</div>
+            <div class="day reveal" data-delay="400"><strong>Day 4:</strong> Jodhpur Sightseeing & Drive to Jaisalmer</div>
+            <div class="day reveal" data-delay="500"><strong>Day 5:</strong> Jaisalmer Fort, Sand Dunes & Desert Camel Safari</div>
+            <div class="day reveal" data-delay="600"><strong>Day 6:</strong> Departure from Jaisalmer/Jodhpur</div>
+          </div>
+        </div>
+
+        <!-- RIGHT (Pricing & CTA) -->
+        <div class="price-box reveal fade-right">
+          <!-- UPDATED: Title Change -->
+          <h2>Royal Rajasthan Heritage Tour</h2>
+          
+          <!-- Price remains symbolic -->
+          <p class="price">₹19,999 <small>/ person</small></p> 
+
+          <ul class="info-list">
+            <!-- UPDATED: Inclusions focused on Indian heritage stays -->
+            <li><i class="fas fa-check-circle"></i> Heritage/Luxury Hotel Stays</li>
+            <li><i class="fas fa-check-circle"></i> Daily Breakfast & Dinner Included</li>
+            <li><i class="fas fa-check-circle"></i> Private AC Vehicle for Transfers & Sightseeing</li>
+            <li><i class="fas fa-check-circle"></i> Desert Safari & Cultural Folk Dance Night</li>
+            <li><i class="fas fa-check-circle"></i> Experienced Local Guide</li>
+          </ul>
+
+          <div class="cta-group">
+            <!-- UPDATED: Booking Link with new package name -->
+            <a href="booking.html?package=royal-rajasthan" class="book-btn">
+                <i class="fas fa-book"></i> Book Now
+            </a>
+            <a href="#" class="wa-btn" id="waPackage">
+                <i class="fab fa-whatsapp"></i> WhatsApp Query
+            </a>
+          </div>
+          
+          <p style="margin-top: 20px; text-align: center; color: #777;">
+              Need customization? Contact us for a tailored quote.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="details-section">
+    <div class="details-grid">
+
+        <!-- LEFT (Image Slider & Itinerary) -->
+        <div>
+            <div class="slider reveal fade-left">
+                <!-- UPDATED: Images changed to South India/Kerala themes -->
+                <div class="slide active"><img src="https://images.pexels.com/photos/1018596/pexels-photo-1018596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Kerala Houseboat Backwaters"></div>
+                <div class="slide"><img src="https://images.pexels.com/photos/1769647/pexels-photo-1769647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Munnar Tea Gardens"></div>
+                <div class="slide"><img src="https://images.pexels.com/photos/2082697/pexels-photo-2082697.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Alleppey Beach"></div>
+                <div class="slide"><img src="https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Cochin Fort"></div>
+
+                <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <p style="margin-top: 25px;" class="reveal">
+                Discover the serene beauty of "God's Own Country" with our exclusive Kerala package. This journey takes you through the lush tea estates of Munnar, the tranquil backwaters of Alleppey in a houseboat, and the historical charm of Cochin. Perfect for honeymooners and nature lovers seeking relaxation and authentic cultural experiences.
+            </p>
+
+            <!-- ITINERARY -->
+            <div class="itinerary">
+                <h2 class="reveal">Tour Itinerary (5 Days / 4 Nights)</h2>
+
+                <!-- UPDATED: Kerala Itinerary -->
+                <div class="day reveal" data-delay="100"><strong>Day 1:</strong> Arrival in Cochin & Transfer to Munnar (Tea Estates)</div>
+                <div class="day reveal" data-delay="200"><strong>Day 2:</strong> Munnar Sightseeing (Eravikulam National Park & Spice Plantations)</div>
+                <div class="day reveal" data-delay="300"><strong>Day 3:</strong> Drive to Alleppey & Check-in to Premium Houseboat</div>
+                <div class="day reveal" data-delay="400"><strong>Day 4:</strong> Disembark Houseboat & Transfer to Cochin (Fort Kochi & Chinese Fishing Nets)</div>
+                <div class="day reveal" data-delay="500"><strong>Day 5:</strong> Cochin Sightseeing & Departure</div>
+            </div>
+        </div>
+
+        <!-- RIGHT (Pricing & CTA) -->
+        <div class="price-box reveal fade-right">
+            <!-- UPDATED: Title Change -->
+            <h2>Serene Kerala Backwater Tour</h2>
+
+            <p class="price">₹22,500 <small>/ person</small></p>
+
+            <ul class="info-list">
+                <!-- UPDATED: Inclusions focused on Kerala -->
+                <li><i class="fas fa-check-circle"></i> Deluxe Accommodation (4 Nights)</li>
+                <li><i class="fas fa-check-circle"></i> Private Houseboat Stay in Alleppey</li>
+                <li><i class="fas fa-check-circle"></i> Daily Breakfast & Houseboat Meals (Lunch/Dinner)</li>
+                <li><i class="fas fa-check-circle"></i> Dedicated AC Cab for Inter-city Transfers</li>
+                <li><i class="fas fa-check-circle"></i> Munnar Tea Garden Visits</li>
+            </ul>
+
+            <div class="cta-group">
+                <!-- UPDATED: Booking Link with new package name -->
+                <a href="booking.html?package=serene-kerala" class="book-btn">
+                    <i class="fas fa-book"></i> Book Now
+                </a>
+                <a href="#" class="wa-btn" id="waPackageKerala">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Query
+                </a>
+            </div>
+
+            <p style="margin-top: 20px; text-align: center; color: #777;">
+                Need customization? Contact us for a tailored quote.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="details-section" style="background: var(--bg-white);">
+    <div class="details-grid">
+
+        <!-- LEFT (Image Slider & Itinerary) -->
+        <div>
+            <div class="slider reveal fade-left">
+                <!-- UPDATED: Images changed to Golden Triangle themes -->
+                <div class="slide active"><img src="https://images.pexels.com/photos/4508492/pexels-photo-4508492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Taj Mahal"></div>
+                <div class="slide"><img src="https://images.pexels.com/photos/1797136/pexels-photo-1797136.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="India Gate Delhi"></div>
+                <div class="slide"><img src="https://images.pexels.com/photos/1109040/pexels-photo-1109040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Jaipur Hawa Mahal"></div>
+                <div class="slide"><img src="https://images.pexels.com/photos/236528/pexels-photo-236528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Amer Fort Jaipur"></div>
+
+                <!-- NOTE: You need to add unique IDs to these buttons if you want them to control ONLY this specific slider -->
+                <button class="slider-btn prev golden-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next golden-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <p style="margin-top: 25px;" class="reveal">
+                Experience the heart of India's rich history and culture with the iconic Golden Triangle Tour. Connecting the majestic capital Delhi, the monument of love Agra, and the regal Pink City Jaipur, this tour is perfect for first-time visitors seeking heritage, architecture, and unforgettable stories.
+            </p>
+
+            <!-- ITINERARY -->
+            <div class="itinerary">
+                <h2 class="reveal">Tour Itinerary (5 Days / 4 Nights)</h2>
+
+                <div class="day reveal" data-delay="100"><strong>Day 1:</strong> Arrival in Delhi & Half-Day City Tour (Red Fort, India Gate)</div>
+                <div class="day reveal" data-delay="200"><strong>Day 2:</strong> Drive to Agra & Taj Mahal Sunset Visit</div>
+                <div class="day reveal" data-delay="300"><strong>Day 3:</strong> Agra Fort, Fatehpur Sikri & Drive to Jaipur</div>
+                <div class="day reveal" data-delay="400"><strong>Day 4:</strong> Jaipur Sightseeing (Amer Fort, Hawa Mahal, Jal Mahal, Local Bazaar)</div>
+                <div class="day reveal" data-delay="500"><strong>Day 5:</strong> Departure from Jaipur or Drive back to Delhi</div>
+            </div>
+        </div>
+
+        <!-- RIGHT (Pricing & CTA) -->
+        <div class="price-box reveal fade-right">
+            <h2>Classic Golden Triangle Tour</h2>
+
+            <p class="price">₹18,500 <small>/ person</small></p>
+
+            <ul class="info-list">
+                <li><i class="fas fa-check-circle"></i> 4-Star Accommodation (4 Nights)</li>
+                <li><i class="fas fa-check-circle"></i> Daily Breakfast Buffet</li>
+                <li><i class="fas fa-check-circle"></i> Private AC Sedan for all Transfers & Sightseeing</li>
+                <li><i class="fas fa-check-circle"></i> Monument Entrance Fees Included</li>
+                <li><i class="fas fa-check-circle"></i> Experienced Chauffeur & Tour Guide</li>
+            </ul>
+
+            <div class="cta-group">
+                <a href="booking.html?package=golden-triangle" class="book-btn">
+                    <i class="fas fa-book"></i> Book Now
+                </a>
+                <a href="#" class="wa-btn" id="waPackageGolden">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Query
+                </a>
+            </div>
+
+            <p style="margin-top: 20px; text-align: center; color: #777;">
+                History and culture come alive on this magnificent journey!
+            </p>
+        </div>
+
+    </div>
+</section>
+   
+
+
+</main>
+
+<!-- FOOTER (STANDARDIZED ENGLISH) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+// ==================== IMAGE SLIDER (Existing Bali Slider) ====================
+const slides = document.querySelectorAll('.slide');
+let idx = 0;
+const showSlide = i => {
+  slides.forEach(s => s.classList.remove('active'));
+  slides[i].classList.add('active');
+}
+document.querySelector('.next').onclick = () => {
+  idx = (idx + 1) % slides.length;
+  showSlide(idx);
+}
+document.querySelector('.prev').onclick = () => {
+  idx = (idx - 1 + slides.length) % slides.length;
+  showSlide(idx);
+}
+
+
+/* WHATSAPP Query for Bali package */
+document.getElementById('waPackage').onclick = e => {
+  e.preventDefault();
+  window.open(
+    "https://wa.me/919998250825?text=Hello! I am interested in Bali Paradise Escape package. Can you share more details?",
+    "_blank"
+  );
+}
+
+// ==================== SCROLL REVEAL LOGIC ====================
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+
+const observerOptions = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.1 
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

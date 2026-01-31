@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>International Tour Packages | Global Adventures with The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes all base and animation styles) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (INTERNATIONAL PAGE ONLY) ================= -->
+  <style>
+    /* Hero specific to international pages */
+    .international-hero {
+        height: 80vh;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background-color: #0f172a; /* Fallback Dark Color */
+    }
+    
+    /* Slider Slides */
+    .international-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .international-slide.active {
+        opacity: 1;
+    }
+
+    /* Overlay for text readability */
+    .international-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, .7);
+        z-index: 1;
+    }
+    .international-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    .international-hero-content h1 {
+        font-size: 3.8rem; 
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    .international-hero-content p {
+        font-size: 1.3rem;
+        margin-top: 15px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Visa & Flight Assistance Section (Design retained, but refined) */
+    .assistance-cta {
+        background: #fdfdfd;
+        padding: 60px 6%;
+        margin-top: 0;
+    }
+    .assistance-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    .assistance-card {
+        background: var(--bg-white);
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border-bottom: 5px solid #0d6efd; /* Distinct secondary color */
+        transition: transform 0.3s;
+    }
+    .assistance-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    .assistance-card i {
+        font-size: 40px; 
+        color: #0d6efd;
+        margin-bottom: 15px;
+        background: #e6f7ff;
+        padding: 10px;
+        border-radius: 50%;
+    }
+    .assistance-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .international-hero {
+            height: 45vh;
+        }
+        .international-hero-content h1 {
+            font-size: 2.8rem;
+        }
+        .assistance-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap slightly for better look */
+}
+
+/* FIX: Login Button Styling */
+.login-btn {
+    /* Base: Text-based pill button */
+    font-weight: 600;
+    padding: 8px 15px; 
+    border-radius: 999px; 
+    border: 1px solid #ccc; /* Subtle border */
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex; /* Allow icon and text to align */
+    align-items: center;
+    gap: 6px; /* Gap between icon and text */
+}
+
+.login-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: #fff7f1; /* Very light background on hover */
+    transform: scale(1.02);
+}
+
+/* ... (cta-button and mobile-menu-icon styles remain the same) ... */
+
+
+/* --- Who We Are Section --- */
+/* ... (All other sections CSS remains the same) ... */
+
+
+/* Responsive Fixes for Header Actions */
+@media (max-width: 768px) {
+  /* ... (other mobile CSS remains) ... */
+
+  .header-actions {
+    gap: 8px; /* Reduce gap further on mobile */
+  }
+  
+  .login-btn {
+      /* On small screens, hide the login button to save space 
+         or just show the icon if you prefer: 
+         display: flex; width: 40px; height: 40px; padding: 0; justify-content: center; */
+      display: none; 
+  }
+  
+  .cta-button {
+      padding: 8px 15px;
+      font-size: 14px;
+  }
+  
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html" class="active">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html" class="active">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+    <!-- HERO SECTION WITH SLIDER -->
+    <section class="international-hero">
+        
+        <!-- SLIDES (FIXED IMAGE LINKS) -->
+        <!-- Europe/Swiss Alps -->
+        <div class="international-slide active" style="background-image:url('https://images.pexels.com/photos/1570779/pexels-photo-1570779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div> 
+        <!-- Asia/Maldives -->
+        <div class="international-slide" style="background-image:url('https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div> 
+        <!-- Turkey/Culture -->
+        <div class="international-slide" style="background-image:url('https://images.pexels.com/photos/2088236/pexels-photo-2088236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div> 
+
+        <div class="international-hero-content hero-text-animate">
+            <h1 class="reveal-delay-1">Your Journey Beyond Borders</h1>
+            <p class="reveal-delay-2">Explore the finest destinations across Europe, Asia, and the Americas with our premium tour packages.</p>
+        </div>
+    </section>
+
+    <!-- ASSISTANCE CTA (Visa/Flight) -->
+    <section class="assistance-cta">
+        <h2 class="section-title reveal fade-down">Seamless International Travel Support</h2>
+        <div class="assistance-grid">
+            
+            <div class="assistance-card reveal" data-delay="100">
+                <i class="fas fa-passport"></i>
+                <h3>Expert Visa Assistance</h3>
+                <p>Don't let paperwork stop your trip. Our experts handle visa applications for popular destinations, ensuring a smooth process.</p>
+                <a href="visa.html" class="details-btn" style="margin-top: 15px; display: inline-block;">Get Visa Help</a>
+            </div>
+            
+            <div class="assistance-card reveal" data-delay="300">
+                <i class="fas fa-plane-departure"></i>
+                <h3>Best Flight Deals</h3>
+                <p>We source the most competitive international flight tickets and advise on multi-stop itineraries for maximum savings and convenience.</p>
+                <a href="services.html" class="details-btn" style="margin-top: 15px; display: inline-block;">Book Flights Now</a>
+            </div>
+
+            <div class="assistance-card reveal" data-delay="500">
+                <i class="fas fa-hotel"></i>
+                <h3>Luxury Accommodation</h3>
+                <p>From private villas to 5-star resorts, we book world-class stays that enhance your international travel experience.</p>
+                <a href="services.html" class="details-btn" style="margin-top: 15px; display: inline-block;">View Hotels</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEATURED INTERNATIONAL PACKAGES -->
+    <section class="popular-packages">
+        <h2 class="section-title reveal">Featured Global Adventures</h2>
+        <div class="packages-grid">
+            
+            <!-- Package 1: Dubai -->
+            <div class="package-card reveal fade-up" data-delay="100">
+                <img src="https://images.pexels.com/photos/1739572/pexels-photo-1739572.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dubai City">
+                <div class="package-info">
+                    <p class="package-location">Middle East</p>
+                    <h3>Glittering Dubai Extravaganza (5N/6D)</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-building"></i> Burj Khalifa Tour & Fountain Show</li>
+                        <li><i class="fas fa-caravan"></i> Premium Desert Safari</li>
+                        <li><i class="fas fa-shopping-bag"></i> Global Village Visit</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹45,999/- <small>per person</small></p>
+                        <a href="package-details.html?id=dubai" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 2: Thailand -->
+            <div class="package-card reveal fade-up" data-delay="300">
+                <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Thailand Beach">
+                <div class="package-info">
+                    <p class="package-location">Southeast Asia</p>
+                    <h3>Tropical Thailand Delight (Bangkok & Phuket)</h3>
+                     <ul class="package-highlights">
+                        <li><i class="fas fa-umbrella-beach"></i> Krabi & Phuket Beaches</li>
+                        <li><i class="fas fa-water"></i> Phi Phi Island Hopping</li>
+                        <li><i class="fas fa-city"></i> Bangkok Temple Tours</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹32,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=thailand" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 3: Europe (FIXED IMAGE LINK) -->
+            <div class="package-card reveal fade-up" data-delay="500">
+                <img src="https://images.pexels.com/photos/1018596/pexels-photo-1018596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="European city view">
+                <div class="package-info">
+                    <p class="package-location">Europe Grand Tour</p>
+                    <h3>Romantic Switzerland & Paris (7N/8D)</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-train"></i> Eurail Pass & Scenic Trains</li>
+                        <li><i class="fas fa-landmark"></i> Eiffel Tower Entry</li>
+                        <li><i class="fas fa-mountain"></i> Mt. Titlis / Jungfraujoch Tour</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹95,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=europe" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 4: Singapore & Malaysia -->
+            <div class="package-card reveal fade-up" data-delay="100">
+                <img src="https://images.pexels.com/photos/403009/pexels-photo-403009.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Singapore Skyline">
+                <div class="package-info">
+                    <p class="package-location">Asia Duo</p>
+                    <h3>Singapore & Malaysia Combo (8N/9D)</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-city"></i> Marina Bay Sands & Gardens By The Bay</li>
+                        <li><i class="fas fa-archway"></i> Batu Caves, Kuala Lumpur</li>
+                        <li><i class="fas fa-umbrella-beach"></i> Genting Highlands Access</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹69,999/- <small>per person</small></p>
+                        <a href="package-details.html?id=singapore-malay" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 5: Maldives -->
+            <div class="package-card reveal fade-up" data-delay="300">
+                <img src="https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Maldives">
+                <div class="package-info">
+                    <p class="package-location">Indian Ocean</p>
+                    <h3>Luxury Maldives Honeymoon</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-water"></i> Overwater Bungalow Stay</li>
+                        <li><i class="fas fa-wine-glass"></i> All-Inclusive Meals</li>
+                        <li><i class="fas fa-plane"></i> Seaplane/Speedboat Transfers</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹1,15,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=maldives-luxury" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 6: Turkey -->
+            <div class="package-card reveal fade-up" data-delay="500">
+                <img src="https://images.pexels.com/photos/2088236/pexels-photo-2088236.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Turkey Hot Air Balloon">
+                <div class="package-info">
+                    <p class="package-location">Eurasia</p>
+                    <h3>Cultural Turkey Adventure (Istanbul & Cappadocia)</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-balloon"></i> Hot Air Balloon Ride (Optional)</li>
+                        <li><i class="fas fa-mosque"></i> Hagia Sophia & Blue Mosque</li>
+                        <li><i class="fas fa-ship"></i> Bosphorus Cruise</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹62,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=turkey" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px;" class="reveal">
+            <a href="packages.html" class="cta-button-large">View All Packages</a>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER (STANDARDIZED ENGLISH) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (SCROLL REVEAL & SLIDER) ================= -->
+<script>
+// ==================== INTERNATIONAL HERO IMAGE SLIDER ====================
+const slides = document.querySelectorAll('.international-slide');
+let slideIndex = 0;
+
+function showNextSlide() {
+    slides.forEach(s => s.classList.remove('active'));
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+}
+
+// Start auto sliding every 4 seconds
+setInterval(showNextSlide, 4500); 
+
+
+// ==================== SCROLL REVEAL LOGIC ====================
+// We include 'fade-up' here as packages use it
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+
+const observerOptions = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.1 
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Package | Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#f4f6fb;
+}
+
+/* ===== LAYOUT ===== */
+.admin-layout{
+  display:flex;
+  min-height:100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:260px;
+  background:#0f172a;
+  color:#fff;
+  padding:24px 20px;
+  position:fixed;
+  height:100vh;
+  left:0;
+  top:0;
+  transition:.3s;
+  z-index:1000;
+}
+
+.sidebar h2{
+  font-size:22px;
+  margin-bottom:35px;
+}
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#cbd5e1;
+  text-decoration:none;
+  padding:12px 14px;
+  border-radius:10px;
+  margin-bottom:10px;
+  transition:.3s;
+  font-size:15px;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:#1e293b;
+  color:#fff;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:260px;
+  padding:30px;
+  width:100%;
+}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.menu-btn{
+  font-size:22px;
+  cursor:pointer;
+  display:none;
+}
+
+.topbar h1{
+  font-size:26px;
+  font-weight:600;
+}
+
+.subtitle{
+  color:#6b7280;
+  margin-bottom:25px;
+  font-size:14px;
+}
+
+/* ===== CARD ===== */
+.card{
+  max-width:560px;
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+/* ===== FORM ===== */
+.form-group{
+  margin-bottom:16px;
+}
+
+label{
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:6px;
+  display:block;
+}
+
+input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:14px;
+  transition:.25s;
+}
+
+input:focus{
+  outline:none;
+  border-color:#ff6b00;
+  box-shadow:0 0 0 3px rgba(255,107,0,.15);
+}
+
+/* ===== BUTTON ===== */
+button{
+  margin-top:10px;
+  background:#ff6b00;
+  color:#fff;
+  border:none;
+  padding:13px 26px;
+  border-radius:999px;
+  font-weight:600;
+  cursor:pointer;
+  font-size:15px;
+  transition:.3s;
+}
+
+button:hover{
+  box-shadow:0 10px 25px rgba(255,107,0,.35);
+}
+
+/* ===== MESSAGE ===== */
+#msg{
+  margin-top:14px;
+  font-weight:600;
+  font-size:14px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(-100%);
+  }
+  .sidebar.active{
+    transform:translateX(0);
+  }
+  .main{
+    margin-left:0;
+  }
+  .menu-btn{
+    display:block;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="manage-packages.html"><i class="fas fa-suitcase"></i> Packages</a>
+    <a href="add-package.html"><i class="fas fa-plus-circle"></i> Add Package</a>
+    <a href="manage-offers.html"><i class="fas fa-bullhorn"></i> Offer Popup</a>
+    
+    <!-- Updated sidebar links to reflect new enquiry types -->
+    <a href="tour-bookings.html"><i class="fas fa-calendar-check"></i> Tour Bookings</a>
+    <a href="car-enquiries.html"><i class="fas fa-car-side"></i> Car Enquiries</a>
+    <a href="bus-enquiries.html"><i class="fas fa-bus-simple"></i> Bus Enquiries</a>
+    
+    <a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a>
+    <a href="/"><i class="fas fa-globe"></i> View Website</a>
+    <a href="/admin/login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <i class="fas fa-bars menu-btn" onclick="toggleSidebar()"></i>
+      <h1>Add New Package</h1>
+    </div>
+
+    <p class="subtitle">
+      Create and publish a new travel package for your customers
+    </p>
+
+    <!-- CARD -->
+    <div class="card">
+      <form id="pkgForm">
+        <div class="form-group">
+          <label>Package Title</label>
+          <input id="title" placeholder="Bali Paradise Escape" required>
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input id="location" placeholder="Bali, Indonesia">
+        </div>
+
+        <div class="form-group">
+          <label>Price (₹)</label>
+          <input id="price" type="number" placeholder="28999">
+        </div>
+
+        <div class="form-group">
+          <label>Days / Nights</label>
+          <input id="days" placeholder="5 Days / 4 Nights">
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <input id="category" placeholder="International / Honeymoon">
+        </div>
+
+        <div class="form-group">
+          <label>Image URL</label>
+          <input id="image" placeholder="https://example.com/image.jpg">
+        </div>
+
+        <button type="submit">
+          <i class="fas fa-save"></i> Save Package
+        </button>
+
+        <p id="msg"></p>
+      </form>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function toggleSidebar(){
+  document.querySelector('.sidebar').classList.toggle('active');
+}
+
+pkgForm.addEventListener('submit', async e=>{
+  e.preventDefault();
+
+  const payload={
+    title:title.value.trim(),
+    location:location.value.trim(),
+    price:price.value,
+    days:days.value.trim(),
+    category:category.value.trim(),
+    image:image.value.trim()
+  };
+
+  try{
+    const res=await fetch('/api/admin/packages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+
+    const data=await res.json();
+
+    msg.innerText=data.success
+      ? '✅ Package added successfully'
+      : '❌ Failed to add package';
+
+    msg.style.color=data.success?'green':'red';
+
+    if(data.success) pkgForm.reset();
+  }catch{
+    msg.innerText='⚠ Server error';
+    msg.style.color='red';
+  }
+});
+</script>
+
+</body>
+</html>

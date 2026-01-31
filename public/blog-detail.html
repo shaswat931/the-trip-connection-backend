@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leh-Ladakh Dream Trip: Planning Your Ultimate Expedition | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes base styles and animations) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (BLOG DETAIL PAGE ONLY - Enhanced Readability) ================= -->
+  <style>
+    /* Defining base colors */
+    :root {
+        --primary-color: #ff6f61; /* Coral/Orange for accents */
+        --secondary-color: #333; /* Dark text */
+        --accent-blue: #0d6efd; /* Strong Blue for CTAs */
+        --bg-light: #f4f7fa; 
+        --bg-white: #ffffff;
+    }
+    
+    /* Hero Image Enhancement */
+    .detail-hero {
+        height: 65vh; 
+        background: url('https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: flex-end; 
+        justify-content: center;
+        color: #fff;
+        padding-bottom: 40px;
+    }
+    .detail-hero::after { 
+        content: ''; 
+        position: absolute; 
+        inset: 0; 
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.1) 100%); 
+        z-index: 1; 
+    }
+
+    /* Article Header/Title */
+    .article-header {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .article-header .tag {
+        display: inline-block;
+        background: var(--primary-color); 
+        color: white;
+        padding: 6px 15px;
+        border-radius: 20px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .article-header h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 15px;
+        line-height: 1.1;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    }
+    .article-meta {
+        font-size: 16px;
+        color: #ddd;
+    }
+    .article-meta i {
+        color: var(--accent-blue);
+        margin-right: 5px;
+    }
+
+
+    /* Main Content Layout */
+    .article-section {
+        padding: 60px 6%;
+        background: var(--bg-white); 
+    }
+    .article-grid {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr; 
+        gap: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: flex-start;
+    }
+
+    /* Article Body Styling for Readability */
+    .article-body {
+        padding-right: 20px;
+        /* Using a subtle background on the main body for visual comfort */
+        background: #fff; 
+    }
+    
+    .article-body h2 {
+        font-size: 2.2rem;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+        font-weight: 800;
+        border-bottom: 3px solid var(--primary-color);
+        width: fit-content;
+        padding-bottom: 5px;
+    }
+    .article-body h3 {
+        font-size: 1.6rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent-blue);
+        font-weight: 700;
+    }
+    .article-body p {
+        margin-bottom: 25px;
+        line-height: 1.9;
+        color: #444;
+        font-size: 17px;
+    }
+    .article-body ul {
+        margin-left: 25px;
+        margin-bottom: 25px;
+        color: #444;
+        list-style: disc;
+    }
+    .article-body li {
+        margin-bottom: 10px;
+        line-height: 1.7;
+    }
+    .article-body img {
+         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Blockquote Style */
+    .article-body blockquote {
+        border-left: 6px solid var(--primary-color);
+        padding: 20px 30px;
+        background: #fff8f8; /* Light accent background */
+        margin: 30px 0;
+        font-style: italic;
+        font-size: 1.1rem;
+        color: var(--secondary-color);
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    }
+
+
+    /* Sidebar/Author */
+    .article-sidebar {
+        background: var(--bg-light); 
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 100px;
+    }
+    .author-box {
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 20px;
+    }
+    .author-box img {
+        width: 120px; 
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 10px;
+        border: 5px solid var(--primary-color);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Package Promo CTA Refinement (Achhe Buttons) */
+    .package-promo {
+        margin-bottom: 30px;
+        padding: 20px 0;
+    }
+    .package-promo h4 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    /* Specific styles for sidebar CTA buttons */
+    .package-promo .cta-button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 14px 0; /* Increased padding */
+        font-size: 1.05rem;
+        font-weight: 700;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 111, 97, 0.5);
+    }
+
+    .package-promo .cta-button:nth-child(2) { /* WhatsApp Button */
+        background: #25D366;
+        margin-top: 10px;
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5);
+    }
+    .package-promo .cta-button:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* Related Posts */
+    .related-posts {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px dashed #ddd;
+    }
+    .related-posts h4 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        border-left: 5px solid var(--accent-blue);
+        padding-left: 12px;
+        color: var(--secondary-color);
+        font-weight: 700;
+    }
+    .related-posts li a {
+        color: var(--accent-blue);
+        font-size: 16px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+        .detail-hero {
+            height: 45vh;
+            padding-bottom: 20px;
+        }
+        .article-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        .article-body {
+            border-right: none;
+            padding-right: 0;
+        }
+        .article-sidebar {
+            position: static;
+        }
+        .article-header h1 {
+            font-size: 2.8rem;
+        }
+        .article-body h2 {
+            font-size: 1.8rem;
+            width: 100%;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+        }
+    }
+    @media (max-width: 600px) {
+        .article-header h1 {
+            font-size: 2rem;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER (Standard) ==================== -->
+<div id="preloader"><img src="/images/logofinal.png" alt="Loading"></div>
+
+<!-- ==================== HEADER / NAVBAR (Standard) ==================== -->
+<header class="header">
+    <a href="index.html" class="logo"><img src="/images/logofinal.png" alt="The Trip Connection Logo"></a>
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+                <a href="packages.html">Packages ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="domestic.html">Domestic Tours</a></li>
+                    <li><a href="international.html">International Tours</a></li>
+                    <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                    <li><a href="package-details.html">All Packages</a></li>
+                </ul>
+            </li>            
+            <li class="dropdown">
+                <a href="services.html">Services ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="bus.html">Bus Booking</a></li>
+                    <li><a href="car.html">Car Booking</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </li>
+            <li><a href="blog.html" class="active">Blog</a></li> 
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <a href="/admin/login.html" class="login-btn" title="Admin Login">
+            <i class="fas fa-user"></i>
+        </a>
+        <a href="booking.html" class="cta-button">Book Now</a>
+        <div class="mobile-menu-icon"><i class="fas fa-bars"></i></div>
+    </div>
+</header>
+
+<main>
+    
+    <!-- HERO/HEADER -->
+    <section class="detail-hero">
+        <div class="article-header hero-text-animate">
+            <span class="tag reveal fade-down">Adventure / Domestic</span>
+            <h1 class="reveal-delay-1">Leh-Ladakh Dream Trip: Planning Your Ultimate Bike Expedition</h1>
+            <p class="article-meta reveal-delay-2">
+                By: Rohan Sharma | <i class="fas fa-calendar-alt"></i> May 25, 2024 | <i class="fas fa-eye"></i> 2.5K Views
+            </p>
+        </div>
+    </section>
+
+    <!-- ARTICLE CONTENT & SIDEBAR -->
+    <section class="article-section">
+        <div class="article-grid">
+            
+            <!-- LEFT: Article Body -->
+            <div class="article-body">
+                <p class="reveal">
+                    Ladakh, the mythical 'Land of High Passes', offers an unmatched blend of Buddhist culture, breathtaking barren landscapes, and the ultimate test of endurance. A motorcycle trip here is a rite of passage for adventurers. We at The Trip Connection have put together a comprehensive guide to help you conquer the Himalayas safely and responsibly.
+                </p>
+
+                <img src="https://images.pexels.com/photos/10186717/pexels-photo-10186717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Pangong Lake" style="width:100%; border-radius: 10px; margin: 30px 0;" class="reveal fade-up">
+
+                <h2 class="reveal">Section 1: The Challenge of Altitude and Acclimatization</h2>
+                <p class="reveal">
+                    Altitude Sickness (AMS) is the single biggest threat to your trip. Leh town sits high, and passes are much higher. Proper acclimatization is absolutely essential—it's not optional. If you fly into Leh, you must take it easy. Avoid hiking, rush, or even heavy luggage lifting for the first two days.
+                </p>
+
+                <h3 class="reveal">Acclimatization Tips from Experts</h3>
+                <ul class="reveal">
+                    <li><b>Hydration:</b> Drink 4-5 liters of water daily. Avoid sugary drinks and coffee.</li>
+                    <li><b>Rest:</b> First 48 hours are dedicated to gentle walks and deep rest.</li>
+                    <li><b>Medication:</b> Consult your physician about taking Diamox (Acetazolamide) as a prophylactic measure.</li>
+                    <li><b>Avoid Alcohol/Smoking:</b> These inhibit your body’s ability to acclimatize.</li>
+                </ul>
+
+                <h2 class="reveal">Section 2: Choosing Your Expedition Path</h2>
+                <p class="reveal">
+                    You have two main arterial roads leading into Leh, both offering spectacular, yet distinct, experiences:
+                </p>
+
+                <h3 class="reveal">Route A: The Manali-Leh Highway</h3>
+                <p>This route is more challenging, involves higher passes, and sees heavier traffic. It is often open only from late May/early June to mid-October. It’s ideal for seasoned riders looking for maximum challenge.</p>
+
+                <h3 class="reveal">Route B: The Srinagar-Leh Highway</h3>
+                <p>Often considered the safer and smoother option, the gradient is gentler, making it better for acclimatization, especially if you plan to drive or ride in. It usually opens earlier than the Manali route.</p>
+
+                <h2 class="reveal">Section 3: Essential Packing and Permits</h2>
+                <p class="reveal">
+                    Regardless of whether you travel by bike or SUV, Ladakh's remote nature demands thorough preparation.
+                </p>
+                <blockquote class="reveal">
+                    "All Indian tourists need the mandatory Inner Line Permit (ILP) to visit protected areas like Nubra Valley and Pangong Tso. Ensure this is booked and printed before your journey begins."
+                </blockquote>
+
+                <h3 class="reveal">Clothing & Gear Requirements</h3>
+                <ul class="reveal">
+                    <li><b>Thermal Layers:</b> Three layers are necessary: base layer, fleece layer, and a waterproof/windproof outer shell.</li>
+                    <li><b>Sun Protection:</b> Sunglasses (UV protection mandatory), wide-brimmed hat, and SPF 50+ cream.</li>
+                    <li><b>Emergency Supplies:</b> Basic bike repair kit (if biking), spare fuel canisters, and dry food rations.</li>
+                </ul>
+
+                <p class="reveal">
+                    Ready to trade concrete jungles for the cold desert mountains? Your Leh-Ladakh adventure starts now. Contact us for a personalized itinerary that covers the best of Nubra, Pangong, and Tso Moriri!
+                </p>
+            </div>
+            
+            <!-- RIGHT: Sidebar -->
+            <div class="article-sidebar">
+                
+                <!-- Author Box -->
+                <div class="author-box reveal fade-right" data-delay="100">
+                    <img src="https://images.pexels.com/users/avatars/402941/kris-lucas-881.jpeg?w=256&h=256&fit=crop&dpr=1" alt="Author Photo">
+                    <h4>Rohan Sharma</h4>
+                    <p>Adventure Travel Specialist</p>
+                    <p style="font-size: 14px; color: #777;">TTC Team | 7 Years Himalayan Experience</p>
+                </div>
+
+                <!-- Package CTA -->
+                <div class="package-promo reveal fade-right" data-delay="300">
+                    <h4>Plan Your Expedition!</h4>
+                    <p style="font-size: 15px; color: #555; margin-bottom: 20px; text-align: center;">
+                        Get an all-inclusive, safety-focused Ladakh package, including ILP assistance and certified guides.
+                    </p>
+                    <!-- Enhanced CTA Buttons -->
+                    <a href="package-details.html?id=ladakh" class="cta-button" style="background: var(--accent-blue);">
+                        <i class="fas fa-box-open"></i> View Package Details
+                    </a>
+                    <a href="https://wa.me/919998250825?text=Hello!%20I%20am%20interested%20in%20the%20Ladakh%20package%20mentioned%20in%20your%20blog." class="cta-button">
+                        <i class="fab fa-whatsapp"></i> Get Instant Quote
+                    </a>
+                </div>
+                
+                <!-- Related Posts -->
+                <div class="related-posts reveal fade-right" data-delay="500">
+                    <h4>More Domestic Adventures</h4>
+                    <ul>
+                        <li><a href="blog-detail.html?id=spiti">Spiti Valley: The World's Most Treacherous Roads</a></li>
+                        <li><a href="blog-detail.html?id=northeast">Sikkim Trekking Guide for Beginners</a></li>
+                        <li><a href="blog-detail.html?id=uttarakhand">The Char Dham Yatra Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER & WIDGETS (Standardized) -->
+<footer class="footer">
+    <!-- ... Footer content ... -->
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="domestic.html">Domestic Tours</a></li>
+                <li><a href="international.html">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (Standard) ================= -->
+<script>
+// Scroll Reveal Logic (Standard)
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

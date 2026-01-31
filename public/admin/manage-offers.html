@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Offer Popup | Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#f4f6fb;
+}
+
+/* ===== LAYOUT ===== */
+.admin-layout{
+  display:flex;
+  min-height:100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:260px;
+  background:#0f172a;
+  color:#fff;
+  padding:24px 20px;
+  position:fixed;
+  height:100vh;
+  left:0;
+  top:0;
+  transition:.3s;
+  z-index:1000;
+}
+
+.sidebar h2{
+  font-size:22px;
+  margin-bottom:35px;
+}
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#cbd5e1;
+  text-decoration:none;
+  padding:12px 14px;
+  border-radius:10px;
+  margin-bottom:10px;
+  transition:.3s;
+  font-size:15px;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:#1e293b;
+  color:#fff;
+}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:260px;
+  padding:30px;
+  width:100%;
+}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.menu-btn{
+  font-size:22px;
+  cursor:pointer;
+  display:none;
+}
+
+.topbar h1{
+  font-size:26px;
+  font-weight:600;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  max-width:560px;
+}
+
+/* ===== FORM ===== */
+.card h3{
+  margin-bottom:20px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:6px;
+  display:block;
+}
+
+input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:14px;
+}
+
+input[type="file"]{
+  padding:8px;
+}
+
+.preview{
+  width:100%;
+  height:230px;
+  border-radius:14px;
+  border:2px dashed #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fafafa;
+  overflow:hidden;
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#ff6b00;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{
+  background:#e55d00;
+}
+
+#msg{
+  margin-top:12px;
+  font-size:14px;
+  font-weight:500;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(-100%);
+  }
+  .sidebar.active{
+    transform:translateX(0);
+  }
+  .main{
+    margin-left:0;
+  }
+  .menu-btn{
+    display:block;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="manage-packages.html"><i class="fas fa-suitcase"></i> Packages</a>
+    <a href="add-package.html"><i class="fas fa-plus-circle"></i> Add Package</a>
+    <a href="manage-offers.html"><i class="fas fa-bullhorn"></i> Offer Popup</a>
+    
+    <!-- Updated sidebar links to reflect new enquiry types -->
+    <a href="tour-bookings.html"><i class="fas fa-calendar-check"></i> Tour Bookings</a>
+    <a href="car-enquiries.html"><i class="fas fa-car-side"></i> Car Enquiries</a>
+    <a href="bus-enquiries.html"><i class="fas fa-bus-simple"></i> Bus Enquiries</a>
+    
+    <a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a>
+    <a href="/"><i class="fas fa-globe"></i> View Website</a>
+    <a href="/admin/login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <i class="fas fa-bars menu-btn" onclick="toggleSidebar()"></i>
+        <h1>Offer Popup</h1>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <h3>Create / Update Offer</h3>
+
+      <form id="offerForm">
+
+        <div class="form-group">
+          <label>Offer Title</label>
+          <input id="title" placeholder="Flat 30% Off on Bali Trip" required>
+        </div>
+
+        <div class="form-group">
+          <label>Popup Delay (seconds)</label>
+          <input id="delay" type="number" value="10">
+        </div>
+
+        <div class="form-group">
+          <label>Offer Image (Max 400KB)</label>
+          <input type="file" id="imageFile" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+          <div class="preview" id="previewBox">
+            <span style="color:#999;font-size:14px;">Image Preview</span>
+          </div>
+        </div>
+
+        <button type="submit">
+          <i class="fas fa-save"></i> Save Offer
+        </button>
+
+        <p id="msg"></p>
+      </form>
+    </div>
+
+  </main>
+</div>
+
+<script>
+let base64Image='';
+
+imageFile.addEventListener('change',e=>{
+  const file=e.target.files[0];
+  if(!file) return;
+
+  if(file.size > 400*1024){
+    alert('Please upload image under 400KB');
+    e.target.value='';
+    return;
+  }
+
+  const reader=new FileReader();
+  reader.onload=()=>{
+    base64Image=reader.result;
+    previewBox.innerHTML=`<img src="${base64Image}">`;
+  };
+  reader.readAsDataURL(file);
+});
+
+offerForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+
+  if(!base64Image){
+    msg.innerText='❌ Please select an image';
+    msg.style.color='red';
+    return;
+  }
+
+  const payload={
+    title:title.value.trim(),
+    image:base64Image,
+    delay:Number(delay.value)
+  };
+
+  try{
+    const res=await fetch('/api/admin/offer',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+
+    const data=await res.json();
+    msg.innerText=data.success?'✅ Offer saved successfully':data.message;
+    msg.style.color=data.success?'green':'red';
+  }catch{
+    msg.innerText='❌ Server error';
+    msg.style.color='red';
+  }
+});
+
+function toggleSidebar(){
+  document.querySelector('.sidebar').classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

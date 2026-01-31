@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domestic Tour Packages | Explore India with The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Includes all base and animation styles) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (DOMESTIC PAGE ONLY) ================= -->
+  <style>
+    /* Hero specific to domestic pages (Now set up for sliding images) */
+    .domestic-hero {
+        height: 80vh;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background-color: #3f51b5; /* Fallback color */
+    }
+    
+    /* Slider Slides */
+    .domestic-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .domestic-slide.active {
+        opacity: 1;
+    }
+
+    /* Overlay for text readability */
+    .domestic-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, .65);
+        z-index: 1;
+    }
+    .domestic-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    .domestic-hero-content h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .domestic-hero-content p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+    /* Car Rental CTA Section (Styling retained) */
+    .car-rental-cta {
+        background: #e6f7ff; 
+        border-top: 5px solid #0d6efd;
+        padding: 40px 6%;
+        margin: 40px auto;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        gap: 30px;
+    }
+    .car-rental-cta .info {
+        max-width: 65%;
+    }
+    .car-rental-cta .info h2 {
+        color: #0d6efd;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    .car-rental-cta .cta-btn-wrapper a {
+        background: #0d6efd; 
+        padding: 14px 30px;
+        font-size: 16px;
+        border-radius: 999px;
+        color: #fff;
+        font-weight: 600;
+        transition: transform 0.3s;
+        box-shadow: 0 10px 20px rgba(13, 110, 253, 0.4);
+    }
+    
+    /* ... (Rest of the package and responsive CSS remains the same) ... */
+    
+    @media (max-width: 900px) {
+        .car-rental-cta {
+            flex-direction: column;
+            text-align: center;
+        }
+        .car-rental-cta .info {
+            max-width: 100%;
+        }
+        .car-rental-cta .info h2 {
+            font-size: 1.6rem;
+        }
+        .car-rental-cta .cta-btn-wrapper a {
+            display: block;
+        }
+    }
+    @media (max-width: 600px) {
+        .domestic-hero-content h1 {
+            font-size: 2.5rem;
+        }
+    }
+
+    /* Header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduced gap slightly for better look */
+}
+
+/* FIX: Login Button Styling */
+.login-btn {
+    /* Base: Text-based pill button */
+    font-weight: 600;
+    padding: 8px 15px; 
+    border-radius: 999px; 
+    border: 1px solid #ccc; /* Subtle border */
+    color: var(--secondary-color);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex; /* Allow icon and text to align */
+    align-items: center;
+    gap: 6px; /* Gap between icon and text */
+}
+
+.login-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: #fff7f1; /* Very light background on hover */
+    transform: scale(1.02);
+}
+
+/* ... (cta-button and mobile-menu-icon styles remain the same) ... */
+
+
+/* --- Who We Are Section --- */
+/* ... (All other sections CSS remains the same) ... */
+
+
+/* Responsive Fixes for Header Actions */
+@media (max-width: 768px) {
+  /* ... (other mobile CSS remains) ... */
+
+  .header-actions {
+    gap: 8px; /* Reduce gap further on mobile */
+  }
+  
+  .login-btn {
+      /* On small screens, hide the login button to save space 
+         or just show the icon if you prefer: 
+         display: flex; width: 40px; height: 40px; padding: 0; justify-content: center; */
+      display: none; 
+  }
+  
+  .cta-button {
+      padding: 8px 15px;
+      font-size: 14px;
+  }
+  
+  .mobile-menu-icon {
+    display: block;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html" class="active">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html" class="active">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+    <!-- HERO SECTION WITH SLIDER -->
+   <section class="domestic-hero">
+        
+        <div class="domestic-slide active" style="background-image:url('/images/ds-18.jpg')"></div> 
+        
+        <div class="domestic-slide" style="background-image:url('/images/ds-17.jpg')"></div> 
+        
+        <div class="domestic-slide" style="background-image:url('/images/ds-15.jpg')"></div> 
+
+        <div class="domestic-hero-content hero-text-animate">
+            <h1 class="reveal-delay-1">Discover Incredible India</h1>
+            <p class="reveal-delay-2">Tailored tour packages covering the majestic Himalayas to the serene Southern coasts.</p>
+        </div>
+</section>
+
+    <!<!-- ======================= 1. HIMALAYAN ESCAPES ======================= -->
+    <section class="popular-packages">
+        <h2 class="section-title reveal">Himalayan & Northern Escapes 🏔️</h2>
+        <div class="packages-grid">
+            
+            <!-- Package 1: Kashmir (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="100">
+                <img src="/images/ds-1.jpg" alt="Kashmir Houseboat"> 
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Kashmir (Heaven on Earth)</p>
+                    <h3>Srinagar, Gulmarg & Pahalgam Tour</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-ship"></i> Dal Lake Shikara Ride</li>
+                        <li><i class="fas fa-mountain"></i> Dreamy Himalayan Views</li>
+                        <li><i class="fas fa-skiing"></i> Gulmarg Gondola & Skiing</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹25,999/- <small>per person</small></p>
+                        <a href="package-details.html?id=kashmir" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 2: Himachal Pradesh (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="200">
+                <img src="/images/ds-2.jpg" alt="Manali">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Himachal Pradesh</p>
+                    <h3>Shimla & Manali Romantic Getaway</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-cloud-sun"></i> Rohtang Pass / Solang Valley</li>
+                        <li><i class="fas fa-wind"></i> Paragliding in Bir Billing</li>
+                        <li><i class="fas fa-coffee"></i> Peaceful Kasol Vibes</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹17,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=himachal" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 3: Leh-Ladakh (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="300">
+                <img src="/images/ds-3.jpg" alt="Ladakh Mountains">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Leh-Ladakh</p>
+                    <h3>Adventurous Ladakh Expedition (Bike/SUV)</h3>
+                     <ul class="package-highlights">
+                        <li><i class="fas fa-motorcycle"></i> Road Trip Adventure</li>
+                        <li><i class="fas fa-campground"></i> Pangong Lake Camping</li>
+                        <li><i class="fas fa-route"></i> Khardung La Pass Visit</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹28,999/- <small>per person</small></p>
+                        <a href="package-details.html?id=ladakh" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 4: Nainital & Mussoorie (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="400">
+                <img src="/images/ds-4.jpg" alt="Nainital Lake">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Uttarakhand</p>
+                    <h3>Serene Nainital & Mussoorie Hill Stations</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-umbrella-beach"></i> Naini Lake Boating</li>
+                        <li><i class="fas fa-leaf"></i> Trekking & Sightseeing</li>
+                        <li><i class="fas fa-temperature-low"></i> Cool Weather Escapes</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹15,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=nainital" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= 2. CULTURAL & GOLDEN TRIANGLE ======================= -->
+    <section class="popular-packages" style="background: var(--bg-white);">
+        <h2 class="section-title reveal">Heritage, History & Spiritual North 🏛️</h2>
+        <div class="packages-grid">
+
+            <!-- Package 5: Delhi (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="100">
+                <img src="/images/ds-5.jpg" alt="India Gate">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Delhi</p>
+                    <h3>Delhi Capital City Highlights</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-landmark"></i> Red Fort & Qutub Minar</li>
+                        <li><i class="fas fa-utensils"></i> Famous Street Food Trail</li>
+                        <li><i class="fas fa-flag"></i> India Gate Visit</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹9,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=delhi" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 6: Agra (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="200">
+                <img src="/images/ds-6.jpg" alt="Taj Mahal">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Uttar Pradesh</p>
+                    <h3>Agra: The Monument of Love</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-heart"></i> Taj Mahal Visit</li>
+                        <li><i class="fas fa-fort-awesome"></i> Agra Fort & Fatehpur Sikri</li>
+                        <li><i class="fas fa-crown"></i> Royal Mughal History</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹8,999/- <small>per person</small></p>
+                        <a href="package-details.html?id=agra" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Package 7: Jaipur (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="300">
+                <img src="/images/ds-7.jpg" alt="Jaipur">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Rajasthan (Pink City)</p>
+                    <h3>Jaipur Heritage & Shopping Tour</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-palette"></i> Hawa Mahal & City Palace</li>
+                        <li><i class="fas fa-chess-rook"></i> Amer Fort Visit</li>
+                        <li><i class="fas fa-shopping-bag"></i> Johari Bazaar Shopping</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹15,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=jaipur" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Package 8: Rishikesh & Haridwar (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="400">
+                <img src="/images/ds-8.jpg" alt="Rishikesh Rafting">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Uttarakhand</p>
+                    <h3>Rishikesh Adventure & Haridwar Spirituality</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-water"></i> River Rafting Adventure</li>
+                        <li><i class="fas fa-hand-holding-water"></i> Ganga Aarti Experience</li>
+                        <li><i class="fas fa-campground"></i> Camping by the River</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹12,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=rishikesh" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 9: Varanasi (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="500">
+                <img src="/images/ds-9.jpg" alt="Varanasi Ganga Ghat">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Uttar Pradesh</p>
+                    <h3>Spiritual Varanasi Ghats & Temples</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-water"></i> Sunrise Boat Ride on Ganga</li>
+                        <li><i class="fas fa-om"></i> Kashi Vishwanath Temple</li>
+                        <li><i class="fas fa-feather-alt"></i> Profound Cultural Vibes</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹11,200/- <small>per person</small></p>
+                        <a href="package-details.html?id=varanasi" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Package 10: Amritsar (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="600">
+                <img src="/images/ds-10.jpg" alt="Golden Temple Amritsar">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Punjab</p>
+                    <h3>Amritsar: Golden Temple & Wagah Border</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-church"></i> Golden Temple Serenity</li>
+                        <li><i class="fas fa-flag"></i> Wagah Border Ceremony</li>
+                        <li><i class="fas fa-drumstick-bite"></i> Langar & Local Cuisine</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹10,800/- <small>per person</small></p>
+                        <a href="package-details.html?id=amritsar" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======================= 3. WESTERN & SOUTHERN COASTAL ROUTES ======================= -->
+    <section class="popular-packages">
+        <h2 class="section-title reveal">Coastal South, Karnataka & Gujarat Special 🏖️</h2>
+        <div class="packages-grid">
+
+            <!-- Package 11: Kerala (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="100">
+                <img src="/images/ds-11.jpg" alt="Kerala Backwaters">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Kerala</p>
+                    <h3>God's Own Country: Backwaters & Spice Route</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-ship"></i> Houseboat Ride (Alleppey)</li>
+                        <li><i class="fas fa-leaf"></i> Munnar Tea Gardens</li>
+                        <li><i class="fas fa-sun"></i> Cochin Beaches & Fort</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹22,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=kerala" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 12: Goa (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="200">
+                <img src="/images/ds-12.jpg" alt="Goa Beach Party">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Goa</p>
+                    <h3>Goa Beach Party & Adventure Trip</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-cocktail"></i> Baga/Calangute Nightlife</li>
+                        <li><i class="fas fa-umbrella-beach"></i> Water Sports & Parasailing</li>
+                        <li><i class="fas fa-plane-departure"></i> North & South Goa Tours</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹14,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=goa" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Package 13: Rann of Kutch (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="300">
+                <img src="/images/ds-13.jpg" alt="Rann of Kutch">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Gujarat Special</p>
+                    <h3>Kutch White Desert Experience (Rann Utsav)</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-camera"></i> Stunning White Desert Views</li>
+                        <li><i class="fas fa-drum"></i> Rann Utsav Cultural Shows</li>
+                        <li><i class="fas fa-car"></i> Vapi/Surat Pickup Option</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹14,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=kutch" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 14: Karnataka (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="400">
+                <img src="/images/ds-14.jpg" alt="Mysore Palace">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Karnataka</p>
+                    <h3>Mysore, Bangalore & Coorg Coffee Vibes</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-crown"></i> Mysore Royal Palace</li>
+                        <li><i class="fas fa-coffee"></i> Coorg Coffee Plantations</li>
+                        <li><i class="fas fa-briefcase"></i> Bangalore Tech City Tour</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹16,900/- <small>per person</small></p>
+                        <a href="package-details.html?id=karnataka" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 15: Rajasthan Desert (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="500">
+                <img src="/images/ds-15.jpg" alt="Jaisalmer Desert">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Rajasthan</p>
+                    <h3>Jaisalmer Golden City & Desert Safari</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-sun"></i> Sand Dunes Sunset</li>
+                        <li><i class="fas fa-bell"></i> Camel Safari Ride</li>
+                        <li><i class="fas fa-castle"></i> Sonar Quila (Jaisalmer Fort)</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹17,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=jaisalmer" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 16: Gir National Park (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="600">
+                <img src="/images/ds-16.jpg" alt="Asiatic Lion">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Gujarat</p>
+                    <h3>Gir National Park Wildlife Adventure</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-paw"></i> Asiatic Lion Safari</li>
+                        <li><i class="fas fa-leaf"></i> Thrilling Jungle Drive</li>
+                        <li><i class="fas fa-camera"></i> Photography Opportunity</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹11,800/- <small>per person</small></p>
+                        <a href="package-details.html?id=gir" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package 17: Hampi (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="700">
+                <img src="/images/ds-17.jpg" alt="Hampi Ruins">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Karnataka</p>
+                    <h3>Hampi Ancient Ruins & Architecture</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-building"></i> UNESCO World Heritage Site</li>
+                        <li><i class="fas fa-book-reader"></i> History Buffs Heaven</li>
+                        <li><i class="fas fa-mountain"></i> Unique Rocky Landscape</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹13,000/- <small>per person</small></p>
+                        <a href="package-details.html?id=hampi" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Package 18: Tamil Nadu (Image Source Here) -->
+            <div class="package-card reveal fade-up" data-delay="800">
+                <img src="/images/ds-18.jpg" alt="Madurai Meenakshi Temple">
+                <!-- REPLACE THIS WITH YOUR IMAGE PATH -->
+                <div class="package-info">
+                    <p class="package-location">Tamil Nadu</p>
+                    <h3>Madurai, Chennai & Kanyakumari</h3>
+                    <ul class="package-highlights">
+                        <li><i class="fas fa-church"></i> Meenakshi Temple Visit</li>
+                        <li><i class="fas fa-sun"></i> Kanyakumari Sunrise/Sunset</li>
+                        <li><i class="fas fa-map-marked-alt"></i> Mahabalipuram Ancient Sites</li>
+                    </ul>
+                    <div class="price-section">
+                        <p class="price">₹18,500/- <small>per person</small></p>
+                        <a href="package-details.html?id=tamilnadu" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="text-align: center; margin-top: 50px;" class="reveal">
+            <a href="packages.html" class="cta-button-large">Explore All Packages</a>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER (STANDARDIZED ENGLISH) -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+
+<!-- ================= JS SCRIPTS (SCROLL REVEAL & SLIDER) ================= -->
+<script>
+// ==================== DOMESTIC HERO IMAGE SLIDER ====================
+const slides = document.querySelectorAll('.domestic-slide');
+let slideIndex = 0;
+
+function showNextSlide() {
+    slides.forEach(s => s.classList.remove('active'));
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
+}
+
+// Start auto sliding every 4 seconds
+setInterval(showNextSlide, 4000);
+
+
+// ==================== SCROLL REVEAL LOGIC ====================
+const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right, .fade-down, .fade-up');
+
+const observerOptions = {
+    root: null, 
+    rootMargin: '0px',
+    threshold: 0.1 
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
+
+revealElements.forEach(el => {
+    if (el.dataset.delay) {
+        el.style.transitionDelay = `${el.dataset.delay}ms`;
+    }
+    scrollObserver.observe(el);
+});
+
+
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

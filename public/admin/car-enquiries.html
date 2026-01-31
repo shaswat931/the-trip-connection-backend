@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Car Enquiries | Admin Panel | The Trip Connection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ========== GLOBAL ADMIN STYLES (Use existing dashboard CSS for layout) ========== */
+/* This section assumes you copy-paste all CSS from dashboard.html's style tag here */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+body{ background:#f4f6fb; color:#1f2937; }
+.admin-layout{ display:flex; min-height:100vh; }
+.sidebar{ width:250px; background:#0f172a; color:#fff; padding:24px 20px; position:fixed; height:100vh; }
+.sidebar h2{ font-size:22px; margin-bottom:35px; }
+.sidebar a{ display:flex; align-items:center; gap:12px; color:#cbd5e1; text-decoration:none; padding:12px 14px; border-radius:10px; margin-bottom:10px; transition:.3s; font-size:15px; }
+.sidebar a i{ width:18px; }
+.sidebar a:hover, .sidebar a.active{ background:#1e293b; color:#fff; }
+.main{ margin-left:250px; padding:30px; width:100%; }
+.topbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
+.menu-btn{ display:none; font-size:22px; cursor:pointer; }
+.topbar h1{ font-size:26px; font-weight:600; }
+.admin-profile{ display:flex; align-items:center; gap:10px; }
+.admin-profile img{ width:42px; height:42px; border-radius:50%; object-fit:cover; }
+.box{ background:#fff; padding:28px; border-radius:18px; box-shadow:0 15px 35px rgba(0,0,0,.08); }
+
+/* ========== TABLE STYLES (Specific for this page) ========== */
+.data-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+.data-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.data-table tr:hover {
+    background: #f0f4f8;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status-New { background-color: #fef3c7; color: #b45309; }
+.status-Contacted { background-color: #d1e7dd; color: #0f5132; }
+.status-Booked { background-color: #cfe2ff; color: #084298; }
+.status-Closed { background-color: #e9ecef; color: #6c757d; }
+
+/* Load/Error Message */
+#loadingMessage {
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
+    color: #666;
+}
+
+/* ========== MOBILE ========== */
+@media(max-width:900px){
+  .sidebar{ transform:translateX(-100%); transition:.3s; z-index:1000; }
+  .sidebar.active{ transform:translateX(0); }
+  .main{ margin-left:0; }
+  .menu-btn{ display:block; }
+  /* Hide unnecessary columns on small screen */
+  .data-table th:nth-child(6), .data-table td:nth-child(6) { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR (Car Enquiries Active) -->
+  <aside class="sidebar" id="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="manage-packages.html"><i class="fas fa-suitcase"></i> Packages</a>
+    <a href="add-package.html"><i class="fas fa-plus-circle"></i> Add Package</a>
+    <a href="manage-offers.html"><i class="fas fa-bullhorn"></i> Offer Popup</a>
+    
+    <!-- Updated sidebar links to reflect new enquiry types -->
+    <a href="tour-bookings.html"><i class="fas fa-calendar-check"></i> Tour Bookings</a>
+    <a href="car-enquiries.html"><i class="fas fa-car-side"></i> Car Enquiries</a>
+    <a href="bus-enquiries.html"><i class="fas fa-bus-simple"></i> Bus Enquiries</a>
+    
+    <a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a>
+    <a href="/"><i class="fas fa-globe"></i> View Website</a>
+    <a href="/admin/login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <i class="fas fa-bars menu-btn" onclick="toggleSidebar()"></i>
+        <h1>Car Booking Enquiries</h1>
+      </div>
+      <div class="admin-profile">
+        <span>Admin</span>
+        <img src="/images/logofinal.png" alt="Admin">
+      </div>
+    </div>
+    
+    <!-- CONTENT BOX: Car Enquiries List -->
+    <div class="box">
+        <h3>Recent Car Quote Requests</h3>
+        
+        <div id="loadingMessage">
+            <i class="fas fa-spinner fa-spin"></i> Loading enquiries...
+        </div>
+
+        <div class="data-table-container" style="display:none;" id="tableContainer">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Client Details</th>
+                        <th>Route</th>
+                        <th>Vehicle</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="carEnquiriesTableBody">
+                    <!-- Data will be loaded here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <p id="noDataMessage" style="display:none; text-align:center; padding: 20px;">No new car enquiries found.</p>
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+/* SIDEBAR TOGGLE (MOBILE) */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('active');
+}
+
+/* FETCH AND DISPLAY CAR ENQUIRIES */
+async function loadCarEnquiries(){
+    const tableBody = document.getElementById('carEnquiriesTableBody');
+    const loadingMessage = document.getElementById('loadingMessage');
+    const tableContainer = document.getElementById('tableContainer');
+    const noDataMessage = document.getElementById('noDataMessage');
+
+    try{
+        loadingMessage.style.display = 'block';
+
+        // API Endpoint defined in your updated server.js
+        const res = await fetch('/api/admin/car-bookings'); 
+        if (!res.ok) throw new Error('Failed to fetch data from API');
+        
+        const data = await res.json();
+        const enquiries = data.data || data; // Handle both {data: []} and just [] response
+
+        tableBody.innerHTML = ''; // Clear previous data
+
+        if (enquiries.length === 0) {
+            noDataMessage.style.display = 'block';
+            tableContainer.style.display = 'none';
+        } else {
+            enquiries.forEach(enquiry => {
+                const row = document.createElement('tr');
+                const formattedDate = new Date(enquiry.createdAt).toLocaleDateString('en-IN', {
+                    day: '2-digit', month: 'short', year: 'numeric'
+                });
+                
+                row.innerHTML = `
+                    <td>${formattedDate}</td>
+                    <td>
+                        <strong>${enquiry.name}</strong><br>
+                        <i class="fas fa-phone-alt"></i> ${enquiry.phone}
+                    </td>
+                    <td>${enquiry.pickup} to ${enquiry.drop} (${enquiry.date ? new Date(enquiry.date).toLocaleDateString() : 'N/A'})</td>
+                    <td>${enquiry.vehicleType}</td>
+                    <td><span class="status-badge status-${enquiry.status}">${enquiry.status}</span></td>
+                    <td>
+                        <!-- Example Action Button - you will implement the update logic later -->
+                        <button onclick="markAsContacted('${enquiry._id}')" title="Mark Contacted" style="background: none; border: none; cursor: pointer; color: #0d6efd;"><i class="fas fa-check"></i></button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+            tableContainer.style.display = 'block';
+        }
+
+    }catch(err){
+        console.error('Car Enquiries Load Error:', err);
+        loadingMessage.innerText = '❌ Failed to load data. Check API connection.';
+        loadingMessage.style.color = '#dc2626';
+    } finally {
+        loadingMessage.style.display = 'none';
+    }
+}
+
+// Example function to update status (Needs backend implementation later)
+function markAsContacted(id) {
+    alert('Functionality to update status for ID: ' + id + ' needs backend implementation!');
+    // In future, this should make a PATCH request to /api/admin/car-bookings/{id}/status
+}
+
+loadCarEnquiries();
+</script>
+
+</body>
+</html>

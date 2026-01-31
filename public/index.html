@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Trip Connection | Best Travel Agency in India</title>
+
+    <!-- SEO -->
+    <meta name="description" content="The Trip Connection offers best India tour packages, car booking, pickup & drop services at affordable prices.">
+    <meta name="keywords" content="India tour packages, Kashmir tour, Goa tour, travel agency India, bus booking, car rental, school picnic, college trip">
+    <meta name="author" content="The Trip Connection">
+
+     <!-- Open Graph -->
+    <meta property="og:title" content="The Trip Connection - Travel Experts">
+    <meta property="og:description" content="Book trusted domestic & international tour packages at best prices.">
+    <meta property="og:image" content="/images/logofinal.png">
+    <meta property="og:type" content="website">
+
+    
+    <!-- ==================== FAVICON & PWA ICONS START ==================== -->
+    
+    <!-- 1. Favicon (Browser Tab Icon) -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
+    <!-- 2. Apple Touch Icon (Add to Home Screen - PWA Icon) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+    
+    <!-- PWA configuration (optional, but good practice) -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#fd810d"> <!-- Theme color matching your primary color -->
+    
+    <!-- ==================== FAVICON & PWA ICONS END ==================== -->
+
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    
+    <!-- Your CSS File -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- INLINE STYLES FOR INDEX PAGE (Card Uniformity, Edges, Corners, Stats, and NEW Slider Design) -->
+    <style>
+        /* Assuming 'var(--primary-color)' and 'var(--bg-light)' are defined in style.css */
+
+        /* 1. Package Card Uniformity and Premium Look */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .package-card {
+            border-radius: 15px; /* Soft rounded corners */
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Important for uniformity */
+            background-color: #fff;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .package-card img {
+            height: 200px; /* Fixed image height for visual uniformity */
+            object-fit: cover;
+            width: 100%;
+        }
+        .package-info {
+            padding: 20px;
+            flex-grow: 1; /* Allows info section to take remaining height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .package-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 20px 0;
+        }
+        .package-highlights li {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .package-highlights i {
+            color: #0d6efd; /* Use a distinct color for icons */
+            margin-right: 8px;
+        }
+        .price-section {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color, #0d6efd); 
+        }
+
+        /* 2. Stats Section (Happy Client Loop) CSS - EDGE/CORNER FIX */
+        .stats {
+            background: linear-gradient(135deg, #0d6efd, #0093E9); /* Blue Gradient */
+            color: #fff;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            text-align: center;
+            padding: 70px 5%;
+            gap: 30px;
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+            margin: 40px auto; 
+            max-width: 1200px; 
+        }
+        .stat h2 {
+            font-size: 3.2rem;
+            margin-bottom: 5px;
+            font-weight: 800;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+        }
+        .stat p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 3. New CTA Banner Style */
+        .cta-banner {
+            background-color: #f8f9fa;
+            padding: 60px 5%;
+            text-align: center;
+            margin: 50px 0;
+        }
+        .cta-banner h2 {
+            font-size: 2.5rem;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        .cta-banner p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 4. PREMIUM Special Booking Card Design (Slider) */
+        .special-bookings .booking-slider-container {
+            overflow: hidden; 
+            position: relative;
+        }
+        .special-bookings .booking-slider {
+            display: flex;
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory;
+            padding: 10px 0;
+            gap: 25px;
+            /* Hide default scrollbar */
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
+        }
+        .special-bookings .booking-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .booking-card {
+            flex: 0 0 320px; /* Fixed width for consistent look in the slider */
+            scroll-snap-align: start;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .booking-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        .booking-card img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .booking-card .card-info {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .booking-card h3 {
+            font-size: 1.3rem;
+            margin-top: 5px;
+            color: #1a237e; 
+        }
+        .booking-card h3 i {
+            font-size: 1.5rem;
+            color: var(--primary-color, #0d6efd); 
+            margin-right: 10px;
+        }
+        .booking-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        /* Slider Navigation Arrows */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            z-index: 10;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: all 0.3s;
+        }
+        .slider-arrow:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .prev-arrow {
+            left: 0px;
+        }
+        .next-arrow {
+            right: 0px;
+        }
+        
+        /* 5. NEW: Why Choose Us Section Premium Design (Updated for 6 cards) */
+        .why-choose {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* Deep Blue Premium Gradient */
+            padding: 80px 6%;
+            color: #fff;
+            margin: 50px auto;
+            border-radius: 20px;
+            max-width: 1300px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .why-choose .section-title {
+            color: #fff;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .why-choose .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #ffc107; /* Yellow accent line */
+            border-radius: 2px;
+        }
+        .why-choose-grid {
+            /* Adjusted grid layout for 6 items (3 columns wide) */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: 30px;
+        }
+        .value-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease, transform 0.3s;
+        }
+        .value-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        .value-card i {
+            font-size: 3.5rem;
+            color: #ffc107; /* Bright Yellow Icon */
+            margin-bottom: 15px;
+            display: block;
+        }
+        .value-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .value-card p {
+            color: #e0e0e0;
+        }
+
+        /* Responsive adjustments for slider */
+        @media (max-width: 1300px) {
+            .prev-arrow { left: 20px; }
+            .next-arrow { right: 20px; }
+        }
+        @media (max-width: 600px) {
+            .booking-card {
+                 flex: 0 0 90%; 
+            }
+            .prev-arrow, .next-arrow {
+                top: 45%; 
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+    <!-- ==================== HERO VIDEO SLIDER with DYNAMIC CONTENT ==================== -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-video-slider">
+            <video class="slider-video active" autoplay loop muted playsinline src="/images/home-3.mp4"></video>
+            <video class="slider-video" autoplay loop muted playsinline src="/images/home-1.mp4"></video>
+            <video class="slider-video" autoplay loop muted playsinline src="/images/home-2.mp4"></video>
+        </div>
+
+        <!-- Content for Slide 1 -->
+        <div class="hero-content active" data-slide="0">
+            <h1>Welcome To The Trip Connection</h1>
+            <p>Discover the world’s most breathtaking destinations with expertly crafted travel experiences.</p>
+            <a href="packages.html" class="cta-button-large">Explore Packages</a>
+        </div>
+        <!-- Content for Slide 2 -->
+        <div class="hero-content" data-slide="1">
+            <h1>Explore the Unseen</h1>
+            <p>Unforgettable adventures, hidden gems, and experiences that stay with you forever.</p>
+            <a href="packages-adventure.html" class="cta-button-large">Adventure Awaits</a>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-content" data-slide="2">
+            <h1>Luxury Redefined</h1>
+            <p>Indulge in premium travel with world-class comfort, elegance, and personalized services.</p>
+            <a href="packages-honeymoon.html" class="cta-button-large">View Luxury Deals</a>
+        </div>
+
+
+        <div class="slider-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES SECTION (Core Values) ==================== -->
+    <section class="features reveal">
+        <div class="feature-card">
+            <i class="fas fa-route"></i>
+            <h3>Customized Itineraries</h3>
+            <p>Tailored trip planning based on your specific budget and preferences.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-award"></i>
+            <h3>Best Price Guarantee</h3>
+            <p>Unbeatable deals and offers, guaranteed with no hidden charges.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-headset"></i>
+            <h3>24/7 Customer Support</h3>
+            <p>Dedicated assistance available at every step throughout your journey.</p>
+        </div>
+    </section>
+
+    <!-- ==================== POPULAR PACKAGES ==================== -->
+    <section class="popular-packages reveal" style="padding: 80px 6%; max-width: 1300px; margin: auto;">
+        <h2 class="section-title">Our Popular India Tour Packages</h2>
+
+        <div class="packages-grid">
+
+            <!-- Kashmir -->
+            <div class="package-card reveal">
+                <img src="https://images.pexels.com/photos/5205083/pexels-photo-5205083.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kashmir Trip">
+                <div class="package-info">
+                    <div>
+                        <p class="package-location">Kashmir, India</p>
+                        <h3>Heavenly Kashmir Tour</h3>
+                        <ul class="package-highlights">
+                            <li><i class="fas fa-snowflake"></i> Gulmarg Snow Experience</li>
+                            <li><i class="fas fa-ship"></i> Dal Lake Shikara Ride</li>
+                            <li><i class="fas fa-hotel"></i> Premium Hotels</li>
+                        </ul>
+                    </div>
+                    <div class="price-section">
+                        <p class="price">₹24,999/- <small>per person</small></p>
+                        <a href="package-details.html" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Himachal -->
+            <div class="package-card reveal">
+                <img src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Himachal Trip">
+                <div class="package-info">
+                    <div>
+                        <p class="package-location">Himachal Pradesh, India</p>
+                        <h3>Manali Shimla Escape</h3>
+                        <ul class="package-highlights">
+                            <li><i class="fas fa-mountain"></i> Snow Mountains</li>
+                            <li><i class="fas fa-car"></i> Sightseeing Tours</li>
+                            <li><i class="fas fa-hotel"></i> 3 Star Hotels</li>
+                        </ul>
+                    </div>
+                    <div class="price-section">
+                        <p class="price">₹17,999/- <small>per person</small></p>
+                        <a href="package-details.html" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rajasthan -->
+            <div class="package-card reveal">
+                <img src="https://images.pexels.com/photos/1618903/pexels-photo-1618903.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rajasthan Trip">
+                <div class="package-info">
+                    <div>
+                        <p class="package-location">Rajasthan, India</p>
+                        <h3>Royal Rajasthan Tour</h3>
+                        <ul class="package-highlights">
+                            <li><i class="fas fa-chess-rook"></i> Forts & Palaces</li>
+                            <li><i class="fas fa-hippo"></i> Desert Safari</li>
+                            <li><i class="fas fa-music"></i> Folk Dance Night</li>
+                        </ul>
+                    </div>
+                    <div class="price-section">
+                        <p class="price">₹15,999/- <small>per person</small></p>
+                        <a href="package-details.html" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goa -->
+            <div class="package-card reveal">
+                <img src="https://images.pexels.com/photos/4428289/pexels-photo-4428289.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Goa Trip">
+                <div class="package-info">
+                    <div>
+                        <p class="package-location">Goa, India</p>
+                        <h3>Goa Beach Holiday</h3>
+                        <ul class="package-highlights">
+                            <li><i class="fas fa-umbrella-beach"></i> Beach Fun</li>
+                            <li><i class="fas fa-water"></i> Water Sports</li>
+                            <li><i class="fas fa-hotel"></i> Beach Resort Stay</li>
+                        </ul>
+                    </div>
+                    <div class="price-section">
+                        <p class="price">₹13,499/- <small>per person</small></p>
+                        <a href="package-details.html" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ladakh -->
+            <div class="package-card reveal">
+                <img src="https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ladakh Trip">
+                <div class="package-info">
+                    <div>
+                        <p class="package-location">Ladakh, India</p>
+                        <h3>Adventurous Ladakh</h3>
+                        <ul class="package-highlights">
+                            <li><i class="fas fa-motorcycle"></i> Bike Tour</li>
+                            <li><i class="fas fa-campground"></i> Pangong Camping</li>
+                            <li><i class="fas fa-om"></i> Monastery Visit</li>
+                        </ul>
+                    </div>
+                    <div class="price-section">
+                        <p class="price">₹21,999/- <small>per person</small></p>
+                        <a href="package-details.html" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kerala -->
+            <div class="package-card reveal">
+                <img src="https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kerala Trip">
+                <div class="package-info">
+                    <div>
+                        <p class="package-location">Kerala, India</p>
+                        <h3>Kerala Backwater Bliss</h3>
+                        <ul class="package-highlights">
+                            <li><i class="fas fa-ship"></i> Houseboat Stay</li>
+                            <li><i class="fas fa-leaf"></i> Tea Gardens</li>
+                            <li><i class="fas fa-spa"></i> Ayurveda Therapy</li>
+                        </ul>
+                    </div>
+                    <div class="price-section">
+                        <p class="price">₹19,499/- <small>per person</small></p>
+                        <a href="package-details.html" class="details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Existing Cards -->
+        </div>
+    </section>
+
+    
+    <!-- ==================== NEW SECTION: STATS (HAPPY CLIENT LOOP) ==================== -->
+    <section class="stats">
+        <div class="stat reveal" data-delay="100"><h2 class="loop-count" data-max="1200">0</h2><p>Happy Clients</p></div>
+        <div class="stat reveal" data-delay="300"><h2 class="loop-count" data-max="80">0</h2><p>Destinations Explored</p></div>
+        <div class="stat reveal" data-delay="500"><h2 class="loop-count" data-max="10">0</h2><p>Years of Experience</p></div>
+        <div class="stat reveal" data-delay="700"><h2 class="loop-count" data-max="3500">0</h2><p>Trips Successfully Planned</p></div>
+    </section>
+
+    <!-- ==================== NEW SECTION: WHY CHOOSE US (PREMIUM DESIGN - 6 CARDS) ==================== -->
+    <section class="why-choose reveal">
+        <h2 class="section-title">Why The Trip Connection is Your Best Travel Partner</h2>
+        
+        <div class="why-choose-grid">
+            <div class="value-card reveal" data-delay="100">
+                <i class="fas fa-gem"></i>
+                <h3>Premium Quality Tours</h3>
+                <p>We partner only with verified hotels and reliable transport services to ensure premium quality travel experiences.</p>
+            </div>
+            <div class="value-card reveal" data-delay="300">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Deep Local Expertise</h3>
+                <p>Based in India, we provide deep local knowledge for domestic tours, helping you discover hidden gems.</p>
+            </div>
+            <div class="value-card reveal" data-delay="500">
+                <i class="fas fa-money-check-alt"></i>
+                <h3>Transparent Pricing</h3>
+                <p>No last-minute surprises or hidden costs. We believe in complete financial transparency from start to finish.</p>
+            </div>
+            
+            <!-- NEW CARDS START HERE -->
+            <div class="value-card reveal" data-delay="700">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Flexible Booking & Cancellation</h3>
+                <p>Enjoy hassle-free modifications and reasonable cancellation policies tailored to traveler needs.</p>
+            </div>
+            <div class="value-card reveal" data-delay="900">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Verified & Safe Partners</h3>
+                <p>Every vendor, from driver to resort, is thoroughly vetted to guarantee your safety and peace of mind.</p>
+            </div>
+            <div class="value-card reveal" data-delay="1100">
+                <i class="fas fa-heart-pulse"></i>
+                <h3>24/7 Dedicated Support</h3>
+                <p>Get instant assistance and dedicated emergency support anytime, anywhere during your entire journey.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ==================== SPECIAL BOOKING SERVICES SLIDER (PREMIUM DESIGN) ==================== -->
+    <section class="special-bookings reveal" style="padding: 40px 6%; max-width: 1300px; margin: auto;">
+        <h2 class="section-title">Rentals, Transfers, and Hassle-Free Group Travel</h2>
+
+        <div class="booking-slider-container">
+            <!-- Slider Navigation (Arrows) -->
+            <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+
+            <div class="booking-slider">
+                
+                <!-- Card 1: Bus Booking (Themed: Transport) -->
+                <div class="booking-card slider-card theme-transport">
+                    <img src="https://images.pexels.com/photos/3392395/pexels-photo-3392395.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bus Booking Service">
+                    <div class="card-info">
+                        <h3><i class="fas fa-bus-alt"></i> Pan-India Bus Booking</h3>
+                        <p>Book comfortable and affordable AC/Non-AC bus tickets for intercity travel. Ideal for large groups and school/college tours.</p>
+                        <a href="bus.html" class="details-btn">Book Your Bus</a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Car Booking (Themed: Transport) -->
+                <div class="booking-card slider-card theme-transport">
+                    <img src="https://images.pexels.com/photos/10368159/pexels-photo-10368159.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Car Booking / Taxi Rental">
+                    <div class="card-info">
+                        <h3><i class="fas fa-car-side"></i> Premium Car Rental with Driver</h3>
+                        <p>Rent a car (Sedan/SUV) with a professional driver for local sightseeing, religious tours, outstation trips, and airport transfers.</p>
+                        <a href="car.html" class="details-btn">Rent a Car</a>
+                    </div>
+                </div>
+
+                <!-- Card 3: College Picnic (Themed: Education) -->
+                <div class="booking-card slider-card theme-education">
+                    <img src="https://images.pexels.com/photos/459654/pexels-photo-459654.jpeg?auto=compress&cs=tinysrgb&w=600" alt="College Group Picnic">
+                    <div class="card-info">
+                        <h3><i class="fas fa-users-gear"></i> University & College Excursions</h3>
+                        <p>Special packages designed for educational field trips, college farewells, and large student group excursions. Focus on safety and fun.</p>
+                        <a href="contact.html" class="details-btn">Get College Trip Quote</a>
+                    </div>
+                </div>
+
+                <!-- Card 4: School Picnic (Themed: Education) -->
+                <div class="booking-card slider-card theme-education">
+                    <img src="https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&w=600" alt="School Excursion">
+                    <div class="card-info">
+                        <h3><i class="fas fa-shield-halved"></i> Safe School Picnics & Field Trips</h3>
+                        <p>Organize safe, educational, and fun annual school picnics. We manage all logistics, permits, and provide experienced tour supervisors.</p>
+                        <a href="contact.html" class="details-btn">Request School Trip Plan</a>
+                    </div>
+                </div>
+                
+                <!-- Added Card 5: Corporate Travel (Themed: Business) -->
+                <div class="booking-card slider-card theme-corporate">
+                    <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corporate Team Trip">
+                    <div class="card-info">
+                        <h3><i class="fas fa-briefcase"></i> Corporate & MICE Travel</h3>
+                        <p>Seamless organization for corporate team outings, conferences (MICE), and official business travel. Customized luxury and budget options available.</p>
+                        <a href="contact.html" class="details-btn">Corporate Inquiry</a>
+                    </div>
+                </div>
+
+                <!-- Added Card 6: Pilgrimage (Themed: Culture) -->
+                <div class="booking-card slider-card theme-culture">
+                    <img src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pilgrimage Tour">
+                    <div class="card-info">
+                        <h3><i class="fas fa-praying-hands"></i> Dedicated Pilgrimage Tours</h3>
+                        <p>Specialized tours covering major Indian temples, Jyotirlingas, and religious sites. Comfortable stay, guided darshans, and elderly care provided.</p>
+                        <a href="domestic.html" class="details-btn">View Temple Packages</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- ==================== NEW SECTION: PREMIUM CTA BANNER ==================== -->
+    <section class="cta-banner">
+        <h2 class="reveal">Ready to Plan Your Perfect Getaway?</h2>
+        <p class="reveal">Whether it's a family vacation, a corporate trip, or a solo adventure, our experts are ready to craft the ideal itinerary for you. Contact us today!</p>
+        <a href="contact.html" class="cta-button-large reveal" style="background-color: var(--primary-color);">Talk to an Expert</a>
+    </section>
+
+</main>
+    
+
+    <!-- ==================== FOOTER (unchanged) ==================== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column about-us">
+                <h3>The Trip Connection</h3>
+                <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="policies.html">Policies</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Top Packages</h4>
+                <ul>
+                    <li><a href="#">Domestic Tours</a></li>
+                    <li><a href="#">International Tours</a></li>
+                    <li><a href="#">Honeymoon Special</a></li>
+                    <li><a href="#">Adventure Trips</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== FLOATING WIDGETS (unchanged) ==================== -->
+    <div class="floating-widgets">
+        <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+            <i class="fas fa-download"></i>
+        </a>
+    </div>
+
+    <!-- OFFER POPUP (unchanged) -->
+    <div id="offerPopup" class="offer-overlay">
+      <div class="offer-box">
+
+        <button class="offer-close" onclick="closeOffer()">✕</button>
+
+        <div class="offer-image">
+          <img id="offerImg" alt="Offer Image">
+        </div>
+
+        <div class="offer-content">
+          <h3 id="offerTitle">Special Offer 🎉</h3>
+          <p id="offerDesc">Limited time deal – don’t miss it.</p>
+
+          <a id="offerBtn" href="#" class="offer-btn">
+            Grab Offer
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+<!-- ================= JS SCRIPTS (Optimized for Index Page) ================= -->
+<script>
+    // Function to close the offer popup (Kept because it's page-specific or API related)
+    function closeOffer(){
+      document.getElementById('offerPopup').style.display='none';
+    }
+
+    // Fetch and display dynamic offer after a delay (e.g., 10 seconds)
+    // (Kept because API interaction is client-side and page-specific)
+    setTimeout(async ()=>{
+      try {
+          const res = await fetch('/api/offer');
+          // Check if response is okay and JSON is available
+          if (!res.ok) return; 
+
+          const offer = await res.json();
+          if(!offer || !offer.title) return; // Exit if no valid offer data
+
+          document.getElementById('offerTitle').innerText = offer.title;
+          document.getElementById('offerDesc').innerText = offer.description;
+          
+          if(offer.image){
+            const img = document.getElementById('offerImg');
+            img.src = offer.image; 
+            img.style.display = 'block';
+          }
+          
+          const btn = document.getElementById('offerBtn');
+          btn.innerText = offer.ctaText || 'Book Now';
+          btn.href = offer.ctaLink || 'booking.html';
+
+          document.getElementById('offerPopup').style.display = 'flex';
+      } catch (error) {
+          console.error("Error fetching offer data:", error);
+      }
+    }, 10000); // 10 seconds delay
+
+
+    /* 
+    IMPORTANT: All other JavaScript code (Stats Counter, Scroll Reveal, Slider JS) 
+    has been removed from this file because it is now handled efficiently 
+    and centrally in /js/main.js.
+    */
+</script>
+    <!-- Your JavaScript File -->
+    <script src="/js/main.js"></script>
+    <script src="/js/offer-popup.js"></script>
+
+</body>
+</html>

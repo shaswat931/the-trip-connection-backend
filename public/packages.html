@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Packages | Explore Domestic & International Trips | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Assuming base styles and animations are defined here) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (ONLY THIS PAGE - ENHANCED) ================= -->
+  <style>
+    /* ================= HERO IMAGE SLIDER ================= */
+    .packages-hero{
+      height:65vh;
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+      background-color: #1f2937; /* Fallback */
+    }
+    .pkg-slide{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      opacity:0;
+      transition:opacity 1.2s ease-in-out;
+    }
+    .pkg-slide.active{
+      opacity:1;
+      z-index:1;
+    }
+    .packages-hero::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,.65); /* Darker overlay */
+      z-index:2;
+    }
+    .packages-hero-content{
+      position:relative;
+      z-index:3;
+      text-align:center;
+    }
+    .packages-hero-content h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        text-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    .packages-hero-content p {
+        font-size: 1.3rem;
+        margin-top: 10px;
+    }
+
+    /* ================= FILTER BAR (Modernized) ================= */
+    .filter-bar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:15px;
+      justify-content:center;
+      padding:40px 5%;
+      background:var(--bg-light); /* Light background for contrast */
+      border-bottom: 1px solid #eee;
+    }
+    .filter-btn{
+      padding:10px 24px;
+      border-radius:999px; /* Pill shape */
+      border:2px solid #ddd;
+      cursor:pointer;
+      background:#fff;
+      font-weight:600;
+      transition:all .3s;
+      color: #333;
+    }
+    .filter-btn.active,
+    .filter-btn:hover{
+      background:var(--primary-color);
+      color:#fff;
+      border-color:var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255,107,0,0.3);
+    }
+
+    /* ================= PACKAGE CARD FIX (Enhancement) ================= */
+    .popular-packages {
+        padding: 60px 6%;
+    }
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+    
+    .package-card{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      background: var(--bg-white);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .package-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+    }
+    
+    .package-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    
+    .package-info {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .package-info h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--secondary-color);
+    }
+    .package-info .price {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-top: 5px;
+    }
+
+    /* ================= BUTTON ALIGNMENT (Action Group) ================= */
+    .pkg-actions{
+      display:flex;
+      gap:10px;
+      margin-top:20px; /* Increased gap */
+      padding-top: 15px;
+      border-top: 1px dashed #eee;
+    }
+    .pkg-actions a{
+      flex:1;
+      text-align:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    
+    .details-btn {
+        background: #0d6efd; /* Blue for details */
+        color: #fff;
+    }
+    .details-btn:hover {
+        background: #0b5cdb;
+    }
+
+    .whatsapp-btn-pkg{
+      background:#25D366;
+      color:#fff;
+    }
+    .whatsapp-btn-pkg:hover {
+        background: #20a852;
+    }
+
+    @media (max-width: 600px) {
+        .packages-hero-content h1 {
+            font-size: 3rem;
+        }
+        .pkg-actions {
+            flex-direction: column;
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="packages.html" class="active">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+<!-- ================= HERO IMAGE SLIDER ================= -->
+<section class="packages-hero">
+    <!-- SLIDER IMAGES (Diverse, High Quality) -->
+    <div class="pkg-slide active" style="background-image:url('https://images.pexels.com/photos/10186717/pexels-photo-10186717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div> <!-- Ladakh/Adventure -->
+    <div class="pkg-slide" style="background-image:url('https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div> <!-- Thailand/Honeymoon -->
+    <div class="pkg-slide" style="background-image:url('https://images.pexels.com/photos/1618903/pexels-photo-1618903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div> <!-- Rajasthan/Domestic -->
+
+    <div class="packages-hero-content hero-text-animate"> 
+        <h1 class="reveal-delay-1">All Tour Packages</h1>
+        <p class="reveal-delay-2">Find your perfect trip—from local gems to global landmarks.</p>
+    </div>
+</section>
+
+<!-- ================= FILTER ================= -->
+<div class="filter-bar reveal fade-down">
+  <button class="filter-btn active" data-filter="all"><i class="fas fa-th-large"></i> All Packages</button>
+  <button class="filter-btn" data-filter="domestic"><i class="fas fa-flag-checkered"></i> Domestic India</button>
+  <button class="filter-btn" data-filter="international"><i class="fas fa-globe"></i> International</button>
+  <button class="filter-btn" data-filter="honeymoon"><i class="fas fa-heart"></i> Honeymoon</button>
+  <button class="filter-btn" data-filter="adventure"><i class="fas fa-mountain"></i> Adventure</button>
+</div>
+
+<!-- ================= PACKAGES GRID ================= -->
+<section class="popular-packages">
+  <div class="packages-grid">
+
+    <!-- Card 1: Bali (International/Honeymoon) -->
+    <div class="package-card reveal fade-up" data-delay="100" data-category="international honeymoon">
+      <img src="https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bali">
+      <div class="package-info">
+        <p class="package-location">Bali, Indonesia</p>
+        <h3>Bali Paradise Escape (6 Days)</h3>
+        <p class="price">₹45,999 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Bali Paradise Escape">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Switzerland (International) -->
+    <div class="package-card reveal fade-up" data-delay="200" data-category="international">
+      <img src="https://images.pexels.com/photos/3889853/pexels-photo-3889853.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Switzerland">
+      <div class="package-info">
+        <p class="package-location">Switzerland, Europe</p>
+        <h3>Alpine Swiss Alps Tour (8 Days)</h3>
+        <p class="price">₹85,500 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=swiss" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Swiss Alps Tour">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Rajasthan (Domestic) -->
+    <div class="package-card reveal fade-up" data-delay="300" data-category="domestic culture">
+      <img src="https://images.pexels.com/photos/1618903/pexels-photo-1618903.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rajasthan Fort">
+      <div class="package-info">
+        <p class="package-location">Rajasthan, India</p>
+        <h3>Royal Rajasthan Heritage Tour</h3>
+        <p class="price">₹18,000 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=rajasthan" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Royal Rajasthan">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4: Ladakh (Domestic/Adventure) -->
+    <div class="package-card reveal fade-up" data-delay="400" data-category="domestic adventure">
+      <img src="https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Ladakh Mountains">
+      <div class="package-info">
+        <p class="package-location">Ladakh, Himalayas</p>
+        <h3>Extreme Ladakh Bike Expedition</h3>
+        <p class="price">₹28,999 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=ladakh" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Ladakh Expedition">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 5: Kerala (Domestic/Honeymoon) -->
+    <div class="package-card reveal fade-up" data-delay="100" data-category="domestic honeymoon">
+      <img src="https://images.pexels.com/photos/1018596/pexels-photo-1018596.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kerala Backwaters">
+      <div class="package-info">
+        <p class="package-location">Kerala, South India</p>
+        <h3>Enchanting Kerala Backwaters</h3>
+        <p class="price">₹22,500 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=kerala" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Kerala Backwaters">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 6: Thailand (International/Adventure) -->
+    <div class="package-card reveal fade-up" data-delay="200" data-category="international adventure">
+      <img src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Thailand Beach">
+      <div class="package-info">
+        <p class="package-location">Thailand</p>
+        <h3>Bangkok & Krabi Tropical Tour</h3>
+        <p class="price">₹32,000 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=thailand" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Thailand Tour">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 7: Maldives (International/Honeymoon) -->
+    <div class="package-card reveal fade-up" data-delay="300" data-category="international honeymoon">
+      <img src="https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Maldives">
+      <div class="package-info">
+        <p class="package-location">Maldives</p>
+        <h3>Luxury Overwater Villa Stay</h3>
+        <p class="price">₹1,15,000 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=maldives" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Maldives Luxury Stay">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 8: Rann of Kutch (Domestic) -->
+    <div class="package-card reveal fade-up" data-delay="400" data-category="domestic">
+      <img src="https://images.pexels.com/photos/792199/pexels-photo-792199.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rann of Kutch">
+      <div class="package-info">
+        <p class="package-location">Gujarat, India</p>
+        <h3>Kutch Rann Utsav Experience</h3>
+        <p class="price">₹14,500 / person</p>
+        <div class="pkg-actions">
+          <a href="package-details.html?id=kutch" class="details-btn">View Details</a>
+          <a href="#" class="whatsapp-btn-pkg" data-pkg="Kutch Rann Utsav">WhatsApp Query</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column about-us">
+                <h3>The Trip Connection</h3>
+                <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="policies.html">Policies</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Top Packages</h4>
+                <ul>
+                    <li><a href="domestic.html">Domestic Tours</a></li>
+                    <li><a href="international.html">International Tours</a></li>
+                    <li><a href="#">Honeymoon Special</a></li>
+                    <li><a href="#">Adventure Trips</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+        </div>
+    </footer>
+
+ <div class="floating-widgets">
+        <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+            <i class="fas fa-download"></i>
+        </a>
+    </div>
+
+<!-- ================= PAGE JS ================= -->
+<script>
+/* HERO SLIDER */
+const slides=document.querySelectorAll('.pkg-slide');
+let sIndex=0;
+setInterval(()=>{
+  slides.forEach(s=>s.classList.remove('active'));
+  sIndex=(sIndex+1)%slides.length;
+  slides[sIndex].classList.add('active');
+},4000);
+
+/* FILTER */
+const filterBtns=document.querySelectorAll('.filter-btn');
+const cards=document.querySelectorAll('.package-card');
+filterBtns.forEach(btn=>{
+  btn.onclick=()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    cards.forEach(card=>{
+      if (f==="all"||card.dataset.category.includes(f)) {
+          card.style.display="block";
+          // Re-trigger animation for visibility if needed
+          setTimeout(() => { card.classList.remove('active'); void card.offsetWidth; card.classList.add('active'); }, 10); 
+      } else {
+          card.style.display="none";
+      }
+    });
+  }
+});
+
+/* WHATSAPP */
+document.querySelectorAll('.whatsapp-btn-pkg').forEach(btn=>{
+  btn.onclick=e=>{
+    e.preventDefault();
+    const pkg=btn.dataset.pkg;
+    window.open(`https://wa.me/919998250825?text=${encodeURIComponent(
+      "Hello! I am interested in "+pkg+" package. Please share details and pricing."
+    )}`,'_blank');
+  }
+});
+
+
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

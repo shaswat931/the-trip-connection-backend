@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Our Story & Vision | The Trip Connection</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- MAIN CSS (Assuming all styles including animations are defined here) -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- ================= EXTRA CSS (ABOUT PAGE ONLY - FINALIZED DESIGN) ================= -->
+  <style>
+    /* VARIABLES (Assuming these are defined in style.css, but redefining for clarity) */
+    :root {
+        --primary-color: #fd810d; /* Blue */
+        --secondary-color: #1a202c; /* Dark text */
+        --bg-light: #f8f9fa; /* Light background */
+        --bg-white: #ffffff;
+    }
+
+    /* New Hero Styles (Focus on Team/Mission) */
+    .about-hero {
+        height: 80vh;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background-color: var(--primary-color); /* Fallback Blue */
+    }
+    /* Adjusted slider for better image fit */
+    .about-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+    .about-slide.active {
+        opacity: 1;
+    }
+    .about-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.75); /* Darker overlay */
+        z-index: 1;
+    }
+    .about-hero-content {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .about-hero-content h1 {
+        font-size: 3.8rem;
+        font-weight: 800;
+        text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .about-hero-content p {
+        font-size: 1.2rem;
+    }
+
+    /* --- Who We Are Section --- */
+    .about-section {
+      padding: 80px 6%;
+      background: var(--bg-light);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr; /* Text wider than image */
+      gap: 50px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-img img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.15);
+      object-fit: cover;
+      height: 100%; /* Ensures better fit in the grid */
+      min-height: 350px;
+    }
+    .mission-vision-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+    }
+    .mission-vision-grid h3 {
+        font-size: 1.1rem;
+        color: var(--primary-color); 
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    /* --- Core Values Section FIX: Split Layout --- */
+    .core-values {
+        background: var(--bg-light); 
+        padding: 80px 6%; 
+    }
+
+    /* New main container for split layout */
+    .values-split-grid {
+        display: grid;
+        /* Left: 40% (for heading), Right: 60% (for cards) */
+        grid-template-columns: 1fr 1.5fr; 
+        gap: 40px;
+        max-width: 1300px; 
+        margin: 0 auto;
+        align-items: center; 
+        min-height: 500px; 
+    }
+
+    /* Left Column: Heading & Text */
+    .values-heading-col {
+        padding-right: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: stretch; 
+    }
+    .values-heading-col .section-title-left {
+        font-size: 3.5rem; 
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+    }
+
+    /* Right Column: Cards (4 items in a 2x2 grid) */
+    .values-cards-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 columns, 2 rows (4 total) */
+        gap: 25px; 
+    }
+
+    /* Individual Feature Card */
+    .core-values .feature-card {
+        background: var(--bg-white);
+        padding: 30px; 
+        border-radius: 18px; 
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
+        text-align: center;
+        
+        border-bottom: 5px solid transparent; 
+        transition: all 0.4s;
+        height: 100%;
+    }
+    .core-values .feature-card:hover {
+        border-bottom: 5px solid var(--primary-color);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Icon Container (The circular orange/blue background) */
+    .icon-placeholder {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #e0f2ff, #fff7e6); /* Light gradient */
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Icon styling (Actual Font Awesome icon) */
+    .core-values .feature-card i {
+        font-size: 32px; 
+        color: var(--primary-color); 
+        margin: 0; 
+        background: none;
+        padding: 0;
+    }
+
+    .core-values .feature-card h3 {
+        margin-bottom: 8px;
+        font-size: 1.2rem;
+        font-weight: 800; 
+        color: var(--secondary-color);
+    }
+    .core-values .feature-card p {
+        font-size: 15px;
+        color: #475569;
+    }
+
+    /* --- Stats Section (LOOP COUNTER) FIX: Corner/Edge fix applied here --- */
+    .stats {
+        background: linear-gradient(135deg, #0d6efd, #0093E9); /* Blue Gradient */
+        color: #fff;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        text-align: center;
+        padding: 70px 5%;
+        gap: 30px;
+        /* FIXES FOR CLIENT REQUEST (Edge and Corner Fix) */
+        border-radius: 20px; 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+        margin: 40px auto; 
+        max-width: 1200px; 
+    }
+    .stat h2 {
+        font-size: 3.2rem;
+        margin-bottom: 5px;
+        font-weight: 800;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+    }
+    .stat p {
+        font-size: 1.1rem;
+    }
+
+    /* --- Timeline/Journey Section --- */
+    .journey-section {
+        padding-top: 40px;
+    }
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto 0;
+      padding-left: 60px;
+    }
+    /* 1. ORIGINAL GREY LINE (Background) */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #e0e0e0;
+      border-radius: 2px;
+    }
+    
+    /* 2. NEW COLORED LINE (Foreground) - Dynamically controlled by JS */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      width: 4px;
+      background: var(--primary-color); 
+      height: 0; 
+      transition: height 1s ease-out; 
+      z-index: 5; 
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+        margin-bottom: 35px;
+        opacity: 0;
+        transform: translateX(-40px);
+        transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        position: relative;
+    }
+    .timeline-item.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -48px;
+        top: 8px;
+        width: 20px;
+        height: 20px;
+        background: var(--primary-color);
+        border: 4px solid var(--bg-light); /* Highlight ring */
+        border-radius: 50%;
+        z-index: 10;
+    }
+    .timeline-item h3 {
+        color: var(--secondary-color);
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1100px) {
+        .values-split-grid {
+             gap: 25px;
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+        .about-img {
+            order: -1; 
+        }
+        .mission-vision-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        /* Core Values - Stacking */
+        .values-split-grid {
+            grid-template-columns: 1fr; /* Single column on tablet/mobile */
+            gap: 30px;
+        }
+        .values-heading-col {
+            text-align: center;
+            order: -1; 
+        }
+        .values-heading-col .section-title-left {
+            text-align: center;
+            font-size: 3rem;
+        }
+        .values-cards-col {
+            grid-template-columns: 1fr 1fr; /* Keep 2 columns on tablet for better density */
+            gap: 20px;
+        }
+
+        .timeline {
+            padding-left: 40px;
+        }
+        .timeline-item::before {
+            left: -32px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .about-hero-content h1 {
+            font-size: 2.8rem;
+        }
+        .stats {
+            grid-template-columns: 1fr; /* Stack stats vertically on small mobile */
+            margin: 20px auto;
+            padding: 40px 5%;
+        }
+        .stat h2 {
+            font-size: 2.2rem;
+        }
+        .values-cards-col {
+             grid-template-columns: 1fr; /* Stack cards vertically on small mobile */
+        }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="/images/logofinal.png" alt="Loading The Trip Connection Website">
+    </div>
+
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+   <header class="header">
+        <a href="index.html" class="logo">
+            <img src="/images/logofinal.png" alt="The Trip Connection Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul class="nav-list">
+                <!-- Ensure the correct link is active in the nav -->
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li> 
+                <li class="dropdown">
+                    <a href="packages.html">Packages ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="domestic.html">Domestic Tours</a></li>
+                        <li><a href="international.html">International Tours</a></li>
+                        <li><a href="car-pricing.html">Pickup and Drop Service</a></li>
+                        <li><a href="package-details.html">All Packages</a></li>
+                    </ul>
+                </li>            
+                <li class="dropdown">
+                    <a href="services.html">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="bus.html">Bus Booking</a></li>
+                        <li><a href="car.html">Car Booking</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="/admin/login.html" class="login-btn" title="Admin Login">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="booking.html" class="cta-button">Book Now</a>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+<main>
+    
+<!-- ================= HERO IMAGE SLIDER (About Page Specific) ================= -->
+<section class="about-hero">
+    <!-- Image Sources updated to reflect India/Team theme -->
+    <div class="about-slide active" style="background-image:url('https://images.pexels.com/photos/3184394/pexels-photo-3184394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+    <div class="about-slide" style="background-image:url('https://images.pexels.com/photos/3184428/pexels-photo-4428289.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')"></div>
+
+    <div class="about-hero-content hero-text-animate"> 
+        <h1 class="reveal-delay-1">Connecting You to the World</h1>
+        <p class="reveal-delay-2">Your trusted partner in personalized travel, based in India.</p>
+    </div>
+</section>
+
+<!-- ================= 1. WHO WE ARE (Mission & Vision) ================= -->
+<section class="about-section who-we-are">
+    <div class="about-grid">
+        <div class="about-content-text reveal fade-left"> 
+            <p class="package-location">OUR ETHOS</p>
+            <h2 class="section-title-left">More Than Just Tickets: It’s Your Journey</h2>
+            <p>
+                The Trip Connection is a premier travel agency dedicated to providing seamless, personalized, and unforgettable journeys. We specialize in curating tailored travel solutions—from budget-friendly domestic escapes to luxurious international adventures.
+            </p>
+            
+            <div class="mission-vision-grid">
+                <div class="reveal" data-delay="300"> 
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>To simplify complex travel planning and deliver exceptional value, ensuring every client experiences the highest level of comfort and adventure.</p>
+                </div>
+                <div class="reveal" data-delay="500"> 
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To be recognized as India’s most trusted and innovative travel connection, setting the benchmark for quality and customer-centric service.</p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="about-img reveal fade-right float-animation" data-delay="100"> 
+            <!-- Image source updated to a map/planning theme -->
+            <img src="https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg?auto=compress&cs=tinysrgb&w=600" alt="World map and planning">
+        </div>
+    </div>
+</section>
+
+<!-- ================= 2. CORE VALUES (Updated Design Section) ================= -->
+<section class="features core-values">
+    
+    <!-- NEW SPLIT GRID CONTAINER -->
+    <div class="values-split-grid"> 
+        
+        <!-- LEFT COLUMN: Heading -->
+        <div class="values-heading-col reveal fade-left">
+            <h2 class="section-title-left">The Values That Drive Us</h2>
+            <p style="font-size: 1.1rem; color: #555; max-width: 350px; margin-top: 15px;">
+                Our commitment to excellence ensures every journey is safe, transparent, and uniquely tailored to you.
+            </p>
+        </div>
+        
+        <!-- RIGHT COLUMN: Feature Cards (Now 4 Cards) -->
+        <div class="values-cards-col">
+            
+            <div class="feature-card reveal" data-delay="100">
+                <div class="icon-placeholder">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Trust & Transparency</h3>
+                <p>Building relationships through honest pricing and reliable service without hidden fees.</p>
+            </div>
+            
+            <div class="feature-card reveal" data-delay="300">
+                <div class="icon-placeholder">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>Innovation in Itinerary</h3>
+                <p>Designing unique, customized routes that go beyond standard tourist paths.</p>
+            </div>
+            
+            <div class="feature-card reveal" data-delay="500">
+                <div class="icon-placeholder">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Dedicated assistance available at every step throughout your journey, globally.</p>
+            </div>
+
+            <div class="feature-card reveal" data-delay="700">
+                <div class="icon-placeholder">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>Best Price Guarantee</h3>
+                <p>Unbeatable deals and offers, guaranteed with no hidden charges or surprises.</p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ================= 3. STATS (LOOP COUNTER) ================= -->
+<section class="stats">
+    <div class="stat reveal" data-delay="100"><h2 class="loop-count" data-max="1200">0</h2><p>Happy Clients</p></div>
+    <div class="stat reveal" data-delay="300"><h2 class="loop-count" data-max="80">0</h2><p>Destinations Explored</p></div>
+    <div class="stat reveal" data-delay="500"><h2 class="loop-count" data-max="10">0</h2><p>Years of Experience</p></div>
+    <div class="stat reveal" data-delay="700"><h2 class="loop-count" data-max="3500">0</h2><p>Trips Successfully Planned</p></div>
+</section>
+
+<!-- ================= 4. OUR JOURNEY (TIMELINE) ================= -->
+<section class="about-section journey-section">
+    <h2 class="section-title reveal">Our Milestones</h2>
+    <div class="timeline">
+        <div class="timeline-item reveal" data-delay="100">
+            <h3>2015: The Genesis</h3>
+            <p>Established The Trip Connection with a core vision to simplify travel bookings for the Indian market.</p>
+        </div>
+        <div class="timeline-item reveal" data-delay="300">
+            <h3>2018: Global Expansion</h3>
+            <p>Successfully expanded our portfolio to include major international destinations across Europe and Southeast Asia.</p>
+        </div>
+        <div class="timeline-item reveal" data-delay="500">
+            <h3>2021: Digital Transformation</h3>
+            <p>Launched our dedicated mobile app and enhanced online platform, achieving 1000+ satisfied traveler mark.</p>
+        </div>
+        <div class="timeline-item reveal" data-delay="700">
+            <h3>2024: Future Forward</h3>
+            <p>Focusing on sustainable tourism initiatives and launching specialized adventure and wellness packages globally.</p>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER (STANDARDIZED ENGLISH) ================= -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column about-us">
+            <h3>The Trip Connection</h3>
+            <p>Dedicated to providing world-class travel experiences globally. Let us guide your next unforgettable adventure!</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+                <li><a href="policies.html">Policies</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Top Packages</h4>
+            <ul>
+                <li><a href="#">Domestic Tours</a></li>
+                <li><a href="#">International Tours</a></li>
+                <li><a href="#">Honeymoon Special</a></li>
+                <li><a href="#">Adventure Trips</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h4>Contact Info</h4>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Travel Lane, Mumbai</p>
+            <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+            <p><i class="fas fa-envelope"></i> help@tripconnection.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 The Trip Connection. Designed with ❤️ for travelers.</p>
+    </div>
+</footer>
+
+<!-- ================= FLOATING WIDGETS (SAME) ================= -->
+ <div class="floating-widgets">
+    <a href="https://wa.me/919998250825?text=Hello!%20I%20saw%20your%20website%20'The%20Trip%20Connection'%20and%20I%20am%20interested%20in%20your%20packages." class="widget-btn whatsapp-btn" target="_blank" title="WhatsApp Us">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="/pdf/brochure.pdf" class="widget-btn brochure-btn" download title="Download Brochure">
+        <i class="fas fa-download"></i>
+    </a>
+</div>
+<script>
+// ==================== HERO IMAGE SLIDER (Kept Inline - Page Specific) ====================
+const slides = document.querySelectorAll('.about-slide');
+let slideIndex = 0;
+// Fade between images every 4 seconds
+if (slides.length > 0) {
+    // Initial active class setup
+    slides[0].classList.add('active'); 
+    
+    setInterval(() => {
+      slides.forEach(s => s.classList.remove('active'));
+      slideIndex = (slideIndex + 1) % slides.length;
+      slides[slideIndex].classList.add('active');
+    }, 4000);
+}
+
+/* ==================== TIMELINE FILL ANIMATION LOGIC (FIXED) ==================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const timeline = document.querySelector('.timeline');
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    if (timeline && timelineItems.length > 0) {
+        
+        // Function to find and safely modify the height of the colored line (.timeline::after)
+        const updateTimelineHeight = () => {
+            let maxVisibleY = 0;
+            const timelineRect = timeline.getBoundingClientRect();
+
+            // Find the lowest point of the last visible timeline item
+            timelineItems.forEach(item => {
+                // Relies on main.js IntersectionObserver setting the 'active' class
+                if (item.classList.contains('active')) {
+                    const rect = item.getBoundingClientRect();
+                    // Calculate the position relative to the start of the timeline container
+                    // We need the distance from the top of the timeline container (where the line starts)
+                    const relativeBottom = rect.top - timelineRect.top + rect.height;
+                    maxVisibleY = Math.max(maxVisibleY, relativeBottom - 10); 
+                }
+            });
+
+            // --- Robust way to modify the ::after element's style ---
+            // Note: This needs to locate the style rule within the DOM's stylesheets.
+            
+            const styleSheets = document.styleSheets;
+            let rule = null;
+
+            for (let i = 0; i < styleSheets.length; i++) {
+                try {
+                    const rules = styleSheets[i].cssRules || styleSheets[i].rules;
+                    if (rules) {
+                        for (let j = 0; j < rules.length; j++) {
+                            // Target the specific rule text
+                            if (rules[j].selectorText && rules[j].selectorText.includes('.timeline::after')) {
+                                rule = rules[j];
+                                break;
+                            }
+                        }
+                    }
+                } catch (e) {
+                    // Ignore cross-origin stylesheet errors
+                }
+                if (rule) break;
+            }
+
+            if (rule) {
+                // Ensure maxVisibleY is not negative
+                const targetHeight = Math.max(0, maxVisibleY);
+                // Apply the height to the CSS rule
+                rule.style.height = `${targetHeight}px`;
+            } 
+        };
+        
+        // We run this frequently on scroll and resize to update the colored line length
+        window.addEventListener('scroll', updateTimelineHeight);
+        window.addEventListener('resize', updateTimelineHeight);
+
+        // Initial run to check position on load (important for items visible immediately)
+        // Delay slightly to ensure main.js IntersectionObserver has run first
+        setTimeout(updateTimelineHeight, 500); 
+    }
+});
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
