@@ -14,7 +14,7 @@ const app = express();
 // ================= CORS (NETLIFY FIX) =================
 app.use(cors({
   origin: [
-    "https://thetripconnection.netlify.app"
+    "https://thetripconnection.netlify.app/"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
