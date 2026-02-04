@@ -201,6 +201,10 @@
 
 <!-- ================= JS SCRIPTS (Includes Animation Logic) ================= -->
 <script>
+// 🛑 FIX 1: BASE URL DEFINITION
+// Yeh tumhara live Render backend URL hai.
+const BASE_URL = 'https://thetripconnection-backend.onrender.com'; 
+
 // ==================== SCROLL REVEAL LOGIC ====================
 // Finds all elements with the 'reveal' class
 const revealElements = document.querySelectorAll('.reveal, .fade-left, .fade-right');
@@ -231,12 +235,13 @@ revealElements.forEach(el => {
 });
 
 
-// ==================== FORM SUBMISSION LOGIC ====================
+// ==================== FORM SUBMISSION LOGIC (FIXED) ====================
 document.getElementById('contactForm').addEventListener('submit', async function(e){
   e.preventDefault();
 
   const formMsg = document.getElementById('formMsg');
   formMsg.innerText = "Sending message...";
+  formMsg.style.color = "blue"; // Optional: Add a pending color
 
   const payload = {
     name: document.getElementById('name').value,
@@ -246,7 +251,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
   };
 
   try {
-    const res = await fetch('/api/contact', {
+    // 🛑 FIX 2: BASE_URL ko endpoint ke aage joda gaya hai
+    const res = await fetch(`${BASE_URL}/api/contact`, { 
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -254,7 +260,10 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
     const data = await res.json();
 
-    if(!data.success) throw new Error('API Error');
+    if(!data.success) {
+        // If server returns success: false
+        throw new Error(data.message || 'API Error: Operation failed on server');
+    }
 
     formMsg.innerText =
       "✅ Thank you! We have received your message and will contact you shortly.";
@@ -263,11 +272,12 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
   } catch (err) {
     formMsg.innerText =
-      "❌ Something went wrong. Please try again later.";
+      "❌ Something went wrong. Please try again later. (Check console for details)";
     formMsg.style.color = "red";
-    console.error(err);
+    console.error("Submission Failed:", err);
   }
 });
+</script>
 
 
 </script>
