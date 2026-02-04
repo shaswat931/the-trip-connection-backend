@@ -11,31 +11,14 @@ connectDB();
 
 const app = express();
 
-// ================= CORS (NETLIFY + LOCALHOST SAFE) =================
-const allowedOrigins = [
-  "https://thetripconnection.netlify.app",
-  "http://localhost:3000",
-  "http://localhost:5500"
-];
-
+// ================= CORS (NETLIFY FIX) =================
 app.use(cors({
-  origin: function (origin, callback) {
-    // allow REST tools / server-to-server / Render health check
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  origin: [
+    "https://thetripconnection.netlify.app/"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
-
-// Preflight support
-app.options('*', cors());
-
 // ================= MIDDLEWARE =================
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -53,6 +36,7 @@ const BusBooking = require('./models/BusBooking');
 app.get('/api/test', (req, res) => {
   res.json({ message: 'Backend API is running successfully!' });
 });
+
 
 // =================================================
 // ================= BOOKINGS =======================
@@ -85,6 +69,7 @@ app.delete('/api/admin/bookings/:id', async (req, res) => {
   }
 });
 
+
 // =================================================
 // ================= CONTACT ========================
 // =================================================
@@ -105,6 +90,7 @@ app.get('/api/admin/contacts', async (req, res) => {
     res.status(500).json({ error: 'Failed to load contacts' });
   }
 });
+
 
 // =================================================
 // ================= PACKAGES =======================
@@ -135,6 +121,7 @@ app.delete('/api/admin/packages/:id', async (req, res) => {
     res.status(500).json({ success: false });
   }
 });
+
 
 // =================================================
 // ================= CAR BOOKING ===================
@@ -167,6 +154,7 @@ app.delete('/api/admin/car-bookings/:id', async (req, res) => {
   }
 });
 
+
 // =================================================
 // ================= BUS BOOKING ===================
 // =================================================
@@ -198,6 +186,7 @@ app.delete('/api/admin/bus-bookings/:id', async (req, res) => {
   }
 });
 
+
 // =================================================
 // ================= OFFER ==========================
 // =================================================
@@ -225,6 +214,7 @@ app.get('/api/offer', async (req, res) => {
   }
 });
 
+
 // =================================================
 // ================= DASHBOARD COUNTS ===============
 // =================================================
@@ -245,10 +235,11 @@ app.get('/api/admin/dashboard-counts', async (req, res) => {
       packages,
       totalNewActionable: tourBookings + carBookings + busBookings
     });
-  } catch {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to load dashboard counts' });
   }
 });
+
 
 // ================= SERVER =================
 const PORT = process.env.PORT || 5000;
