@@ -12,39 +12,23 @@ connectDB();
 const app = express();
 
 // ================= CORS (NETLIFY FIX) =================
-// FIX: Using function based origin check to handle localhost and Netlify
-const allowedOrigins = [
-  "https://thetripconnection.netlify.app", // Your Netlify Frontend
-  "http://localhost:3000",                 // Local dev port 1
-  "http://localhost:5000",                 // Local dev port 2
-  // Add Render's backend URL if you are testing the API endpoint directly from a browser tab
-  "https://the-trip-connection-backend.orender.com" 
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps/postman) or if in allowed list
-    if (!origin) return callback(null, true); 
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin: ' + origin;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Added PATCH method for potential status updates later
+  origin: [
+    "https://thetripconnection.netlify.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
-
 // ================= MIDDLEWARE =================
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // ================= MODELS =================
-const Booking = require('./models/Booking'); // Tour Bookings
+const Booking = require('./models/Booking');
 const Contact = require('./models/Contact');
 const Package = require('./models/Package');
-const Offer = require('./models/Offer'); // Assuming relative path is correct now
+const Offer = require('./models/Offer');
 const CarBooking = require('./models/CarBooking');
 const BusBooking = require('./models/BusBooking');
 
@@ -55,11 +39,10 @@ app.get('/api/test', (req, res) => {
 
 
 // =================================================
-// ================= BOOKINGS (Tour Packages) ======
+// ================= BOOKINGS =======================
 // =================================================
 app.post('/api/bookings', async (req, res) => {
   try {
-    // Ensures status is 'New' by default, or uses status provided in request body
     const bookingData = { ...req.body, status: req.body.status || 'New' };
     const booking = await Booking.create(bookingData);
     res.status(201).json({ success: true, booking });
@@ -181,7 +164,6 @@ app.post('/api/bus-booking', async (req, res) => {
     const busBooking = await BusBooking.create(busBookingData);
     res.status(201).json({ success: true, busBooking });
   } catch (err) {
-    console.error("Bus Booking Error:", err);
     res.status(500).json({ success: false, message: err.message });
   }
 });
@@ -234,44 +216,26 @@ app.get('/api/offer', async (req, res) => {
 
 
 // =================================================
-// ================= DASHBOARD COUNTS (FIXED FOR LEGACY DATA) ====
+// ================= DASHBOARD COUNTS ===============
 // =================================================
 app.get('/api/admin/dashboard-counts', async (req, res) => {
   try {
-    const newCountQuery = { 
-        $or: [
-            { status: 'New' },
-            { status: { $exists: false } }
-        ]
-    };
-      
-    // 1. TOUR BOOKINGS (Actionable)
-    const tourBookings = await Booking.countDocuments(newCountQuery);
+    const tourBookings = await Booking.countDocuments({ $or: [{ status: 'New' }, { status: { $exists: false } }] });
+    const carBookings = await CarBooking.countDocuments({ $or: [{ status: 'New' }, { status: { $exists: false } }] });
+    const busBookings = await BusBooking.countDocuments({ $or: [{ status: 'New' }, { status: { $exists: false } }] });
 
-    // 2. CAR BOOKINGS (Actionable)
-    const carBookings = await CarBooking.countDocuments(newCountQuery); 
-    
-    // 3. BUS BOOKINGS (Actionable)
-    const busBookings = await BusBooking.countDocuments(newCountQuery);   
-    
-    // 4. Total static counts (These count ALL records, regardless of status)
     const contacts = await Contact.countDocuments();
     const packages = await Package.countDocuments();
 
-    // Sum of all actionable items
-    const totalNewActionable = tourBookings + carBookings + busBookings; 
-
-    res.json({ 
-      tourBookings, 
-      contacts, 
-      packages, 
+    res.json({
+      tourBookings,
       carBookings,
       busBookings,
-      totalNewActionable
+      contacts,
+      packages,
+      totalNewActionable: tourBookings + carBookings + busBookings
     });
-    
-  } catch (error) {
-    console.error("Dashboard count error:", error);
+  } catch (err) {
     res.status(500).json({ error: 'Failed to load dashboard counts' });
   }
 });
