@@ -12,12 +12,11 @@ connectDB();
 const app = express();
 
 // ================= CORS (NETLIFY FIX) =================
-// ================= CORS (SPECIFIC FIX WITH OPTIONS) =================
 app.use(cors({
   origin: [
     "https://thetripconnection.netlify.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // 🛑 YEH ZAROORI HAI!
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 // ================= MIDDLEWARE =================
