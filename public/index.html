@@ -769,48 +769,57 @@
 
 <!-- ================= JS SCRIPTS (Optimized for Index Page) ================= -->
 <script>
-    // Function to close the offer popup (Kept because it's page-specific or API related)
-    function closeOffer(){
-      document.getElementById('offerPopup').style.display='none';
-    }
+  // ==================== OFFER POPUP LOGIC (Using Render URL) ====================
+  function closeOffer(){
+    document.getElementById('offerPopup').style.display='none';
+  }
 
-    // Fetch and display dynamic offer after a delay (e.g., 10 seconds)
-    // (Kept because API interaction is client-side and page-specific)
-    setTimeout(async ()=>{
-      try {
-          const res = await fetch('/api/offer');
-          // Check if response is okay and JSON is available
-          if (!res.ok) return; 
+  // Define the BASE URL of your running backend (Render)
+  // FIX: This URL must be correct!
+  const RENDER_BACKEND_URL = "https://the-trip-connection-backend.orender.com"; 
 
-          const offer = await res.json();
-          if(!offer || !offer.title) return; // Exit if no valid offer data
+  setTimeout(async ()=> {
+    try {
+      // 1. Fetching the offer data from the deployed backend
+      const res = await fetch(`${RENDER_BACKEND_URL}/api/offer`);
+      if (!res.ok) return;
 
-          document.getElementById('offerTitle').innerText = offer.title;
-          document.getElementById('offerDesc').innerText = offer.description;
-          
-          if(offer.image){
-            const img = document.getElementById('offerImg');
-            img.src = offer.image; 
-            img.style.display = 'block';
-          }
-          
-          const btn = document.getElementById('offerBtn');
-          btn.innerText = offer.ctaText || 'Book Now';
-          btn.href = offer.ctaLink || 'booking.html';
+      const offer = await res.json();
+      if (!offer || !offer.title) return;
 
-          document.getElementById('offerPopup').style.display = 'flex';
-      } catch (error) {
-          console.error("Error fetching offer data:", error);
+      document.getElementById('offerTitle').innerText = offer.title;
+      document.getElementById('offerDesc').innerText = offer.description || '';
+
+      if (offer.image) {
+        const img = document.getElementById('offerImg');
+        let imageUrl = offer.image;
+        
+        // --- FIX LOGIC START: Ensure Image URL is Absolute ---
+        // If the image path is relative (e.g., /uploads/offer.jpg) and stored on the Render server,
+        // we must prepend the Render URL to make it absolute.
+        if (imageUrl.startsWith('/')) {
+             imageUrl = RENDER_BACKEND_URL + imageUrl;
+        }
+        // --- FIX LOGIC END ---
+
+        img.src = imageUrl;
+        img.style.display = 'block';
       }
-    }, 10000); // 10 seconds delay
 
+      const btn = document.getElementById('offerBtn');
+      btn.innerText = offer.ctaText || 'Book Now';
+      btn.href = offer.ctaLink || 'booking.html';
 
-    /* 
-    IMPORTANT: All other JavaScript code (Stats Counter, Scroll Reveal, Slider JS) 
-    has been removed from this file because it is now handled efficiently 
-    and centrally in /js/main.js.
-    */
+      document.getElementById('offerPopup').style.display = 'flex';
+
+    } catch (err) {
+      console.error("Offer fetch error:", err);
+    }
+  }, 10000); // 10 seconds delay
+  
+  // ... (Rest of your JS code: slider logic, etc.) ...
 </script>
+
     <!-- Your JavaScript File -->
     <script src="/js/main.js"></script>
     <script src="/js/offer-popup.js"></script>

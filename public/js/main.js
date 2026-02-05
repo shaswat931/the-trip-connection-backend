@@ -90,7 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
       function showSlide(index) {
         videos.forEach((video, i) => {
           video.classList.toggle('active', i === index);
-          video.pause();
+          // Only pause/play if it's a video slider
+          if(video.tagName === 'VIDEO') {
+             video.pause();
+          }
         });
     
         contents.forEach((content, i) => {
@@ -101,8 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
           dot.classList.toggle('active', i === index);
         });
     
-        videos[index].currentTime = 0;
-        videos[index].play().catch(() => {});
+        // Ensure video starts playing from beginning
+        if(videos[index].tagName === 'VIDEO') {
+            videos[index].currentTime = 0;
+            videos[index].play().catch(() => {});
+        }
+
         currentSlide = index;
       }
     
@@ -112,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     
       function startSlider() {
-        sliderTimer = setInterval(nextSlide, 8000);
+        // Set to 5000ms (5 seconds) as typically video loops are longer
+        sliderTimer = setInterval(nextSlide, 5000); 
       }
     
       function resetSlider() {
@@ -226,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
     /* ==================== SPECIAL BOOKING SLIDER JS (Smooth Scroll) ==================== */
-    const slider = document.querySelector('.booking-slider');
+    const slider = document.getElementById('bookingSlider');
     const prevBtn = document.querySelector('.prev-arrow');
     const nextBtn = document.querySelector('.next-arrow');
 
@@ -254,9 +262,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth'
                 });
             }
+            // Temporarily disable auto-slide when user manually scrolls
             resetInterval();
         };
         
+        // This function hides the arrows if all content fits without scrolling, 
+        // and starts the auto-slide only if scrolling is necessary.
         const checkArrowsVisibility = () => {
             if (!slider || !prevBtn || !nextBtn) return;
             const maxScroll = slider.scrollWidth - slider.clientWidth;
@@ -269,7 +280,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                  prevBtn.style.display = 'block';
                  nextBtn.style.display = 'block';
-                 if (!autoSlideInterval) startAutoSlide();
+                 // If auto-slide isn't running, start it
+                 if (!autoSlideInterval) startAutoSlide(); 
             }
         };
 
@@ -280,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isNearEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5;
                 
                 if (isNearEnd) {
+                    // Jump to start instantly before scrolling next
                     slider.style.scrollBehavior = 'auto';
                     slider.scrollLeft = 0;
                     
@@ -293,23 +306,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }, slideIntervalTime);
         };
         
+        // Function to temporarily stop and restart the interval (used during user scroll)
         const resetInterval = () => {
             clearInterval(autoSlideInterval);
-            // Ensure auto slide restarts only if it was supposed to run (i.e., not disabled by checkArrowsVisibility)
-            if (slider.scrollWidth > slider.clientWidth) {
-                 startAutoSlide();
-            }
+            // Wait for a short pause before restarting auto-slide
+            setTimeout(() => {
+                checkArrowsVisibility(); // Check if autoslide should be running
+            }, 5000); 
         };
 
 
         nextBtn.addEventListener('click', () => scrollSlider('next'));
         prevBtn.addEventListener('click', () => scrollSlider('prev'));
         
+        // Initial setup and window listeners
         window.addEventListener('load', checkArrowsVisibility);
         window.addEventListener('resize', checkArrowsVisibility);
-        // Added passive scroll listener to avoid blocking main thread
-        slider.addEventListener('scroll', () => resetInterval(), { passive: true }); 
         
+        // Start checking visibility and auto-slide on DOM ready
         checkArrowsVisibility(); 
     }
 
